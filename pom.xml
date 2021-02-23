@@ -10,11 +10,6 @@
       	  <robot.tag></robot.tag>
   		  <robot.exclude.tag></robot.exclude.tag>
 	      <robot.browser>chrome</robot.browser>
-	      <robot.browser_version>65</robot.browser_version>
-	      <robot.browser_os>Windows</robot.browser_os>
-	      <robot.browser_os_version>10</robot.browser_os_version>
-	      <robot.remote_url>False</robot.remote_url>
-	      <robot.main.url>about:blank</robot.main.url>
   </properties>
   <dependencies>
         <dependency>
@@ -31,7 +26,7 @@
   </dependencies>      
 <profiles>
       <profile>
-            <id>localhost</id>
+            <id>platform</id>
             <properties>
                <robot.docker.adminurl.command>docker exec helfi-app drush uli</robot.docker.adminurl.command>
                <robot.language>Suomi</robot.language>
