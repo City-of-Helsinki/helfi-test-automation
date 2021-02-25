@@ -3,6 +3,10 @@ Documentation   Common Keywords referred by many testsuites. Platform side tests
 Library           SeleniumLibrary
 Library           OperatingSystem
 Resource		  ./variables/create_page.robot
+*** Variables ***
+${URL_content_page}							https://helfi.docker.sh/fi/admin/content
+
+
 
 *** Keywords ***
 Get Admin Url
@@ -10,14 +14,12 @@ Get Admin Url
    ${admin_url} =   Run  ${ADMIN_URL}
    Set Test Variable   ${admin_url}
    
-Login And Go To Content Site
+Login And Go To Content Page
 	[Documentation]   Preparatory action for platform tests: User logs in and then navigates to Content('Sisältö')
-	...				  site. Also accepts cookies here.	
+	...				  page. Also accepts cookies here.	
 	Get Admin Url
 	Open Browser  ${admin_url}  ${BROWSER}
-	Go To   https://helfi.docker.sh/fi/user/1
-	Wait Until Keyword Succeeds  3x  200ms  Click Button  //button[contains(text(), 'Accept all cookies')]
-	Wait Until Keyword Succeeds  3x  200ms  Click Element  //li[contains(@class, 'menu-item menu-item__system-admin_content')]
+	Go To   ${URL_content_page}
 
 Go To New Article Site
 	Click Add Content
@@ -45,3 +47,12 @@ Click Add Page
 Click Add Article
 	[Documentation]   Add Article ('Artikkeli') click in Add Content('Lisää sisältöä') -menu
 	Wait Until Keyword Succeeds  5x  200ms  Click Element  //a[contains(@href, '/fi/node/add/article')]
+	
+Delete Newly Created Item on Content Menu List
+	[Documentation]   Deletes Created Item By assuming it is the topmost one in the list. Returns to content page afterwards.
+	Click Button   ${Btn_Actions_Dropbutton}
+	Click Element  ${Btn_Actions_ContentMenu_Deletebutton}
+	Click Element  ${Btn_Actions_SelectedItem_Deletebutton}
+	Go To   ${URL_content_page}
+	
+	
