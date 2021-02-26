@@ -17,7 +17,7 @@ Get Admin Url
    
 Login And Go To Content Page
 	[Documentation]   Preparatory action for platform tests: User logs in and then navigates to Content('Sisältö')
-	...				  page. Also accepts cookies here.	
+	...				  page. Also accepts cookies here.
 	Get Admin Url
 	Open Browser  ${admin_url}  ${BROWSER}
 	Go To   ${URL_content_page}

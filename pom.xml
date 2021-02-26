@@ -12,6 +12,7 @@
 	      <robot.browser>chrome</robot.browser>
 	      <robot.reportspath>${project.basedir}/target/robotframework-reports</robot.reportspath>
 	      <robot.screenshotspath>${project.basedir}/src/main/resources/screenshots</robot.screenshotspath>
+	      <robot.contentpath>${project.basedir}/src/main/resources/content</robot.contentpath>
   </properties>
   <dependencies>
         <dependency>
@@ -65,6 +66,7 @@
                            	 	<variable>BROWSER:${robot.browser}</variable>
                            	 	<variable>REPORTS_PATH:${robot.reportspath}</variable>
                            	 	<variable>SCREENSHOTS_PATH:${robot.screenshotspath}</variable>
+                           	 	<variable>CONTENT_PATH:${robot.contentpath}</variable>
                           	</variables>
                         </configuration>
                     </plugin>
