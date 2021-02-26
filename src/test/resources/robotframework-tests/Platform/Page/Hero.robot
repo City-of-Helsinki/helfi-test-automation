@@ -43,7 +43,7 @@ Cleanup and Close Browser
 	Close Browser
 
 Layout Should Not Have Changed
-	${originalpic}=  Set Variable  ${SCREENSHOTS_PATH}/fi_HERO_left_vaakuna_no_picture_chrome.png
+	${originalpic}=  Set Variable  ${SCREENSHOTS_PATH}/fi_HERO_left_vaakuna_nopicture_chrome.png
 	${comparisonpic}=  Set Variable  ${REPORTS_PATH}/fi_HERO_left_vaakuna_nopicture_chrome_TESTRUN.png
 	Compared Pictures Match   ${originalpic}    ${comparisonpic}
 	
