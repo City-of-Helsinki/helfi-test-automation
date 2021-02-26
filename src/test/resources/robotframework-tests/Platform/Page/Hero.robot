@@ -9,7 +9,9 @@ Test Teardown   Cleanup and Close Browser
 Browse Content Item
 	[Tags]  HERO 
 	When User Creates a Page With Hero Block
-	User Opens Created Content	
+	And User Opens Created Content
+	Then Layout Should Not Have Changed	
+	
    
 *** Keywords ***
 User Creates a Page With Hero Block
@@ -20,13 +22,8 @@ User Creates a Page With Hero Block
 	Click Element   ${Swh_HeroOnOff} 
 	Wait Until Keyword Succeeds  5x  100ms  Input Text  ${Inp_Hero_Title}   Test Automation Hero Title
 	
-	Select Frame   css:#cke_1_contents > iframe
-	Input Text   //body   ${TextFileContent}
-	Unselect Frame
-
-	Select Frame   css:#cke_58_contents > iframe
-	Input Text   //body   ${TextFileDescription}
-	Unselect Frame
+	Input Text To Frame   css:#cke_1_contents > iframe   //body   ${TextFileContent}
+	Input Text To Frame   css:#cke_58_contents > iframe   //body   ${TextFileDescription}
 
 		
 	Click Button   ${Btn_Submit}
@@ -38,10 +35,17 @@ User Opens Created Content
 	Wait Until Keyword Succeeds  3x  200ms  Click Button  //button[contains(text(), 'Accept all cookies')]
 	Maximize Browser Window
 	Execute javascript  document.body.style.zoom="40%"
-	Capture Page Screenshot
+	Capture Page Screenshot    filename=fi_HERO_left_vaakuna_nopicture_chrome_TESTRUN.png
 	
 Cleanup and Close Browser
 	Go To   ${URL_content_page}
 	Wait Until Keyword Succeeds  5x  200ms  Delete Newly Created Item on Content Menu List
 	Close Browser
+
+Layout Should Not Have Changed
+	${originalpic}=  Set Variable  ${SCREENSHOTS_PATH}/fi_HERO_left_vaakuna_no_picture_chrome.png
+	${comparisonpic}=  Set Variable  ${REPORTS_PATH}/fi_HERO_left_vaakuna_nopicture_chrome_TESTRUN.png
+	Compared Pictures Match   ${originalpic}    ${comparisonpic}
+	
+	
 	

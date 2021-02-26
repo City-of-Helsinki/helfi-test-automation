@@ -10,13 +10,14 @@
       	  <robot.tag></robot.tag>
   		  <robot.exclude.tag></robot.exclude.tag>
 	      <robot.browser>chrome</robot.browser>
+	      <robot.reportspath>${project.basedir}/target/robotframework-reports</robot.reportspath>
+	      <robot.screenshotspath>${project.basedir}/src/main/resources/screenshots</robot.screenshotspath>
   </properties>
   <dependencies>
         <dependency>
             <groupId>com.github.hi-fi</groupId>
             <artifactId>robotframework-seleniumlibrary</artifactId>
             <version>3.141.59.26</version>
-            <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>com.github.marketsquare</groupId>
@@ -62,7 +63,9 @@
                            	 	<variable>LANGUAGE:${robot.language}</variable>
                            	 	<variable>ADMIN_URL:${robot.docker.adminurl.command}</variable>
                            	 	<variable>BROWSER:${robot.browser}</variable>
-                           	</variables>
+                           	 	<variable>REPORTS_PATH:${robot.reportspath}</variable>
+                           	 	<variable>SCREENSHOTS_PATH:${robot.screenshotspath}</variable>
+                          	</variables>
                         </configuration>
                     </plugin>
 

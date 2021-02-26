@@ -3,6 +3,7 @@ Documentation   Common Keywords referred by many testsuites. Platform side tests
 Library           SeleniumLibrary
 Library           OperatingSystem
 Resource		  ./variables/create_page.robot
+Library           ../scripts/compare.py
 *** Variables ***
 ${URL_content_page}							https://helfi.docker.sh/fi/admin/content
 
@@ -55,4 +56,15 @@ Delete Newly Created Item on Content Menu List
 	Click Element  ${Btn_Actions_SelectedItem_Deletebutton}
 	Go To   ${URL_content_page}
 	
+Input Text To Frame
+	[Documentation]   Inserts text to given frame and returns to original content
+	[Arguments]	   ${frame}   ${locator}   ${input}
+	Select Frame   ${frame}
+	Input Text   ${locator}   ${input}
+	Unselect Frame
 	
+Compared Pictures Match
+	[Documentation]   Tests that two pictures look same --> layout is not broken
+	[Arguments]	   ${pic1}   ${pic2}
+	${results}=     TestImages      ${pic1}   ${pic2}
+    Run keyword if  ${results}==False   fail    "Pictures are different"
