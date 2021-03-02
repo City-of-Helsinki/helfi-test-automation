@@ -3,7 +3,7 @@ Documentation   Common Keywords referred by many testsuites. Platform side tests
 Library           SeleniumLibrary
 Library           OperatingSystem
 Resource		  ./variables/create_page.robot
-Library           ../scripts/compare.py
+Library 		   helfi.ta.PictureCompare
 *** Variables ***
 ${URL_content_page}							https://helfi.docker.sh/fi/admin/content
 ${URL_media_page}							https://helfi.docker.sh/fi/admin/content/media							
@@ -74,5 +74,5 @@ Input Text To Frame
 Compared Pictures Match
 	[Documentation]   Tests that two pictures look same --> layout is not broken
 	[Arguments]	   ${pic1}   ${pic2}
-	${results}=  TestImages      ${pic1}   ${pic2}
+	${results}=  compare      ${pic1}   ${pic2}   ${EMPTY}
     Run keyword if  ${results}==False   fail    "Pictures are different"

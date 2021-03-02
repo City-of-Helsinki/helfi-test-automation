@@ -6,6 +6,8 @@
   <name>Hel.Fi Test Automation</name>
   <description>New Hel.fi site test automation</description>
   <properties>
+  		  <maven.compiler.source>15</maven.compiler.source>
+		  <maven.compiler.target>15</maven.compiler.target>
   	      <robot.log.file></robot.log.file>
       	  <robot.tag></robot.tag>
   		  <robot.exclude.tag></robot.exclude.tag>
@@ -27,6 +29,11 @@
             <artifactId>robotframework-httprequestlibrary</artifactId>
             <version>0.0.17</version>
         </dependency>
+        <dependency>
+		    <groupId>com.github.romankh3</groupId>
+		    <artifactId>image-comparison</artifactId>
+		    <version>4.3.0</version>
+		</dependency>
   </dependencies>      
 <profiles>
       <profile>
@@ -58,10 +65,12 @@
                                 <user.timezone>Europe/Helsinki</user.timezone>
                             </systemPropertyVariables>
                             <testCasesDirectory>${project.basedir}/src/test/resources/robotframework-tests</testCasesDirectory>
+                            <extraPathDirectories>
+                                 <extraPathDirectory>${project.basedir}/src/main/java</extraPathDirectory>
+                            </extraPathDirectories>
                             <includes_cli>${robot.tag}</includes_cli>
                             <excludes_cli>${robot.exclude.tag}</excludes_cli>
                             <log>${robot.log.file}</log>
-                            <xunitFile>${project.build.directory}/robotframework-reports/xunit.xml</xunitFile>
                             <variables>
                            	 	<variable>LANGUAGE:${robot.language}</variable>
                            	 	<variable>ADMIN_URL:${robot.docker.adminurl.command}</variable>

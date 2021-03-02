@@ -11,7 +11,7 @@ ${picalign} 		 ${EMPTY}
 
 Left Aligned
 	[Documentation]   Left Aligned Hero Block with Short version of text files in Finnish. 'Vaakuna' style.
-	[Tags]   HERO
+	[Tags]   HERO    
 	Given User Starts Creating a Left Aligned Page With Hero Block
 	When User Submits New Page
 	And User Opens Created Content
@@ -19,7 +19,7 @@ Left Aligned
 
 Center Aligned
 	[Documentation]   Center Aligned Hero Block with Short version of text files in Finnish. 'Vaakuna' style.
-	[Tags]  HERO
+	[Tags]  HERO   
 	Given User Starts Creating a Center Aligned Page With Hero Block
 	When User Submits New Page
 	And User Opens Created Content
@@ -27,7 +27,7 @@ Center Aligned
 
 Left Aligned Picture
 	[Documentation]   Center Aligned Hero Block with Short version of text files in Finnish. 'Vaakuna' style.
-	[Tags]  HERO    TODO
+	[Tags]  HERO    
 	Given User Starts Creating a Left Aligned Page With Hero Block
 	And With Left Aligned Hero Picture Added
 	When User Submits New Page
@@ -78,7 +78,6 @@ User Opens Created Content
 	Wait Until Keyword Succeeds  3x  200ms  Click Button  //button[contains(text(), 'Accept all cookies')]
 	Maximize Browser Window
 	Execute javascript  document.body.style.zoom="40%"
-	Sleep  1
 	Capture Page Screenshot    filename=HERO_chrome_TESTRUN.png
 
 Layout Should Not Have Changed
