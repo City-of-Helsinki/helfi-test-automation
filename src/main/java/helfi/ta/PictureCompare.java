@@ -76,9 +76,9 @@ public class PictureCompare {
 		           BufferedImage resultImage = imageComparisonResult.getResult();
 		           
 		           //Image can be saved after comparison, using ImageComparisonUtil.
-//               ImageComparisonUtil.saveImage(resultDestination, resultImage); 
+               ImageComparisonUtil.saveImage(resultDestination, resultImage); 
 		           
-		           if(imageComparisonState.MATCH != null)
+		           if(imageComparisonResult.getImageComparisonState().equals(imageComparisonState.MATCH))
 		        	   return true;
 		           
 		           

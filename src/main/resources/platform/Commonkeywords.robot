@@ -74,5 +74,5 @@ Input Text To Frame
 Compared Pictures Match
 	[Documentation]   Tests that two pictures look same --> layout is not broken
 	[Arguments]	   ${pic1}   ${pic2}
-	${results}=  compare      ${pic1}   ${pic2}   ${EMPTY}
+	${results}=  compare      ${pic1}   ${pic2}   ${REPORTS_PATH}/pic_difference.png
     Run keyword if  ${results}==False   fail    "Pictures are different"

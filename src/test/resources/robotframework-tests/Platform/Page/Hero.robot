@@ -11,7 +11,7 @@ ${picalign} 		 ${EMPTY}
 
 Left Aligned
 	[Documentation]   Left Aligned Hero Block with Short version of text files in Finnish. 'Vaakuna' style.
-	[Tags]   HERO    
+	[Tags]   HERO
 	Given User Starts Creating a Left Aligned Page With Hero Block
 	When User Submits New Page
 	And User Opens Created Content
@@ -27,7 +27,7 @@ Center Aligned
 
 Left Aligned Picture
 	[Documentation]   Center Aligned Hero Block with Short version of text files in Finnish. 'Vaakuna' style.
-	[Tags]  HERO    
+	[Tags]  HERO
 	Given User Starts Creating a Left Aligned Page With Hero Block
 	And With Left Aligned Hero Picture Added
 	When User Submits New Page
@@ -81,7 +81,7 @@ User Opens Created Content
 	Capture Page Screenshot    filename=HERO_chrome_TESTRUN.png
 
 Layout Should Not Have Changed
-	${originalpic}=  Set Variable If  '${picalign}'!='${EMPTY}'  ${SCREENSHOTS_PATH}/fi_short_HERO_${picalign}_vaakuna_${picture}_chrome.png   ${SCREENSHOTS_PATH}/fi_short_HERO_${value}_vaakuna_${picture}_chrome.png
+	${originalpic}=  Set Variable If  '${picalign}'!='${EMPTY}'  ${SCREENSHOTS_PATH}/fi_short_HERO_${picalign}_vaakuna_${picture}_chrome.png   ${SCREENSHOTS_PATH}/fi_short_HERO_${value}_vaakuna_picture_chrome.png
 	${comparisonpic}=  Set Variable  ${REPORTS_PATH}/HERO_chrome_TESTRUN.png
 	Compared Pictures Match   ${originalpic}    ${comparisonpic}
 	
