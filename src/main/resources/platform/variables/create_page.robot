@@ -29,4 +29,9 @@ ${Opt_Hero_Picture_On_Bottom}				css:[value=with-image-bottom]
 ${Opt_Hero_Picture_On_Background}			css:[value=background-image]
 ${Opt_Hero_Diagonal}						css:[value=diagonal]
 ${Btn_Hero_Picture}							name:field_hero_image-media-library-open-button-field_hero-0-subform
-
+${Btn_Hero_File_Upload}					    name:files[upload]
+${Inp_Hero_Pic_Name}						css:[data-drupal-selector=edit-media-0-fields-name-0-value]
+${Inp_Hero_Pic_AltText}						css:[data-drupal-selector=edit-media-0-fields-field-media-image-0-alt]
+${Inp_Hero_Pic_Photographer}				css:[data-drupal-selector=edit-media-0-fields-field-photographer-0-value]
+${Btn_Hero_Save_Pic}						//button[contains(text(),'Tallenna')]
+${Btn_Hero_Insert_Pic}						//button[contains(text(),'Insert selected')]

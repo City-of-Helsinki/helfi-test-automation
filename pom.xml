@@ -10,9 +10,11 @@
       	  <robot.tag></robot.tag>
   		  <robot.exclude.tag></robot.exclude.tag>
 	      <robot.browser>chrome</robot.browser>
+	      <robot.language>suomi</robot.language>
 	      <robot.reportspath>${project.basedir}/target/robotframework-reports</robot.reportspath>
 	      <robot.screenshotspath>${project.basedir}/src/main/resources/screenshots</robot.screenshotspath>
 	      <robot.contentpath>${project.basedir}/src/main/resources/content</robot.contentpath>
+	      <robot.imagespath>${project.basedir}/src/main/resources/images</robot.imagespath>
   </properties>
   <dependencies>
         <dependency>
@@ -67,6 +69,7 @@
                            	 	<variable>REPORTS_PATH:${robot.reportspath}</variable>
                            	 	<variable>SCREENSHOTS_PATH:${robot.screenshotspath}</variable>
                            	 	<variable>CONTENT_PATH:${robot.contentpath}</variable>
+                           	 	<variable>IMAGES_PATH:${robot.imagespath}</variable>
                           	</variables>
                         </configuration>
                     </plugin>

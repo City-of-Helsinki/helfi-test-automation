@@ -6,6 +6,7 @@ Resource		  ./variables/create_page.robot
 Library           ../scripts/compare.py
 *** Variables ***
 ${URL_content_page}							https://helfi.docker.sh/fi/admin/content
+${URL_media_page}							https://helfi.docker.sh/fi/admin/content/media							
 
 
 
@@ -56,6 +57,13 @@ Delete Newly Created Item on Content Menu List
 	Click Element  ${Btn_Actions_SelectedItem_Deletebutton}
 	Go To   ${URL_content_page}
 	
+Delete Newly Created Item from Content Media List
+	Go To   ${URL_media_page}
+	Wait Until Keyword Succeeds  5x  200ms  Click Button   ${Btn_Actions_Dropbutton}
+	Click Element  ${Btn_Actions_ContentMenu_Deletebutton}
+	Click Element  ${Btn_Actions_SelectedItem_Deletebutton}
+	Go To   ${URL_media_page}	
+	
 Input Text To Frame
 	[Documentation]   Inserts text to given frame and returns to original content
 	[Arguments]	   ${frame}   ${locator}   ${input}
@@ -66,5 +74,5 @@ Input Text To Frame
 Compared Pictures Match
 	[Documentation]   Tests that two pictures look same --> layout is not broken
 	[Arguments]	   ${pic1}   ${pic2}
-	${results}=     TestImages      ${pic1}   ${pic2}
+	${results}=  TestImages      ${pic1}   ${pic2}
     Run keyword if  ${results}==False   fail    "Pictures are different"
