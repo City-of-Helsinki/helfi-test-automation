@@ -16,9 +16,11 @@ public class PictureCompare {
 		// load the images to be compared
 		           BufferedImage expectedImage = ImageComparisonUtil.readImageFromResources(expectedpath);
 		           BufferedImage actualImage = ImageComparisonUtil.readImageFromResources(actualpath);
-		           
+		           File resultDestination = null;
 		           // where to save the result (leave null if you want to see the result in the UI)
-		           File resultDestination = new File(resultpath);
+		           if(resultpath != null && !resultpath.isEmpty()) {
+		        	   resultDestination = new File(resultpath);
+		           }
 		   
 		           //Create ImageComparison object for it.
 		           ImageComparison imageComparison = new ImageComparison( expectedImage, actualImage, resultDestination );
@@ -76,7 +78,9 @@ public class PictureCompare {
 		           BufferedImage resultImage = imageComparisonResult.getResult();
 		           
 		           //Image can be saved after comparison, using ImageComparisonUtil.
-               ImageComparisonUtil.saveImage(resultDestination, resultImage); 
+		           if(resultDestination != null && imageComparisonResult.getImageComparisonState().equals(imageComparisonState.MISMATCH)) {
+		        	   	ImageComparisonUtil.saveImage(resultDestination, resultImage); 
+		           }
 		           
 		           if(imageComparisonResult.getImageComparisonState().equals(imageComparisonState.MATCH))
 		        	   return true;
@@ -85,6 +89,10 @@ public class PictureCompare {
 	} catch (ImageComparisonException e) {
 		// TODO Auto-generated catch block
 		e.printStackTrace();
+	}
+	catch (NullPointerException ne) {
+		// TODO Auto-generated catch block
+		ne.printStackTrace();
 	}
        return false;
     }
