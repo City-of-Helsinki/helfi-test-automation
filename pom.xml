@@ -25,11 +25,6 @@
             <version>3.141.59.26</version>
         </dependency>
         <dependency>
-            <groupId>com.github.marketsquare</groupId>
-            <artifactId>robotframework-httprequestlibrary</artifactId>
-            <version>0.0.17</version>
-        </dependency>
-        <dependency>
 		    <groupId>com.github.romankh3</groupId>
 		    <artifactId>image-comparison</artifactId>
 		    <version>4.3.0</version>

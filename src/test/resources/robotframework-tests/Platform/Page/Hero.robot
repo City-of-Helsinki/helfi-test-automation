@@ -1,6 +1,6 @@
 *** Settings ***
 Documentation   Testing Hero Block Settings in Platform
-Resource        ../../../../../main/resources/platform/Commonkeywords.robot
+Resource        ../../../robotframework-keywords/platform/Commonkeywords.robot
 Test Setup      Login And Go To Content Page
 Test Teardown   Cleanup and Close Browser	
 
@@ -11,36 +11,60 @@ ${picalign} 		 ${EMPTY}
 
 Left Aligned
 	[Documentation]   Left Aligned Hero Block with Short version of text files in Finnish. 'Vaakuna' style.
-	[Tags]   HERO
+	[Tags]   HERO 
 	Given User Starts Creating a Left Aligned Page With Hero Block
-	When User Submits New Page
+	When User Submits The New Page
 	And User Opens Created Content
 	Then Layout Should Not Have Changed	
 
 Center Aligned
 	[Documentation]   Center Aligned Hero Block with Short version of text files in Finnish. 'Vaakuna' style.
-	[Tags]  HERO
+	[Tags]  HERO     
 	Given User Starts Creating a Center Aligned Page With Hero Block
-	When User Submits New Page
+	When User Submits The New Page
 	And User Opens Created Content
 	Then Layout Should Not Have Changed	
 
 Left Aligned Picture
-	[Documentation]   Center Aligned Hero Block with Short version of text files in Finnish. 'Vaakuna' style.
-	[Tags]  HERO
-	Given User Starts Creating a Left Aligned Page With Hero Block
-	And With Left Aligned Hero Picture Added
-	When User Submits New Page
+	[Documentation]   Left Aligned Hero Block with Picture
+	[Tags]  HERO    
+	Given User Starts Creating Hero Block Page with Picture on Left
+	When User Submits The New Page
 	And User Opens Created Content
 	Then Layout Should Not Have Changed	
+
+Right Aligned Picture
+	[Documentation]   Right Aligned Hero Block with Picture
+	[Tags]  HERO
+	Given User Starts Creating Hero Block Page with Picture on Right
+	When User Submits The New Page
+	And User Opens Created Content
+	Then Layout Should Not Have Changed
+	
+Bottom Aligned Picture
+	[Documentation]   Bottom Aligned Hero Block with Picture
+	[Tags]  HERO
+	Given User Starts Creating Hero Block Page with Picture on Bottom
+	When User Submits The New Page
+	And User Opens Created Content
+	Then Layout Should Not Have Changed
+	
+Background Picture
+	[Documentation]    Hero Block with Background Picture
+	[Tags]  HERO   
+	Given User Starts Creating Hero Block Page with Picture on Background
+	When User Submits The New Page
+	And User Opens Created Content
+	Then Layout Should Not Have Changed			
    
 *** Keywords ***
+ 
 User Starts Creating a ${value} Aligned Page With Hero Block 
 	
 	Set Test Variable   ${value}    ${value} 
 	
 	Go To New Page Site
-	Input Text  ${Inp_Title}  Test Automation: ${value} Aligned Hero Block Page Without Picture
+	Input Text  ${Inp_Title}  Test Automation: ${value} Aligned Hero Block Page
 		
 	${TextFileContent}=  Get File  ${CONTENT_PATH}/text_content_short_fi.txt
 	${TextFileDescription}=  Get File  ${CONTENT_PATH}/text_description_short_fi.txt
@@ -52,10 +76,15 @@ User Starts Creating a ${value} Aligned Page With Hero Block
 	Input Text To Frame   ${Frm_Content}   //body   ${TextFileContent}
 	Input Text To Frame   ${Frm_Content_Description}   //body   ${TextFileDescription}
 
-With ${value} Aligned Hero Picture Added
+User Starts Creating Hero Block Page with Picture on ${picalign}
+	User Starts Creating a Left Aligned Page With Hero Block
     Set Test Variable   ${picture}  picture
-    Set Test Variable   ${picalign}   ${value}    
-	Run Keyword If  '${value}'=='Left'  Click Element   ${Opt_Hero_Picture_On_Left} 
+    Set Test Variable   ${picalign}   ${picalign}    
+	Run Keyword If  '${picalign}'=='Left'  Click Element   ${Opt_Hero_Picture_On_Left}
+	Run Keyword If  '${picalign}'=='Right'  Click Element   ${Opt_Hero_Picture_On_Right}
+	Run Keyword If  '${picalign}'=='Bottom'  Click Element   ${Opt_Hero_Picture_On_Bottom}
+	Run Keyword If  '${picalign}'=='Background'  Click Element   ${Opt_Hero_Picture_On_Background}
+		 
 	Click Button   ${Btn_Hero_Picture}
 	Wait Until Keyword Succeeds  5x  100ms  Choose File   ${Btn_Hero_File_Upload}   ${IMAGES_PATH}/train.jpg
 	Wait Until Keyword Succeeds  5x  100ms  Focus  ${Inp_Hero_Pic_Name}
@@ -68,7 +97,7 @@ With ${value} Aligned Hero Picture Added
 	Click Button   ${Btn_Hero_Save_Pic}
 	Wait Until Keyword Succeeds  5x  100ms  Click Button   ${Btn_Hero_Insert_Pic}   
 
-User Submits New Page
+User Submits The New Page
 	Wait Until Keyword Succeeds  5x  100ms  Click Button   ${Btn_Submit}
 		
 	
