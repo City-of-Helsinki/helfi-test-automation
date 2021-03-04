@@ -8,6 +8,8 @@ Test Teardown   Cleanup and Close Browser
 ${picture} 			 nopicture
 ${picalign} 		 ${EMPTY}
 ${linkstyle} 		 ${EMPTY}
+${color}	 		 ${EMPTY}
+
 *** Test Cases ***
 
 Left Aligned
@@ -28,7 +30,7 @@ Center Aligned
 
 Left Aligned Picture
 	[Documentation]   Left Aligned Hero Block with Picture
-	[Tags]  HERO    
+	[Tags]  HERO
 	Given User Starts Creating Hero Block Page with Left Picture
 	When User Submits The New Page
 	And User Opens Created Content
@@ -66,7 +68,7 @@ Diagonal Picture
 	And User Opens Created Content
 	Then Layout Should Not Have Changed	
 
-With Fullcolor Link
+Fullcolor Link
 	[Documentation]   Adds Left aligned page and a link with Fullcolor styling option selected
 	[Tags]   HERO    
 	Given User Starts Creating a Left Aligned Page With Hero Block
@@ -75,7 +77,7 @@ With Fullcolor Link
 	And User Opens Created Content
 	Then Layout Should Not Have Changed
 
-With Framed Link
+Framed Link
 	[Documentation]   Adds Left aligned page and a link with Framed styling option selected
 	[Tags]   HERO
 	Given User Starts Creating a Left Aligned Page With Hero Block
@@ -84,7 +86,7 @@ With Framed Link
 	And User Opens Created Content
 	Then Layout Should Not Have Changed
 
-With Transparent Link
+Transparent Link
 	[Documentation]   Adds Left aligned page and a link with Transparent styling option selected
 	[Tags]   HERO  
 	Given User Starts Creating a Left Aligned Page With Hero Block
@@ -92,6 +94,106 @@ With Transparent Link
 	When User Submits The New Page
 	And User Opens Created Content
 	Then Layout Should Not Have Changed
+
+Gold Background Color
+	[Documentation]   Left Aligned Hero Block with Background Color selection 'Gold' 
+	[Tags]   HERO    
+	Given User Starts Creating a Left Aligned Page With Hero Block
+	And User Adds Gold As Background Color
+	When User Submits The New Page
+	And User Opens Created Content
+	Then Layout Should Not Have Changed
+
+Silver Background Color
+	[Documentation]   Left Aligned Hero Block with Background Color selection 'Silver' 
+	[Tags]   HERO
+	Given User Starts Creating a Left Aligned Page With Hero Block
+	And User Adds Silver As Background Color
+	When User Submits The New Page
+	And User Opens Created Content
+	Then Layout Should Not Have Changed
+	
+Brick Background Color
+	[Documentation]   Left Aligned Hero Block with Background Color selection 'Brick' 
+	[Tags]   HERO 
+	Given User Starts Creating a Left Aligned Page With Hero Block
+	And User Adds Brick As Background Color
+	When User Submits The New Page
+	And User Opens Created Content
+	Then Layout Should Not Have Changed
+	
+Bus Background Color
+	[Documentation]   Left Aligned Hero Block with Background Color selection 'Bus' 
+	[Tags]   HERO
+	Given User Starts Creating a Left Aligned Page With Hero Block
+	And User Adds Bus As Background Color
+	When User Submits The New Page
+	And User Opens Created Content
+	Then Layout Should Not Have Changed
+	
+Copper Background Color
+	[Documentation]   Left Aligned Hero Block with Background Color selection 'Copper' 
+	[Tags]   HERO
+	Given User Starts Creating a Left Aligned Page With Hero Block
+	And User Adds Copper As Background Color
+	When User Submits The New Page
+	And User Opens Created Content
+	Then Layout Should Not Have Changed
+	
+Engel Background Color
+	[Documentation]   Left Aligned Hero Block with Background Color selection 'Engel' 
+	[Tags]   HERO
+	Given User Starts Creating a Left Aligned Page With Hero Block
+	And User Adds Engel As Background Color
+	When User Submits The New Page
+	And User Opens Created Content
+	Then Layout Should Not Have Changed
+	
+Fog Background Color
+	[Documentation]   Left Aligned Hero Block with Background Color selection 'Fog' 
+	[Tags]   HERO
+	Given User Starts Creating a Left Aligned Page With Hero Block
+	And User Adds Fog As Background Color
+	When User Submits The New Page
+	And User Opens Created Content
+	Then Layout Should Not Have Changed
+	
+Metro Background Color
+	[Documentation]   Left Aligned Hero Block with Background Color selection 'Metro' 
+	[Tags]   HERO
+	Given User Starts Creating a Left Aligned Page With Hero Block
+	And User Adds Metro As Background Color
+	When User Submits The New Page
+	And User Opens Created Content
+	Then Layout Should Not Have Changed
+	
+Summer Background Color
+	[Documentation]   Left Aligned Hero Block with Background Color selection 'Summer' 
+	[Tags]   HERO
+	Given User Starts Creating a Left Aligned Page With Hero Block
+	And User Adds Summer As Background Color
+	When User Submits The New Page
+	And User Opens Created Content
+	Then Layout Should Not Have Changed
+	
+Suomenlinna Background Color
+	[Documentation]   Left Aligned Hero Block with Background Color selection 'Suomenlinna' 
+	[Tags]   HERO
+	Given User Starts Creating a Left Aligned Page With Hero Block
+	And User Adds Suomenlinna As Background Color
+	When User Submits The New Page
+	And User Opens Created Content
+	Then Layout Should Not Have Changed
+	
+Tram Background Color
+	[Documentation]   Left Aligned Hero Block with Background Color selection 'Tram' 
+	[Tags]   HERO
+	Given User Starts Creating a Left Aligned Page With Hero Block
+	And User Adds Tram As Background Color
+	When User Submits The New Page
+	And User Opens Created Content
+	Then Layout Should Not Have Changed
+
    
 *** Keywords ***
  
@@ -126,11 +228,8 @@ User Starts Creating Hero Block Page with ${picalign} Picture
 	Wait Until Keyword Succeeds  5x  100ms  Choose File   ${Btn_Hero_File_Upload}   ${IMAGES_PATH}/train.jpg
 	Wait Until Keyword Succeeds  5x  100ms  Focus  ${Inp_Hero_Pic_Name}
 	Input Text    ${Inp_Hero_Pic_Name}   Juna sillalla
-	Focus  ${Inp_Hero_Pic_AltText}
 	Input Text    ${Inp_Hero_Pic_AltText}   Vanha juna kuljettaa matkustajia 
-	Focus  ${Inp_Hero_Pic_Photographer}
 	Input Text    ${Inp_Hero_Pic_Photographer}   Testi Valokuvaaja
-	Focus  ${Btn_Hero_Save_Pic}
 	Click Button   ${Btn_Hero_Save_Pic}
 	Wait Until Keyword Succeeds  5x  100ms  Click Button   ${Btn_Hero_Insert_Pic}   
 
@@ -144,6 +243,14 @@ User Adds Hero Link Button With ${style} Style
 	Run Keyword If  '${style}'=='Framed'  Click Element   ${Opt_Hero_Link_ButtonFramed}
 	Run Keyword If  '${style}'=='Transparent'  Click Element   ${Opt_Hero_Link_ButtonTransparent}
 	Capture Page Screenshot
+
+User Adds ${color} As Background Color
+	Set Test Variable   ${color}  ${color}
+	Focus    ${Ddn_Hero_Color}
+	Click Element   ${Ddn_Hero_Color}
+	Click Element   ${Opt_Hero_Color_${color}}
+
+
 
 User Submits The New Page
 	Wait Until Keyword Succeeds  5x  100ms  Click Button   ${Btn_Submit}
@@ -161,6 +268,7 @@ Layout Should Not Have Changed
 	${originalpic} =  Set Variable If
 ...  '${picalign}'!='${EMPTY}'  ${SCREENSHOTS_PATH}/fi_short_HERO_${picalign}_vaakuna_${picture}_chrome.png
 ...  '${linkstyle}'!='${EMPTY}'  ${SCREENSHOTS_PATH}/fi_short_HERO_left_vaakuna_nopicture_${linkstyle}link_chrome.png
+...  '${color}'!='${EMPTY}'  ${SCREENSHOTS_PATH}/fi_short_HERO_left_${color}_nopicture_chrome.png
 ...   ${SCREENSHOTS_PATH}/fi_short_HERO_${value}_vaakuna_nopicture_chrome.png
 	${comparisonpic}=  Set Variable  ${REPORTS_PATH}/HERO_chrome_TESTRUN-${TEST NAME}.png
 	Compared Pictures Match   ${originalpic}    ${comparisonpic}
