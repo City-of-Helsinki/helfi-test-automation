@@ -52,6 +52,7 @@ Click Add Article
 	
 Delete Newly Created Item on Content Menu List
 	[Documentation]   Deletes Created Item By assuming it is the topmost one in the list. Returns to content page afterwards.
+	Go To   ${URL_content_page}
 	Click Button   ${Btn_Actions_Dropbutton}
 	Click Element  ${Btn_Actions_ContentMenu_Deletebutton}
 	Click Element  ${Btn_Actions_SelectedItem_Deletebutton}
@@ -74,5 +75,5 @@ Input Text To Frame
 Compared Pictures Match
 	[Documentation]   Tests that two pictures look same --> layout is not broken
 	[Arguments]	   ${pic1}   ${pic2}
-	${results}=  compare      ${pic1}   ${pic2}   ${REPORTS_PATH}/pic_difference.png
+	${results}=  compare      ${pic1}   ${pic2}   ${REPORTS_PATH}/pic_difference-${TEST NAME}.png
     Run keyword if  ${results}==False   fail    "Pictures are different"

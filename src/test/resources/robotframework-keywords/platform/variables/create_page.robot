@@ -35,3 +35,10 @@ ${Inp_Hero_Pic_AltText}						css:[data-drupal-selector=edit-media-0-fields-field
 ${Inp_Hero_Pic_Photographer}				css:[data-drupal-selector=edit-media-0-fields-field-photographer-0-value]
 ${Btn_Hero_Save_Pic}						//button[contains(text(),'Tallenna')]
 ${Btn_Hero_Insert_Pic}						//button[contains(text(),'Insert selected')]
+${Btn_Hero_AddLink}						    name:field_hero_0_subform_field_hero_cta_link_add_more
+${Inp_Hero_Link_URL}						css:[data-drupal-selector=edit-field-hero-0-subform-field-hero-cta-0-subform-field-link-link-0-uri]
+${Inp_Hero_Link_Title}						css:[data-drupal-selector=edit-field-hero-0-subform-field-hero-cta-0-subform-field-link-link-0-title]
+${Ddn_Hero_Link_Design}						css:[data-drupal-selector=edit-field-hero-0-subform-field-hero-cta-0-subform-field-link-design]
+${Opt_Hero_Link_ButtonFullcolor}			css:[value=primary]
+${Opt_Hero_Link_ButtonFramed}				css:[value=secondary]
+${Opt_Hero_Link_ButtonTransparent}			css:[value=supplementary]
