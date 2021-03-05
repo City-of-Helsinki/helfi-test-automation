@@ -1,12 +1,12 @@
 *** Settings ***
 Documentation   Testing Hero Block Settings in Platform
 Resource        ../../../robotframework-keywords/platform/Commonkeywords.robot
+Resource        ../../../robotframework-keywords/platform/Page.robot
 Test Setup      Login And Go To Content Page
 Test Teardown   Cleanup and Close Browser	
 
 *** Variables ***
 ${picture} 			 nopicture
-${picalign} 		 ${EMPTY}
 ${linkstyle} 		 ${EMPTY}
 ${color}	 		 ${EMPTY}
 
@@ -198,21 +198,20 @@ Tram Background Color
 *** Keywords ***
  
 User Starts Creating a ${value} Aligned Page With Hero Block 
-	
 	Set Test Variable   ${value}    ${value} 
-	
 	Go To New Page Site
-	Input Text  ${Inp_Title}  Test Automation: ${value} Aligned Hero Block Page
-		
-	${TextFileContent}=  Get File  ${CONTENT_PATH}/text_content_short_fi.txt
-	${TextFileDescription}=  Get File  ${CONTENT_PATH}/text_description_short_fi.txt
+	
+	Input Title  Test Automation: ${value} Aligned Hero Block Page
+	
 	Click Element   ${Swh_HeroOnOff}
 	Wait Until Keyword Succeeds  5x  100ms  Run Keyword If  '${value}'=='Center'  Click Element   ${Ddn_Hero_Alignment}
 	Run Keyword If  '${value}'=='Center'  Click Element   ${Opt_Hero_Alignment_Center} 
 	Wait Until Keyword Succeeds  5x  100ms  Input Text  ${Inp_Hero_Title}   Juhani Aho: Rautatie
 	
-	Input Text To Frame   ${Frm_Content}   //body   ${TextFileContent}
-	Input Text To Frame   ${Frm_Content_Description}   //body   ${TextFileDescription}
+	${TextFileContent}=  Get File  ${CONTENT_PATH}/text_content_short_fi.txt
+	${TextFileDescription}=  Get File  ${CONTENT_PATH}/text_description_short_fi.txt
+	Input Text Content   ${TextFileContent}
+	Input Hero Description   ${TextFileDescription}
 
 User Starts Creating Hero Block Page with ${picalign} Picture 
 	User Starts Creating a Left Aligned Page With Hero Block
@@ -248,21 +247,19 @@ User Adds ${color} As Background Color
 	Set Test Variable   ${color}  ${color}
 	Focus    ${Ddn_Hero_Color}
 	Click Element   ${Ddn_Hero_Color}
-	Click Element   ${Opt_Hero_Color_${color}}
+	Click Element With Value   ${color}
 
-
+Input Hero Description
+	[Arguments]   ${description}
+	Input Text To Frame   ${Frm_Content_Description}   //body   ${description}
 
 User Submits The New Page
-	Wait Until Keyword Succeeds  5x  100ms  Click Button   ${Btn_Submit}
+	Submit Page
+		
 		
 	
 User Opens Created Content
-	Go To   ${URL_content_page}
-	Wait Until Keyword Succeeds  5x  200ms  Click Element  //a[contains(@href, '/fi/test-automation')]
-	Wait Until Keyword Succeeds  5x  200ms  Click Button  //button[contains(text(), 'Accept all cookies')]
-	Maximize Browser Window
-	Execute javascript  document.body.style.zoom="40%"
-	Capture Page Screenshot    filename=HERO_chrome_TESTRUN-${TEST NAME}.png
+	Open Test Automation Created Content
 
 Layout Should Not Have Changed
 	${originalpic} =  Set Variable If
@@ -270,11 +267,9 @@ Layout Should Not Have Changed
 ...  '${linkstyle}'!='${EMPTY}'  ${SCREENSHOTS_PATH}/fi_short_HERO_left_vaakuna_nopicture_${linkstyle}link_chrome.png
 ...  '${color}'!='${EMPTY}'  ${SCREENSHOTS_PATH}/fi_short_HERO_left_${color}_nopicture_chrome.png
 ...   ${SCREENSHOTS_PATH}/fi_short_HERO_${value}_vaakuna_nopicture_chrome.png
-	${comparisonpic}=  Set Variable  ${REPORTS_PATH}/HERO_chrome_TESTRUN-${TEST NAME}.png
+	${comparisonpic}=  Set Variable  ${REPORTS_PATH}/chrome_TESTRUN-${TEST NAME}.png
 	Compared Pictures Match   ${originalpic}    ${comparisonpic}
 	
-Cleanup and Close Browser
-	Wait Until Keyword Succeeds  2x  200ms  Delete Newly Created Item on Content Menu List
-	Run Keyword If  '${picalign}'!='${EMPTY}'  Wait Until Keyword Succeeds  2x  200ms 	Delete Newly Created Item from Content Media List
-	Close Browser	
+
+	
 	

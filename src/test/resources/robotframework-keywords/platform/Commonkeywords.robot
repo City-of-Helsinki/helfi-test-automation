@@ -2,12 +2,13 @@
 Documentation   Common Keywords referred by many testsuites. Platform side tests only
 Library           SeleniumLibrary
 Library           OperatingSystem
+Library			  Collections
+Library			  String
 Resource		  ./variables/create_page.robot
 Library 		   helfi.ta.PictureCompare
 *** Variables ***
 ${URL_content_page}							https://helfi.docker.sh/fi/admin/content
 ${URL_media_page}							https://helfi.docker.sh/fi/admin/content/media							
-
 
 
 *** Keywords ***
@@ -31,13 +32,6 @@ Go To New Page Site
 	Click Add Content
 	Click Add Page
 	
-Select Language
-	[Arguments]     ${value}
-	[Documentation]  fi = Finnish , sv = Swedish , en = English , ru = Russian
-	Click Element  ${Ddn_SelectLanguage}
-	Wait Until Keyword Succeeds  5x  200ms  Click Element  //option[contains(@value, '${value}')]
-
-
 Click Add Content
 	[Documentation]   Add Content ('Lisää sisältöä') in Content Menu
 	Wait Until Keyword Succeeds  5x  200ms  Click Element  //a[contains(@href, '/fi/node/add')]
@@ -77,3 +71,16 @@ Compared Pictures Match
 	[Arguments]	   ${pic1}   ${pic2}
 	${results}=  compare      ${pic1}   ${pic2}   ${REPORTS_PATH}/pic_difference-${TEST NAME}.png
     Run keyword if  ${results}==False   fail    "Pictures are different"
+    
+Click Element With Value
+	[Arguments]	   ${value}
+	${value}=  Convert To Lower Case   ${value}
+	Click Element  css:[value=${value}]
+	
+Open Test Automation Created Content
+	Go To   ${URL_content_page}
+	Wait Until Keyword Succeeds  5x  200ms  Click Element  //a[contains(@href, '/fi/test-automation')]
+	Wait Until Keyword Succeeds  5x  200ms  Click Button  //button[contains(text(), 'Accept all cookies')]
+	Maximize Browser Window
+	Execute javascript  document.body.style.zoom="40%"
+	Capture Page Screenshot    filename=chrome_TESTRUN-${TEST NAME}.png
