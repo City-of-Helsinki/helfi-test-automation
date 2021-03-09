@@ -10,6 +10,13 @@
 #				 Menu-item  = Mtm
 
 *** Variables ***
+#SHARED
+${Btn_File_Upload}					    	name:files[upload]
+${Inp_Pic_Name}								css:[data-drupal-selector=edit-media-0-fields-name-0-value]
+${Inp_Pic_AltText}							css:[data-drupal-selector=edit-media-0-fields-field-media-image-0-alt]
+${Inp_Pic_Photographer}						css:[data-drupal-selector=edit-media-0-fields-field-photographer-0-value]
+${Btn_Save_Pic}								//button[contains(text(),'Tallenna')]
+${Btn_Insert_Pic}							//button[contains(text(),'Insert selected')]
 ${Ddn_SelectLanguage}						//select[@id='edit-langcode-0-value']
 ${Inp_Title}								//input[@id='edit-title-0-value']
 ${Inp_Hero_Title}							//input[contains(@id, 'edit-field-hero-0-subform')]
@@ -30,12 +37,6 @@ ${Opt_Hero_Picture_On_Bottom}				css:[value=with-image-bottom]
 ${Opt_Hero_Picture_On_Background}			css:[value=background-image]
 ${Opt_Hero_Diagonal}						css:[value=diagonal]
 ${Btn_Hero_Picture}							name:field_hero_image-media-library-open-button-field_hero-0-subform
-${Btn_Hero_File_Upload}					    name:files[upload]
-${Inp_Hero_Pic_Name}						css:[data-drupal-selector=edit-media-0-fields-name-0-value]
-${Inp_Hero_Pic_AltText}						css:[data-drupal-selector=edit-media-0-fields-field-media-image-0-alt]
-${Inp_Hero_Pic_Photographer}				css:[data-drupal-selector=edit-media-0-fields-field-photographer-0-value]
-${Btn_Hero_Save_Pic}						//button[contains(text(),'Tallenna')]
-${Btn_Hero_Insert_Pic}						//button[contains(text(),'Insert selected')]
 ${Btn_Hero_AddLink}						    name:field_hero_0_subform_field_hero_cta_link_add_more
 ${Inp_Hero_Link_URL}						css:[data-drupal-selector=edit-field-hero-0-subform-field-hero-cta-0-subform-field-link-link-0-uri]
 ${Inp_Hero_Link_Title}						css:[data-drupal-selector=edit-field-hero-0-subform-field-hero-cta-0-subform-field-link-link-0-title]
@@ -44,37 +45,28 @@ ${Opt_Hero_Link_ButtonFullcolor}			css:[value=primary]
 ${Opt_Hero_Link_ButtonFramed}				css:[value=secondary]
 ${Opt_Hero_Link_ButtonTransparent}			css:[value=supplementary]
 ${Ddn_Hero_Color}							css:[data-drupal-selector=edit-field-hero-0-subform-field-hero-bg-color]
-${Opt_Hero_Color_Gold}						css:[value=gold]
-${Opt_Hero_Color_Silver}					css:[value=silver]
-${Opt_Hero_Color_Brick}						css:[value=brick]
-${Opt_Hero_Color_Bus}						css:[value=bus]
-${Opt_Hero_Color_Copper}					css:[value=copper]
-${Opt_Hero_Color_Engel}						css:[value=engel]
-${Opt_Hero_Color_Fog}						css:[value=fog]
-${Opt_Hero_Color_Metro}						css:[value=metro]
-${Opt_Hero_Color_Summer}					css:[value=summer]
-${Opt_Hero_Color_Suomenlinna}				css:[value=suomenlinna]
-${Opt_Hero_Color_Tram}						css:[value=tram]
+
 #COLUMNS
 ${Ddn_AddContent}							//ul[@data-drupal-selector='edit-field-content-add-more-operations']//li[2]/button
 ${Opt_AddColumns}						    name:field_content_columns_add_more
 ${Opt_AddImages}						    name:field_content_image_add_more
 ${Inp_Column_Title}	  						css:[data-drupal-selector=edit-field-content-1-subform-field-columns-title-0-value]
 ${Ddn_Column_Style}	  						css:[data-drupal-selector=edit-field-content-1-subform-field-columns-design]
-${Opt_Column_Style_5050}					css:[value=50-50]
-${Opt_Column_Style_3070}					css:[value=30-70]
-${Opt_Column_Style_7030}					css:[value=70-30]
-${Ddn_Column_LeftColumn_AddContent}			//ul[@data-drupal-selector='edit-field-content-1-subform-field-columns-left-column-add-more-operations']//button
-${Ddn_Column_RightColumn_AddContent}		//ul[@data-drupal-selector='edit-field-content-1-subform-field-columns-right-column-add-more-operations']//button
-${Opt_Column_LeftColumn_AddContent_Image}	//ul[@data-drupal-selector='edit-field-content-1-subform-field-columns-left-column-add-more-operations']//input[@name='field_content_1_subform_field_columns_left_column_image_add_more']
-${Opt_Column_LeftColumn_AddContent_Text}	//ul[@data-drupal-selector='edit-field-content-1-subform-field-columns-left-column-add-more-operations']//input[@name='field_content_1_subform_field_columns_left_column_text_add_more']
-${Opt_Column_LeftColumn_AddContent_ListOfLinks}		//ul[@data-drupal-selector='edit-field-content-1-subform-field-columns-left-column-add-more-operations']//input[@name='field_content_1_subform_field_columns_left_column_list_of_links_add_more']
-${Opt_Column_LeftColumn_AddContent_Link}	//ul[@data-drupal-selector='edit-field-content-1-subform-field-columns-left-column-add-more-operations']//input[@name='field_content_1_subform_field_columns_left_column_link_add_more']
-${Opt_Column_RightColumn_AddContent_Text}	//ul[@data-drupal-selector='edit-field-content-1-subform-field-columns-right-column-add-more-operations']//input[@name='field_content_1_subform_field_columns_right_column_text_add_more']
-${Btn_Column_LeftColumn_AddPicture}			name:field_image-media-library-open-button-field_content-1-subform-field_columns_left_column-0-subform
-${Btn_Column_RightColumn_AddPicture}		name:field_image-media-library-open-button-field_content-1-subform-field_columns_right_column-0-subform
-${Frm_Column_LeftColumn_Text}				//div[contains(@id,'cke_edit-field-content-1-subform-field-columns-left-column-0-subform-field-text-0-value')]//iframe
-${Frm_Column_RightColumn_Text}				//div[contains(@id,'cke_edit-field-content-1-subform-field-columns-right-column-0-subform-field-text-0-value')]//iframe
-
-
-
+${Ddn_Column_Left_AddContent}               //ul[@data-drupal-selector='edit-field-content-1-subform-field-columns-left-column-add-more-operations']//button
+${Ddn_Column_Right_AddContent}				//ul[@data-drupal-selector='edit-field-content-1-subform-field-columns-right-column-add-more-operations']//button
+${Opt_Column_Left_AddContent_Image}			//ul[@data-drupal-selector='edit-field-content-1-subform-field-columns-left-column-add-more-operations']//input[@name='field_content_1_subform_field_columns_left_column_image_add_more']
+${Opt_Column_Left_AddContent_Text}			//ul[@data-drupal-selector='edit-field-content-1-subform-field-columns-left-column-add-more-operations']//input[@name='field_content_1_subform_field_columns_left_column_text_add_more']
+${Opt_Column_Left_AddContent_ListOfLinks}	//ul[@data-drupal-selector='edit-field-content-1-subform-field-columns-left-column-add-more-operations']//input[@name='field_content_1_subform_field_columns_left_column_list_of_links_add_more']
+${Opt_Column_Left_AddContent_Link}			//ul[@data-drupal-selector='edit-field-content-1-subform-field-columns-left-column-add-more-operations']//input[@name='field_content_1_subform_field_columns_left_column_link_add_more']
+${Opt_Column_Right_AddContent_Image}		//ul[@data-drupal-selector='edit-field-content-1-subform-field-columns-right-column-add-more-operations']//input[@name='field_content_1_subform_field_columns_right_column_image_add_more']
+${Opt_Column_Right_AddContent_Text}			//ul[@data-drupal-selector='edit-field-content-1-subform-field-columns-right-column-add-more-operations']//input[@name='field_content_1_subform_field_columns_right_column_text_add_more']
+${Btn_Column_Left_AddPicture}				name:field_image-media-library-open-button-field_content-1-subform-field_columns_left_column-0-subform
+${Btn_Column_Right_AddPicture}				name:field_image-media-library-open-button-field_content-1-subform-field_columns_right_column-0-subform
+${Frm_Column_Left_Text}						//div[contains(@id,'cke_edit-field-content-1-subform-field-columns-left-column-0-subform-field-text-0-value')]//iframe
+${Frm_Column_Right_Text}					//div[contains(@id,'cke_edit-field-content-1-subform-field-columns-right-column-0-subform-field-text-0-value')]//iframe
+${Btn_Column_Left_Picture}					name:field_image-media-library-open-button-field_content-1-subform-field_columns_left_column-0-subform
+${Btn_Column_Right_Picture}					name:field_image-media-library-open-button-field_content-1-subform-field_columns_right_column-0-subform
+${Btn_Column_Right_Edit}					name:field_content_1_subform_field_columns_right_column_0_edit
+${Btn_Column_Left_Edit}						name:field_content_1_subform_field_columns_left_column_0_edit
+${Inp_Column_Left_Picture_Caption}			css:[data-drupal-selector=edit-field-content-1-subform-field-columns-left-column-0-subform-field-image-caption-0-value]
+${Inp_Column_Right_Picture_Caption}			css:[data-drupal-selector=edit-field-content-1-subform-field-columns-right-column-0-subform-field-image-caption-0-value]

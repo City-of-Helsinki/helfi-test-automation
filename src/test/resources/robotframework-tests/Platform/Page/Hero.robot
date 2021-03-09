@@ -1,12 +1,13 @@
 *** Settings ***
-Documentation   Testing Hero Block Settings in Platform
+Documentation   Testing Hero Block Settings in Platform. Tests are created with different text alignatiotions like
+...				Left, Center. For pictures there are more alignation options. Also differentlink icon styles are 
+...				tested with default pictureless layout. Also Background color options are tested in several testcases
 Resource        ../../../robotframework-keywords/platform/Commonkeywords.robot
 Resource        ../../../robotframework-keywords/platform/Page.robot
 Test Setup      Login And Go To Content Page
 Test Teardown   Cleanup and Close Browser	
 
 *** Variables ***
-${picture} 			 nopicture
 ${linkstyle} 		 ${EMPTY}
 ${color}	 		 ${EMPTY}
 
@@ -14,14 +15,13 @@ ${color}	 		 ${EMPTY}
 
 Left Aligned
 	[Documentation]   Left Aligned Hero Block with Short version of text files in Finnish. 'Vaakuna' style.
-	[Tags]   HERO
+	[Tags]   HERO    CRITICAL
 	Given User Starts Creating a Left Aligned Page With Hero Block
 	When User Submits The New Page
 	And User Opens Created Content
 	Then Layout Should Not Have Changed	
 
 Center Aligned
-	[Documentation]   Center Aligned Hero Block with Short version of text files in Finnish. 'Vaakuna' style.
 	[Tags]  HERO 
 	Given User Starts Creating a Center Aligned Page With Hero Block
 	When User Submits The New Page
@@ -30,14 +30,13 @@ Center Aligned
 
 Left Aligned Picture
 	[Documentation]   Left Aligned Hero Block with Picture
-	[Tags]  HERO
+	[Tags]  HERO    CRITICAL
 	Given User Starts Creating Hero Block Page with Left Picture
 	When User Submits The New Page
 	And User Opens Created Content
 	Then Layout Should Not Have Changed	
 
 Right Aligned Picture
-	[Documentation]   Right Aligned Hero Block with Picture
 	[Tags]  HERO    
 	Given User Starts Creating Hero Block Page with Right Picture
 	When User Submits The New Page
@@ -45,7 +44,6 @@ Right Aligned Picture
 	Then Layout Should Not Have Changed
 	
 Bottom Aligned Picture
-	[Documentation]   Bottom Aligned Hero Block with Picture
 	[Tags]  HERO
 	Given User Starts Creating Hero Block Page with Bottom Picture
 	When User Submits The New Page
@@ -53,7 +51,6 @@ Bottom Aligned Picture
 	Then Layout Should Not Have Changed
 	
 Background Picture
-	[Documentation]    Hero Block with Background Picture
 	[Tags]  HERO  
 	Given User Starts Creating Hero Block Page with Background Picture
 	When User Submits The New Page
@@ -61,7 +58,6 @@ Background Picture
 	Then Layout Should Not Have Changed			
 
 Diagonal Picture
-	[Documentation]    Hero Block with Diagonal Picture
 	[Tags]  HERO 
 	Given User Starts Creating Hero Block Page with Diagonal Picture
 	When User Submits The New Page
@@ -70,7 +66,7 @@ Diagonal Picture
 
 Fullcolor Link
 	[Documentation]   Adds Left aligned page and a link with Fullcolor styling option selected
-	[Tags]   HERO    
+	[Tags]   HERO    CRITICAL
 	Given User Starts Creating a Left Aligned Page With Hero Block
 	And User Adds Hero Link Button With Fullcolor Style
 	When User Submits The New Page
@@ -78,7 +74,6 @@ Fullcolor Link
 	Then Layout Should Not Have Changed
 
 Framed Link
-	[Documentation]   Adds Left aligned page and a link with Framed styling option selected
 	[Tags]   HERO
 	Given User Starts Creating a Left Aligned Page With Hero Block
 	And User Adds Hero Link Button With Framed Style
@@ -87,7 +82,6 @@ Framed Link
 	Then Layout Should Not Have Changed
 
 Transparent Link
-	[Documentation]   Adds Left aligned page and a link with Transparent styling option selected
 	[Tags]   HERO  
 	Given User Starts Creating a Left Aligned Page With Hero Block
 	And User Adds Hero Link Button With Transparent Style
@@ -97,7 +91,7 @@ Transparent Link
 
 Gold Background Color
 	[Documentation]   Left Aligned Hero Block with Background Color selection 'Gold' 
-	[Tags]   HERO    
+	[Tags]   HERO    CRITICAL    
 	Given User Starts Creating a Left Aligned Page With Hero Block
 	And User Adds Gold As Background Color
 	When User Submits The New Page
@@ -105,7 +99,6 @@ Gold Background Color
 	Then Layout Should Not Have Changed
 
 Silver Background Color
-	[Documentation]   Left Aligned Hero Block with Background Color selection 'Silver' 
 	[Tags]   HERO
 	Given User Starts Creating a Left Aligned Page With Hero Block
 	And User Adds Silver As Background Color
@@ -114,8 +107,7 @@ Silver Background Color
 	Then Layout Should Not Have Changed
 	
 Brick Background Color
-	[Documentation]   Left Aligned Hero Block with Background Color selection 'Brick' 
-	[Tags]   HERO 
+	[Tags]   HERO
 	Given User Starts Creating a Left Aligned Page With Hero Block
 	And User Adds Brick As Background Color
 	When User Submits The New Page
@@ -123,7 +115,6 @@ Brick Background Color
 	Then Layout Should Not Have Changed
 	
 Bus Background Color
-	[Documentation]   Left Aligned Hero Block with Background Color selection 'Bus' 
 	[Tags]   HERO
 	Given User Starts Creating a Left Aligned Page With Hero Block
 	And User Adds Bus As Background Color
@@ -132,7 +123,6 @@ Bus Background Color
 	Then Layout Should Not Have Changed
 	
 Copper Background Color
-	[Documentation]   Left Aligned Hero Block with Background Color selection 'Copper' 
 	[Tags]   HERO
 	Given User Starts Creating a Left Aligned Page With Hero Block
 	And User Adds Copper As Background Color
@@ -141,7 +131,6 @@ Copper Background Color
 	Then Layout Should Not Have Changed
 	
 Engel Background Color
-	[Documentation]   Left Aligned Hero Block with Background Color selection 'Engel' 
 	[Tags]   HERO
 	Given User Starts Creating a Left Aligned Page With Hero Block
 	And User Adds Engel As Background Color
@@ -150,7 +139,6 @@ Engel Background Color
 	Then Layout Should Not Have Changed
 	
 Fog Background Color
-	[Documentation]   Left Aligned Hero Block with Background Color selection 'Fog' 
 	[Tags]   HERO
 	Given User Starts Creating a Left Aligned Page With Hero Block
 	And User Adds Fog As Background Color
@@ -159,7 +147,6 @@ Fog Background Color
 	Then Layout Should Not Have Changed
 	
 Metro Background Color
-	[Documentation]   Left Aligned Hero Block with Background Color selection 'Metro' 
 	[Tags]   HERO
 	Given User Starts Creating a Left Aligned Page With Hero Block
 	And User Adds Metro As Background Color
@@ -168,7 +155,6 @@ Metro Background Color
 	Then Layout Should Not Have Changed
 	
 Summer Background Color
-	[Documentation]   Left Aligned Hero Block with Background Color selection 'Summer' 
 	[Tags]   HERO
 	Given User Starts Creating a Left Aligned Page With Hero Block
 	And User Adds Summer As Background Color
@@ -177,7 +163,6 @@ Summer Background Color
 	Then Layout Should Not Have Changed
 	
 Suomenlinna Background Color
-	[Documentation]   Left Aligned Hero Block with Background Color selection 'Suomenlinna' 
 	[Tags]   HERO
 	Given User Starts Creating a Left Aligned Page With Hero Block
 	And User Adds Suomenlinna As Background Color
@@ -186,7 +171,6 @@ Suomenlinna Background Color
 	Then Layout Should Not Have Changed
 	
 Tram Background Color
-	[Documentation]   Left Aligned Hero Block with Background Color selection 'Tram' 
 	[Tags]   HERO
 	Given User Starts Creating a Left Aligned Page With Hero Block
 	And User Adds Tram As Background Color
@@ -224,13 +208,14 @@ User Starts Creating Hero Block Page with ${picalign} Picture
 	Run Keyword If  '${picalign}'=='Diagonal'  Click Element   ${Opt_Hero_Diagonal}
 		 
 	Click Button   ${Btn_Hero_Picture}
-	Wait Until Keyword Succeeds  5x  100ms  Choose File   ${Btn_Hero_File_Upload}   ${IMAGES_PATH}/train.jpg
-	Wait Until Keyword Succeeds  5x  100ms  Focus  ${Inp_Hero_Pic_Name}
-	Input Text    ${Inp_Hero_Pic_Name}   Juna sillalla
-	Input Text    ${Inp_Hero_Pic_AltText}   Vanha juna kuljettaa matkustajia 
-	Input Text    ${Inp_Hero_Pic_Photographer}   Testi Valokuvaaja
-	Click Button   ${Btn_Hero_Save_Pic}
-	Wait Until Keyword Succeeds  5x  100ms  Click Button   ${Btn_Hero_Insert_Pic}   
+	Wait Until Keyword Succeeds  5x  100ms  Choose File   ${Btn_File_Upload}   ${IMAGES_PATH}/train.jpg
+	Wait Until Keyword Succeeds  5x  100ms  Focus  ${Inp_Pic_Name}
+	Input Text    ${Inp_Pic_Name}   Juna sillalla
+	Input Text    ${Inp_Pic_AltText}   Vanha juna kuljettaa matkustajia 
+	Input Text    ${Inp_Pic_Photographer}   Testi Valokuvaaja
+	Click Button   ${Btn_Save_Pic}
+	Wait Until Keyword Succeeds  5x  100ms  Click Button   ${Btn_Insert_Pic}
+	Set Test Variable  ${picsadded}    ${picsadded}+1   
 
 User Adds Hero Link Button With ${style} Style
 	Set Test Variable   ${linkstyle}  ${style}
