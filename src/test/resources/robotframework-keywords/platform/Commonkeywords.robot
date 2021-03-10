@@ -76,7 +76,14 @@ Click Element With Value
 	[Arguments]	   ${value}
 	${value}=  Convert To Lower Case   ${value}
 	Click Element  css:[value=${value}]
-	
+
+Remove String And Strip Text
+	[Documentation]   Value= String to be modified , String = String to be removed from value -content
+	[Arguments]	   ${value}   ${string}
+	${value}=  Run Keyword And Continue On Failure   Remove String   ${value}   ${string}
+	${value}=  Strip String   ${value} 
+	[Return]    ${value}
+
 Open Test Automation Created Content
 	Go To   ${URL_content_page}
 	Wait Until Keyword Succeeds  5x  200ms  Click Element  //a[contains(@href, '/fi/test-automation')]

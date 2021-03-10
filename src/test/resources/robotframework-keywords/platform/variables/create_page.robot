@@ -70,3 +70,5 @@ ${Btn_Column_Right_Edit}					name:field_content_1_subform_field_columns_right_co
 ${Btn_Column_Left_Edit}						name:field_content_1_subform_field_columns_left_column_0_edit
 ${Inp_Column_Left_Picture_Caption}			css:[data-drupal-selector=edit-field-content-1-subform-field-columns-left-column-0-subform-field-image-caption-0-value]
 ${Inp_Column_Right_Picture_Caption}			css:[data-drupal-selector=edit-field-content-1-subform-field-columns-right-column-0-subform-field-image-caption-0-value]
+${Swh_Column_Left_Picture_Orig_Aspect_Ratio}   css:[data-drupal-selector=edit-field-content-1-subform-field-columns-left-column-0-subform-field-original-aspect-ratio-value]
+${Swh_Column_Right_Picture_Orig_Aspect_Ratio}   css:[data-drupal-selector=edit-field-content-1-subform-field-columns-right-column-0-subform-field-original-aspect-ratio-value]

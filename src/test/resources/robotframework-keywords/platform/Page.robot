@@ -3,8 +3,10 @@ Documentation   New Page creation spesific keywords here. Variables are
 ...				Submitted:  Is the new page submitted. This is needed when tearing down creating content after test.
 ...				Picalign:   Picture alignment value in hero cases.
 ...				Picture:    Is at least one picture added to content = picture , else 'nopicture'
-...				Picsadded:  Number of pictures added to content. This is needed in teardown after test, so all media 
-...				gets deleted succesfully.
+...				Picsadded:  Number of pictures added to content. This is needed in teardown after test, so all media
+...				Picsize:   Picture size for column pictures. Original=  If use original aspect ratio. Cropped otherwise  
+...				gets deleted succesfully. Please note that pictures with greater value of width than length are not 
+...				modified in any way by drupal.
 Resource        Commonkeywords.robot
 
 *** Variables ***
@@ -12,6 +14,7 @@ ${submitted}								false
 ${picalign} 		 						${EMPTY}
 ${picture} 			 						nopicture
 ${picsadded}								0
+${picsize}									cropped
 
 *** Keywords ***
 
@@ -51,8 +54,17 @@ Add Picture to Column
 	Input Text    ${Inp_Pic_Photographer}   ${pgrapher}
 	Click Button   ${Btn_Save_Pic}
 	Wait Until Keyword Succeeds  10x  500ms  Click Button   ${Btn_Insert_Pic}
+	Wait Until Keyword Succeeds  10x  500ms   Add Picture Caption to ${side}  
 	Set Test Variable  ${picsadded}    ${picsadded}+1
 	Set Test Variable  ${picture}    picture   
+
+Add Picture Caption to ${side}
+	Run Keyword If  '${side}'=='left'	Input Text    ${Inp_Column_Left_Picture_Caption}   Juna puksuttaa kohti uutta pysäkkiä
+	Run Keyword If  '${side}'=='right'	Input Text    ${Inp_Column_Right_Picture_Caption}   Buddhalaisessa temppelissä suoritetaan hartausharjoituksia
+
+Use Original Aspect Ratio on ${side}
+	Wait Until Keyword Succeeds  5x  200ms  Click Element   ${Swh_Column_${side}_Picture_Orig_Aspect_Ratio}
+	Set Test Variable  ${picsize}   original
 	
 Add Text Content To Column on ${side}
 	Wait Until Element Is Clickable  ${Opt_Column_${side}_AddContent_Text}   timeout=3
@@ -67,11 +79,17 @@ Add Text Content To Column on ${side}
 	Wait Until Keyword Succeeds  10x  500ms  Input Text To Frame   ${Frm_Column_${side}_Text}   //body   ${content_text}
 
 Add ${content} to Left Column
-	Set Test Variable  ${content1}   ${content}
+	[Documentation]  Here we need to do some tricks in case picture tests original size. Content -string is modified
+	...				 so that picture compare assertion works. Also long, snowdrops picture is used in the case because
+	...				 pictures with longer width value does not get cropped. Only long pictures do.
 	Wait Until Keyword Succeeds  5x  100ms  Click Button  ${Ddn_Column_Left_AddContent}
 	${content_left}=  Create List  Juna sillalla   Vanha juna kuljettaa matkustajia   Testi Valokuvaaja
-	Run Keyword If  '${content}'=='Picture'  Add Picture to Column   left    train   @{content_left}
-	Run Keyword If  '${content}'=='Text'  Add Text Content To Column on Left
+	Run Keyword If  '${content}'=='picture'  Add Picture to Column   left    train   @{content_left}
+	Run Keyword If  '${content}'=='original picture'  Add Picture to Column   left    snowdrops   @{content_left}
+	Run Keyword If  '${content}'=='text'  Add Text Content To Column on Left
+	${content}=  Remove String And Strip Text   ${content}   original
+	Set Test Variable  ${content1}   ${content}
+  
 
 Add ${content} to Right Column
 	Set Test Variable  ${content2}   ${content}

@@ -39,7 +39,7 @@ Test Teardown   Cleanup and Close Browser
 	Then Layout Should Not Have Changed	
 
 50-50 with picture
-	[Tags]  COLUMNS   CRITICAL
+	[Tags]  COLUMNS   CRITICAL   
 	Given User Starts Creating a Page With 50-50 Division And Picture Content
 	And User Adds Picture to Left Column
 	And User Adds Picture to Right Column
@@ -55,6 +55,17 @@ Test Teardown   Cleanup and Close Browser
 	When User Submits The New Page
 	And User Opens Created Content
 	Then Layout Should Not Have Changed
+
+70-30 with original size picture and text
+	[Tags]  COLUMNS   CRITICAL
+	Given User Starts Creating a Page With 70-30 Division And Mixed Content
+	And User Adds Original Picture to Left Column
+	And Picture on Left Has Original Aspect Ratio Enabled
+	And User Adds Text to Right Column
+	When User Submits The New Page
+	And User Opens Created Content
+	Then Layout Should Not Have Changed
+
 
 
 *** Keywords ***
@@ -74,6 +85,7 @@ User Starts Creating a Page With ${division} Division And ${contenttype} Content
 	Click Element With Value   '${division}'
 
 User Adds ${content} to Left Column
+	${content}=  Convert To Lower Case   ${content}
 	Add ${content} to Left Column
 
 User Adds ${content} to Right Column
@@ -85,11 +97,14 @@ User Opens Created Content
 User Submits The New Page
 	Submit Page
 
+Picture on ${side} Has Original Aspect Ratio Enabled
+	Use Original Aspect Ratio on ${side}
+
 Layout Should Not Have Changed
 	${contenttype}=  Convert To Lower Case   ${contenttype}
 	${originalpic} =  Set Variable If  
-	...  '${contenttype}'=='picture'   ${SCREENSHOTS_PATH}/fi_short_COLUMNS_${division}_picture_chrome.png
-	...  '${contenttype}'=='mixed'   ${SCREENSHOTS_PATH}/fi_short_COLUMNS_${division}_left_${content1}_right_${content2}_chrome.png
+	...  '${contenttype}'=='picture'   ${SCREENSHOTS_PATH}/fi_short_COLUMNS_${division}_picture_${picsize}_chrome.png
+	...  '${contenttype}'=='mixed'   ${SCREENSHOTS_PATH}/fi_short_COLUMNS_${division}_left_${content1}_right_${content2}_${picsize}_chrome.png
 	...   ${SCREENSHOTS_PATH}/fi_short_COLUMNS_${division}_text_chrome.png
 	${comparisonpic}=  Set Variable  ${REPORTS_PATH}/chrome_TESTRUN-${TEST NAME}.png
 	Compared Pictures Match   ${originalpic}    ${comparisonpic}
