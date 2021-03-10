@@ -8,7 +8,6 @@ Test Setup      Login And Go To Content Page
 Test Teardown   Cleanup and Close Browser	
 
 *** Variables ***
-${linkstyle} 		 ${EMPTY}
 ${color}	 		 ${EMPTY}
 
 *** Test Cases ***
@@ -226,7 +225,6 @@ User Adds Hero Link Button With ${style} Style
 	Run Keyword If  '${style}'=='Fullcolor'  Click Element   ${Opt_Hero_Link_ButtonFullcolor}
 	Run Keyword If  '${style}'=='Framed'  Click Element   ${Opt_Hero_Link_ButtonFramed}
 	Run Keyword If  '${style}'=='Transparent'  Click Element   ${Opt_Hero_Link_ButtonTransparent}
-	Capture Page Screenshot
 
 User Adds ${color} As Background Color
 	Set Test Variable   ${color}  ${color}

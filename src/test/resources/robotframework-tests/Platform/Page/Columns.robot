@@ -66,7 +66,32 @@ Test Teardown   Cleanup and Close Browser
 	And User Opens Created Content
 	Then Layout Should Not Have Changed
 
+50-50 with text and fullcolor link
+	[Tags]  COLUMNS   CRITICAL
+	Given User Starts Creating a Page With 50-50 Division And Mixed Content
+	And User Adds Text to Left Column
+	And User Adds Link Button With Fullcolor Style into Right Column
+	When User Submits The New Page
+	And User Opens Created Content
+	Then Layout Should Not Have Changed
 
+50-50 With Text And Transparent Link
+	[Tags]  COLUMNS
+	Given User Starts Creating a Page With 50-50 Division And Mixed Content
+	And User Adds Text to Left Column
+	And User Adds Link Button With Transparent Style into Right Column
+	When User Submits The New Page
+	And User Opens Created Content
+	Then Layout Should Not Have Changed
+
+50-50 With Text And Framed Link
+	[Tags]  COLUMNS
+	Given User Starts Creating a Page With 50-50 Division And Mixed Content
+	And User Adds Text to Left Column
+	And User Adds Link Button With Framed Style into Right Column
+	When User Submits The New Page
+	And User Opens Created Content
+	Then Layout Should Not Have Changed
 
 *** Keywords ***
 User Starts Creating a Page With ${division} Division And ${contenttype} Content
@@ -91,6 +116,12 @@ User Adds ${content} to Left Column
 User Adds ${content} to Right Column
 	Add ${content} to Right Column
 
+User Adds Link Button With ${linkstyle} Style into ${side} Column
+	Set Test Variable   ${linkstyle}   ${linkstyle}
+	${side}=  Convert To Lower Case   ${side}
+	Run Keyword If  '${side}'=='right'  Add Link to Right Column
+	Run Keyword If  '${side}'=='left'  Add Link to Left Column
+
 User Opens Created Content
 	Open Test Automation Created Content
 
@@ -104,6 +135,7 @@ Layout Should Not Have Changed
 	${contenttype}=  Convert To Lower Case   ${contenttype}
 	${originalpic} =  Set Variable If  
 	...  '${contenttype}'=='picture'   ${SCREENSHOTS_PATH}/fi_short_COLUMNS_${division}_picture_${picsize}_chrome.png
+	...	 '${linkstyle}'!='${EMPTY}'   ${SCREENSHOTS_PATH}/fi_short_COLUMNS_${division}_left_${content1}_right_${content2}_${linkstyle}_chrome.png
 	...  '${contenttype}'=='mixed'   ${SCREENSHOTS_PATH}/fi_short_COLUMNS_${division}_left_${content1}_right_${content2}_${picsize}_chrome.png
 	...   ${SCREENSHOTS_PATH}/fi_short_COLUMNS_${division}_text_chrome.png
 	${comparisonpic}=  Set Variable  ${REPORTS_PATH}/chrome_TESTRUN-${TEST NAME}.png

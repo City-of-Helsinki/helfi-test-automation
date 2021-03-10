@@ -15,6 +15,7 @@ ${picalign} 		 						${EMPTY}
 ${picture} 			 						nopicture
 ${picsadded}								0
 ${picsize}									cropped
+${linkstyle} 		 						${EMPTY}
 
 *** Keywords ***
 
@@ -36,6 +37,17 @@ Submit Page
 	[Documentation]  User submits new page and it is saved and appears in content view
 	Wait Until Keyword Succeeds  5x  100ms  Click Button   ${Btn_Submit}
 	Set Test Variable   ${submitted}   true
+	
+Add ${linkstyle} Link To ${side} Column
+	${linkstyle}=  Remove String And Strip Text   ${linkstyle}   "
+	Wait Until Element Is Clickable  ${Opt_Column_${side}_AddContent_Link}   timeout=3
+	Click Element  ${Opt_Column_${side}_AddContent_Link}
+	Wait Until Keyword Succeeds  5x  100ms  Input Text   ${Inp_Column_${side}_Link_URL}   https://fi.wikipedia.org/wiki/Rautatie_(romaani)    
+	Input Text   ${Inp_Column_${side}_Link_Title}    Tietoa teoksesta
+	Click Element  ${Ddn_Column_${side}_Link_Design}
+	Run Keyword If  '${linkstyle}'=='Fullcolor'  Click Element   ${Opt_Column_${side}_Link_ButtonFullcolor}
+	Run Keyword If  '${linkstyle}'=='Framed'  Click Element   ${Opt_Column_${side}_Link_ButtonFramed}
+	Run Keyword If  '${linkstyle}'=='Transparent'  Click Element   ${Opt_Column_${side}_Link_ButtonTransparent}
 	
 Add Picture to Column
 	[Documentation]  Adds picture and fills given content. selection= picture name from images -folder at src/main/
@@ -91,14 +103,15 @@ Add ${content} to Left Column
 	Set Test Variable  ${content1}   ${content}
   
 
-Add ${content} to Right Column
+Add ${content:[^"]+} to Right Column
 	Set Test Variable  ${content2}   ${content}
-	Wait Until Element Is Clickable  ${Ddn_Column_Right_AddContent}   timeout=3	 
+	Wait Until Element Is Clickable  ${Ddn_Column_Right_AddContent}   timeout=3
 	Wait Until Keyword Succeeds  10x  500ms  Click Button  ${Ddn_Column_Right_AddContent}
 	${content_right}=  Create List  Temppeli koreassa   Buddhalaistemppeli talvella Aasiassa   Testi Valokuvaaja2
 	Run Keyword If  '${content}'=='Picture'  Add Picture to Column   right    temple   @{content_right}
 	Run Keyword If  '${content}'=='Text'  Add Text Content To Column on Right
-	
+	Run Keyword If  '${content}'=='Link'  Add "${linkstyle}" Link To Right Column
+		
 Cleanup and Close Browser
 	[Documentation]  Deletes content created by testcases. Page , if created and picture if added.
 	Run Keyword If  '${submitted}'!='false'  Wait Until Keyword Succeeds  2x  200ms  Delete Newly Created Item on Content Menu List
