@@ -10,7 +10,6 @@ Test Teardown   Cleanup and Close Browser
 
 
 *** Test Cases ***
-# 	LINKKILISTOISTA EI TARVITSE TEHDÄ TESTEJÄ
 50-50
 	[Tags]  COLUMNS   CRITICAL   
 	Given User Starts Creating a Page With 50-50 Division And Text Content
