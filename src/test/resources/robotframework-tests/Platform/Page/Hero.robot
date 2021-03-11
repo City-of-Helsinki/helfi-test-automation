@@ -57,7 +57,7 @@ Background Picture
 	Then Layout Should Not Have Changed			
 
 Diagonal Picture
-	[Tags]  HERO 
+	[Tags]  HERO
 	Given User Starts Creating Hero Block Page with Diagonal Picture
 	When User Submits The New Page
 	And User Opens Created Content
@@ -214,7 +214,10 @@ User Starts Creating Hero Block Page with ${picalign} Picture
 	Input Text    ${Inp_Pic_Photographer}   Testi Valokuvaaja
 	Click Button   ${Btn_Save_Pic}
 	Wait Until Keyword Succeeds  5x  100ms  Click Button   ${Btn_Insert_Pic}
+	Wait Until Element Is Visible  //input[@data-drupal-selector='edit-field-hero-0-subform-field-hero-image-selection-0-remove-button']   timeout=3
 	Set Test Variable  ${picsadded}    ${picsadded}+1   
+
+
 
 User Adds Hero Link Button With ${style} Style
 	Set Test Variable   ${linkstyle}  ${style}

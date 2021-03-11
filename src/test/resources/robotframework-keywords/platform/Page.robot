@@ -21,6 +21,7 @@ ${linkstyle} 		 						${EMPTY}
 
 Input Title
 	[Arguments]   ${title}
+	Wait Until Element Is Visible   ${Inp_Title}   timeout=3  
 	Input Text  ${Inp_Title}   ${title}  
 	
 Input Text Content

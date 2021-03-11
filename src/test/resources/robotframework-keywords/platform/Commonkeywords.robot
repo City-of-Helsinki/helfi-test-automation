@@ -30,15 +30,18 @@ Go To New Article Site
 
 Go To New Page Site
 	Click Add Content
-	Click Add Page
-	
+	Wait Until Keyword Succeeds  5x  200ms  Click Add Page
+
 Click Add Content
 	[Documentation]   Add Content ('Lisää sisältöä') in Content Menu
+	Wait Until Element Is Visible   //a[contains(@href, '/fi/node/add')]   timeout=3
 	Wait Until Keyword Succeeds  5x  200ms  Click Element  //a[contains(@href, '/fi/node/add')]
    
 Click Add Page
 	[Documentation]   Add Page ('Sivu') click in Add Content('Lisää sisältöä') -menu
+	Wait Until Element Is Visible  //a[contains(@href, '/fi/node/add/page')]   timeout=3
 	Wait Until Keyword Succeeds  5x  200ms  Click Element  //a[contains(@href, '/fi/node/add/page')]
+	Element Should Not Be Visible   //a[contains(@href, '/fi/node/add/page')]
 	
 Click Add Article
 	[Documentation]   Add Article ('Artikkeli') click in Add Content('Lisää sisältöä') -menu

@@ -12,7 +12,7 @@ Test Teardown   Cleanup and Close Browser
 *** Test Cases ***
 # 	LINKKILISTOISTA EI TARVITSE TEHDÄ TESTEJÄ
 50-50
-	[Tags]  COLUMNS   CRITICAL
+	[Tags]  COLUMNS   CRITICAL   
 	Given User Starts Creating a Page With 50-50 Division And Text Content
 	And User Adds Text to Left Column
 	And User Adds Text to Right Column
@@ -21,7 +21,7 @@ Test Teardown   Cleanup and Close Browser
 	Then Layout Should Not Have Changed	
 	
 30-70
-	[Tags]  COLUMNS
+	[Tags]  COLUMNS   
 	Given User Starts Creating a Page With 30-70 Division And Text Content
 	And User Adds Text to Left Column
 	And User Adds Text to Right Column
@@ -48,7 +48,7 @@ Test Teardown   Cleanup and Close Browser
 	Then Layout Should Not Have Changed	
 
 50-50 with picture and text
-	[Tags]  COLUMNS   CRITICAL
+	[Tags]  COLUMNS   CRITICAL   
 	Given User Starts Creating a Page With 50-50 Division And Mixed Content
 	And User Adds Picture to Left Column
 	And User Adds Text to Right Column
@@ -57,7 +57,7 @@ Test Teardown   Cleanup and Close Browser
 	Then Layout Should Not Have Changed
 
 70-30 with original size picture and text
-	[Tags]  COLUMNS   CRITICAL
+	[Tags]  COLUMNS   CRITICAL   
 	Given User Starts Creating a Page With 70-30 Division And Mixed Content
 	And User Adds Original Picture to Left Column
 	And Picture on Left Has Original Aspect Ratio Enabled
