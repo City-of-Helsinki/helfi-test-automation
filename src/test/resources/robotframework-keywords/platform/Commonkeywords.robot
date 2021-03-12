@@ -23,6 +23,7 @@ Login And Go To Content Page
 	Get Admin Url
 	Open Browser  ${admin_url}  ${BROWSER}
 	Go To   ${URL_content_page}
+	Run Keyword If  '${BROWSER}'=='chromeheadless'	Set Window Size   1296   696
 
 Go To New Article Site
 	Click Add Content
@@ -93,4 +94,5 @@ Open Test Automation Created Content
 	Wait Until Keyword Succeeds  5x  200ms  Click Button  //button[contains(text(), 'Accept all cookies')]
 	Maximize Browser Window
 	Execute javascript  document.body.style.zoom="40%"
-	Capture Page Screenshot    filename=chrome_TESTRUN-${TEST NAME}.png
+	Run keyword if  ('${picsize}'=='original') & ('${BROWSER}'=='chromeheadless')   Execute javascript  document.body.style.zoom="30%"
+	Capture Page Screenshot    filename=${BROWSER}_TESTRUN-${TEST NAME}.png

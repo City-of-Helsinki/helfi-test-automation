@@ -14,14 +14,14 @@ ${color}	 		 ${EMPTY}
 
 Left Aligned
 	[Documentation]   Left Aligned Hero Block with Short version of text files in Finnish. 'Vaakuna' style.
-	[Tags]   HERO    CRITICAL
+	[Tags]   HERO    CRITICAL   
 	Given User Starts Creating a Left Aligned Page With Hero Block
 	When User Submits The New Page
 	And User Opens Created Content
 	Then Layout Should Not Have Changed	
 
 Center Aligned
-	[Tags]  HERO 
+	[Tags]  HERO   
 	Given User Starts Creating a Center Aligned Page With Hero Block
 	When User Submits The New Page
 	And User Opens Created Content
@@ -29,14 +29,14 @@ Center Aligned
 
 Left Aligned Picture
 	[Documentation]   Left Aligned Hero Block with Picture
-	[Tags]  HERO    CRITICAL
+	[Tags]  HERO    CRITICAL   
 	Given User Starts Creating Hero Block Page with Left Picture
 	When User Submits The New Page
 	And User Opens Created Content
 	Then Layout Should Not Have Changed	
 
 Right Aligned Picture
-	[Tags]  HERO    
+	[Tags]  HERO
 	Given User Starts Creating Hero Block Page with Right Picture
 	When User Submits The New Page
 	And User Opens Created Content
@@ -50,7 +50,7 @@ Bottom Aligned Picture
 	Then Layout Should Not Have Changed
 	
 Background Picture
-	[Tags]  HERO  
+	[Tags]  HERO
 	Given User Starts Creating Hero Block Page with Background Picture
 	When User Submits The New Page
 	And User Opens Created Content
@@ -81,7 +81,7 @@ Framed Link
 	Then Layout Should Not Have Changed
 
 Transparent Link
-	[Tags]   HERO  
+	[Tags]   HERO 
 	Given User Starts Creating a Left Aligned Page With Hero Block
 	And User Adds Hero Link Button With Transparent Style
 	When User Submits The New Page
@@ -90,7 +90,7 @@ Transparent Link
 
 Gold Background Color
 	[Documentation]   Left Aligned Hero Block with Background Color selection 'Gold' 
-	[Tags]   HERO    CRITICAL    
+	[Tags]   HERO    CRITICAL 
 	Given User Starts Creating a Left Aligned Page With Hero Block
 	And User Adds Gold As Background Color
 	When User Submits The New Page
@@ -187,6 +187,7 @@ User Starts Creating a ${value} Aligned Page With Hero Block
 	Input Title  Test Automation: ${value} Aligned Hero Block Page
 	
 	Click Element   ${Swh_HeroOnOff}
+	Wait Until Keyword Succeeds  5x  100ms  Focus   ${Ddn_Hero_Alignment}
 	Wait Until Keyword Succeeds  5x  100ms  Run Keyword If  '${value}'=='Center'  Click Element   ${Ddn_Hero_Alignment}
 	Run Keyword If  '${value}'=='Center'  Click Element   ${Opt_Hero_Alignment_Center} 
 	Wait Until Keyword Succeeds  5x  100ms  Input Text  ${Inp_Hero_Title}   Juhani Aho: Rautatie
@@ -205,8 +206,8 @@ User Starts Creating Hero Block Page with ${picalign} Picture
 	Run Keyword If  '${picalign}'=='Bottom'  Click Element   ${Opt_Hero_Picture_On_Bottom}
 	Run Keyword If  '${picalign}'=='Background'  Click Element   ${Opt_Hero_Picture_On_Background}
 	Run Keyword If  '${picalign}'=='Diagonal'  Click Element   ${Opt_Hero_Diagonal}
-		 
-	Click Button   ${Btn_Hero_Picture}
+	Wait Until Keyword Succeeds  5x  100ms  Focus   ${Btn_Hero_Picture}
+	Wait Until Keyword Succeeds  5x  100ms  Click Button   ${Btn_Hero_Picture}
 	Wait Until Keyword Succeeds  5x  100ms  Choose File   ${Btn_File_Upload}   ${IMAGES_PATH}/train.jpg
 	Wait Until Keyword Succeeds  5x  100ms  Focus  ${Inp_Pic_Name}
 	Input Text    ${Inp_Pic_Name}   Juna sillalla
@@ -224,6 +225,7 @@ User Adds Hero Link Button With ${style} Style
 	Click Button   ${Btn_Hero_AddLink}
 	Wait Until Keyword Succeeds  5x  100ms  Input Text   ${Inp_Hero_Link_URL}   https://fi.wikipedia.org/wiki/Rautatie_(romaani)    
 	Input Text   ${Inp_Hero_Link_Title}    Tietoa teoksesta
+	Focus   ${Ddn_Hero_Link_Design}
 	Click Element  ${Ddn_Hero_Link_Design}
 	Run Keyword If  '${style}'=='Fullcolor'  Click Element   ${Opt_Hero_Link_ButtonFullcolor}
 	Run Keyword If  '${style}'=='Framed'  Click Element   ${Opt_Hero_Link_ButtonFramed}
@@ -249,11 +251,11 @@ User Opens Created Content
 
 Layout Should Not Have Changed
 	${originalpic} =  Set Variable If
-...  '${picalign}'!='${EMPTY}'  ${SCREENSHOTS_PATH}/fi_short_HERO_${picalign}_vaakuna_${picture}_chrome.png
-...  '${linkstyle}'!='${EMPTY}'  ${SCREENSHOTS_PATH}/fi_short_HERO_left_vaakuna_nopicture_${linkstyle}link_chrome.png
-...  '${color}'!='${EMPTY}'  ${SCREENSHOTS_PATH}/fi_short_HERO_left_${color}_nopicture_chrome.png
-...   ${SCREENSHOTS_PATH}/fi_short_HERO_${value}_vaakuna_nopicture_chrome.png
-	${comparisonpic}=  Set Variable  ${REPORTS_PATH}/chrome_TESTRUN-${TEST NAME}.png
+...  '${picalign}'!='${EMPTY}'  ${SCREENSHOTS_PATH}/${BROWSER}/fi_short_HERO_${picalign}_vaakuna_${picture}_${BROWSER}.png
+...  '${linkstyle}'!='${EMPTY}'  ${SCREENSHOTS_PATH}/${BROWSER}/fi_short_HERO_left_vaakuna_nopicture_${linkstyle}link_${BROWSER}.png
+...  '${color}'!='${EMPTY}'  ${SCREENSHOTS_PATH}/${BROWSER}/fi_short_HERO_left_${color}_nopicture_${BROWSER}.png
+...   ${SCREENSHOTS_PATH}/${BROWSER}/fi_short_HERO_${value}_vaakuna_nopicture_${BROWSER}.png
+	${comparisonpic}=  Set Variable  ${REPORTS_PATH}/${BROWSER}_TESTRUN-${TEST NAME}.png
 	Compared Pictures Match   ${originalpic}    ${comparisonpic}
 	
 

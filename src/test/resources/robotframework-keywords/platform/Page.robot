@@ -60,6 +60,7 @@ Add Picture to Column
 	${picdescription}=  Get From List  ${content}   1
 	${pgrapher}=  Get From List  ${content}   2
 	Wait Until Element Is Clickable  ${Btn_Column_${side}_Picture}   timeout=3
+	Focus   ${Btn_Column_${side}_Picture}
 	Wait Until Keyword Succeeds  10x  500ms  Click Element  ${Btn_Column_${side}_Picture}
 	Wait Until Keyword Succeeds  10x  500ms  Choose File   ${Btn_File_Upload}   ${IMAGES_PATH}/${selection}.jpg
 	Wait Until Keyword Succeeds  10x  500ms  Input Text    ${Inp_Pic_Name}   ${pictitle}
@@ -95,6 +96,7 @@ Add ${content} to Left Column
 	[Documentation]  Here we need to do some tricks in case picture tests original size. Content -string is modified
 	...				 so that picture compare assertion works. Also long, snowdrops picture is used in the case because
 	...				 pictures with longer width value does not get cropped. Only long pictures do.
+	Focus   ${Ddn_Column_Left_AddContent}
 	Wait Until Keyword Succeeds  5x  100ms  Click Button  ${Ddn_Column_Left_AddContent}
 	${content_left}=  Create List  Juna sillalla   Vanha juna kuljettaa matkustajia   Testi Valokuvaaja
 	Run Keyword If  '${content}'=='picture'  Add Picture to Column   left    train   @{content_left}
@@ -107,6 +109,7 @@ Add ${content} to Left Column
 Add ${content:[^"]+} to Right Column
 	Set Test Variable  ${content2}   ${content}
 	Wait Until Element Is Clickable  ${Ddn_Column_Right_AddContent}   timeout=3
+	Focus   ${Ddn_Column_Right_AddContent}
 	Wait Until Keyword Succeeds  10x  500ms  Click Button  ${Ddn_Column_Right_AddContent}
 	${content_right}=  Create List  Temppeli koreassa   Buddhalaistemppeli talvella Aasiassa   Testi Valokuvaaja2
 	Run Keyword If  '${content}'=='Picture'  Add Picture to Column   right    temple   @{content_right}

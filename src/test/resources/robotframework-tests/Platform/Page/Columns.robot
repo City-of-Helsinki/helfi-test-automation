@@ -11,7 +11,7 @@ Test Teardown   Cleanup and Close Browser
 
 *** Test Cases ***
 50-50
-	[Tags]  COLUMNS   CRITICAL   
+	[Tags]  COLUMNS   CRITICAL
 	Given User Starts Creating a Page With 50-50 Division And Text Content
 	And User Adds Text to Left Column
 	And User Adds Text to Right Column
@@ -20,7 +20,7 @@ Test Teardown   Cleanup and Close Browser
 	Then Layout Should Not Have Changed	
 	
 30-70
-	[Tags]  COLUMNS   
+	[Tags]  COLUMNS 
 	Given User Starts Creating a Page With 30-70 Division And Text Content
 	And User Adds Text to Left Column
 	And User Adds Text to Right Column
@@ -38,7 +38,7 @@ Test Teardown   Cleanup and Close Browser
 	Then Layout Should Not Have Changed	
 
 50-50 with picture
-	[Tags]  COLUMNS   CRITICAL   
+	[Tags]  COLUMNS   CRITICAL  
 	Given User Starts Creating a Page With 50-50 Division And Picture Content
 	And User Adds Picture to Left Column
 	And User Adds Picture to Right Column
@@ -47,7 +47,7 @@ Test Teardown   Cleanup and Close Browser
 	Then Layout Should Not Have Changed	
 
 50-50 with picture and text
-	[Tags]  COLUMNS   CRITICAL   
+	[Tags]  COLUMNS   CRITICAL 
 	Given User Starts Creating a Page With 50-50 Division And Mixed Content
 	And User Adds Picture to Left Column
 	And User Adds Text to Right Column
@@ -56,7 +56,7 @@ Test Teardown   Cleanup and Close Browser
 	Then Layout Should Not Have Changed
 
 70-30 with original size picture and text
-	[Tags]  COLUMNS   CRITICAL   
+	[Tags]  COLUMNS   CRITICAL
 	Given User Starts Creating a Page With 70-30 Division And Mixed Content
 	And User Adds Original Picture to Left Column
 	And Picture on Left Has Original Aspect Ratio Enabled
@@ -84,7 +84,7 @@ Test Teardown   Cleanup and Close Browser
 	Then Layout Should Not Have Changed
 
 50-50 With Text And Framed Link
-	[Tags]  COLUMNS
+	[Tags]  COLUMNS 
 	Given User Starts Creating a Page With 50-50 Division And Mixed Content
 	And User Adds Text to Left Column
 	And User Adds Link Button With Framed Style into Right Column
@@ -133,9 +133,9 @@ Picture on ${side} Has Original Aspect Ratio Enabled
 Layout Should Not Have Changed
 	${contenttype}=  Convert To Lower Case   ${contenttype}
 	${originalpic} =  Set Variable If  
-	...  '${contenttype}'=='picture'   ${SCREENSHOTS_PATH}/fi_short_COLUMNS_${division}_picture_${picsize}_chrome.png
-	...	 '${linkstyle}'!='${EMPTY}'   ${SCREENSHOTS_PATH}/fi_short_COLUMNS_${division}_left_${content1}_right_${content2}_${linkstyle}_chrome.png
-	...  '${contenttype}'=='mixed'   ${SCREENSHOTS_PATH}/fi_short_COLUMNS_${division}_left_${content1}_right_${content2}_${picsize}_chrome.png
-	...   ${SCREENSHOTS_PATH}/fi_short_COLUMNS_${division}_text_chrome.png
-	${comparisonpic}=  Set Variable  ${REPORTS_PATH}/chrome_TESTRUN-${TEST NAME}.png
+	...  '${contenttype}'=='picture'   ${SCREENSHOTS_PATH}/${BROWSER}/fi_short_COLUMNS_${division}_picture_${picsize}_${BROWSER}.png
+	...	 '${linkstyle}'!='${EMPTY}'   ${SCREENSHOTS_PATH}/${BROWSER}/fi_short_COLUMNS_${division}_left_${content1}_right_${content2}_${linkstyle}_${BROWSER}.png
+	...  '${contenttype}'=='mixed'   ${SCREENSHOTS_PATH}/${BROWSER}/fi_short_COLUMNS_${division}_left_${content1}_right_${content2}_${picsize}_${BROWSER}.png
+	...   ${SCREENSHOTS_PATH}/${BROWSER}/fi_short_COLUMNS_${division}_text_${BROWSER}.png
+	${comparisonpic}=  Set Variable  ${REPORTS_PATH}/${BROWSER}_TESTRUN-${TEST NAME}.png
 	Compared Pictures Match   ${originalpic}    ${comparisonpic}
