@@ -7,8 +7,8 @@ Library			  String
 Resource		  ./variables/create_page.robot
 Library 		   helfi.ta.PictureCompare
 *** Variables ***
-${URL_content_page}							https://helfi.docker.sh/fi/admin/content
-${URL_media_page}							https://helfi.docker.sh/fi/admin/content/media							
+${URL_content_page}							https://${BASE_URL}/fi/admin/content
+${URL_media_page}							https://${BASE_URL}/fi/admin/content/media							
 
 
 *** Keywords ***
