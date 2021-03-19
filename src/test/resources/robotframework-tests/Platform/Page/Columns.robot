@@ -98,7 +98,7 @@ User Starts Creating a Page With ${division} Division And ${contenttype} Content
 	Go To New Page Site
 	Set Test Variable   ${division}   ${division}
 	Input Title  Test Automation: ${TEST NAME}
-	${headertitle}=  Get File  ${CONTENT_PATH}/text_description_short_fi.txt
+	${headertitle}=  Get File  ${CONTENT_PATH}/text_description_short_${language}.txt
 	Input Text Content   ${headertitle}
 	Wait Until Element Is Clickable   ${Ddn_AddContent}   timeout=3
 	Focus   ${Ddn_AddContent}
@@ -133,9 +133,9 @@ Picture on ${side} Has Original Aspect Ratio Enabled
 Layout Should Not Have Changed
 	${contenttype}=  Convert To Lower Case   ${contenttype}
 	${originalpic} =  Set Variable If  
-	...  '${contenttype}'=='picture'   ${SCREENSHOTS_PATH}/${BROWSER}/fi_short_COLUMNS_${division}_picture_${picsize}_${BROWSER}.png
-	...	 '${linkstyle}'!='${EMPTY}'   ${SCREENSHOTS_PATH}/${BROWSER}/fi_short_COLUMNS_${division}_left_${content1}_right_${content2}_${linkstyle}_${BROWSER}.png
-	...  '${contenttype}'=='mixed'   ${SCREENSHOTS_PATH}/${BROWSER}/fi_short_COLUMNS_${division}_left_${content1}_right_${content2}_${picsize}_${BROWSER}.png
-	...   ${SCREENSHOTS_PATH}/${BROWSER}/fi_short_COLUMNS_${division}_text_${BROWSER}.png
-	${comparisonpic}=  Set Variable  ${REPORTS_PATH}/${BROWSER}_TESTRUN-${TEST NAME}.png
+	...  '${contenttype}'=='picture'   ${SCREENSHOTS_PATH}/${BROWSER}/${language}_short_COLUMNS_${division}_picture_${picsize}_${BROWSER}.png
+	...	 '${linkstyle}'!='${EMPTY}'   ${SCREENSHOTS_PATH}/${BROWSER}/${language}_short_COLUMNS_${division}_left_${content1}_right_${content2}_${linkstyle}_${BROWSER}.png
+	...  '${contenttype}'=='mixed'   ${SCREENSHOTS_PATH}/${BROWSER}/${language}_short_COLUMNS_${division}_left_${content1}_right_${content2}_${picsize}_${BROWSER}.png
+	...   ${SCREENSHOTS_PATH}/${BROWSER}/${language}_short_COLUMNS_${division}_text_${BROWSER}.png
+	${comparisonpic}=  Set Variable  ${REPORTS_PATH}/${BROWSER}_TESTRUN-${TEST NAME}_${language}.png
 	Compared Pictures Match   ${originalpic}    ${comparisonpic}

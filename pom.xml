@@ -12,7 +12,6 @@
       	  <robot.tag></robot.tag>
   		  <robot.exclude.tag></robot.exclude.tag>
 	      <robot.browser>chrome</robot.browser>
-	      <robot.language>suomi</robot.language>
 	      <robot.reportspath>${project.basedir}/target/robotframework-reports</robot.reportspath>
 	      <robot.screenshotspath>${project.basedir}/src/main/resources/screenshots</robot.screenshotspath>
 	      <robot.contentpath>${project.basedir}/src/main/resources/content</robot.contentpath>
@@ -35,7 +34,6 @@
             <id>platform</id>
             <properties>
                <robot.docker.adminurl.command>docker exec helfi-app drush uli</robot.docker.adminurl.command>
-               <robot.language>Suomi</robot.language>
             </properties>
             
             <build>
@@ -67,7 +65,6 @@
                             <excludes_cli>${robot.exclude.tag}</excludes_cli>
                             <log>${robot.log.file}</log>
                             <variables>
-                           	 	<variable>LANGUAGE:${robot.language}</variable>
                            	 	<variable>ADMIN_URL:${robot.docker.adminurl.command}</variable>
                            	 	<variable>BROWSER:${robot.browser}</variable>
                            	 	<variable>REPORTS_PATH:${robot.reportspath}</variable>

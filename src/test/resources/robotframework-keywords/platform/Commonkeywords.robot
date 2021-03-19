@@ -16,6 +16,14 @@ Get Admin Url
    [Documentation]   Gets URL needed in localhost testing.
    ${admin_url} =   Run  ${ADMIN_URL}
    Set Test Variable   ${admin_url}
+
+Select Language
+	[Arguments]     ${value}
+	[Documentation]  fi = Finnish , sv = Swedish , en = English , ru = Russian
+	Run Keyword If  '${value}'=='Finnish'  Click Element  css:[lang|=fi]
+	Run Keyword If  '${value}'=='Swedish'  Click Element  css:[lang|=sv]
+	Run Keyword If  '${value}'=='English'  Click Element  css:[lang|=en]
+	Run Keyword If  '${value}'=='Russian'  Click Element  css:[lang|=ru]
    
 Login And Go To Content Page
 	[Documentation]   Preparatory action for platform tests: User logs in and then navigates to Content('Sisältö')
@@ -35,18 +43,24 @@ Go To New Page Site
 
 Click Add Content
 	[Documentation]   Add Content ('Lisää sisältöä') in Content Menu
-	Wait Until Element Is Visible   //a[contains(@href, '/fi/node/add')]   timeout=3
+	Wait Until Element Is Visible   //a[contains(@href, '/node/add')]   timeout=3
 	Wait Until Keyword Succeeds  5x  200ms  Click Element  //a[contains(@href, '/fi/node/add')]
    
 Click Add Page
 	[Documentation]   Add Page ('Sivu') click in Add Content('Lisää sisältöä') -menu
-	Wait Until Element Is Visible  //a[contains(@href, '/fi/node/add/page')]   timeout=3
-	Wait Until Keyword Succeeds  5x  200ms  Click Element  //a[contains(@href, '/fi/node/add/page')]
-	Element Should Not Be Visible   //a[contains(@href, '/fi/node/add/page')]
+	Wait Until Element Is Visible  //a[contains(@href, '/node/add/page')]   timeout=3
+	Wait Until Keyword Succeeds  5x  200ms  Click Element  //a[contains(@href, '/node/add/page')]
+	Element Should Not Be Visible   //a[contains(@href, '/node/add/page')]
 	
 Click Add Article
 	[Documentation]   Add Article ('Artikkeli') click in Add Content('Lisää sisältöä') -menu
 	Wait Until Keyword Succeeds  5x  200ms  Click Element  //a[contains(@href, '/fi/node/add/article')]
+
+Go To Translate Selection Page
+	[Documentation]   Goes To Translations Page for first document in the content list
+	Go To   ${URL_content_page}
+	Click Button   ${Btn_Actions_Dropbutton}
+	Click Element  ${Btn_Actions_ContentMenu_Translatebutton}
 	
 Delete Newly Created Item on Content Menu List
 	[Documentation]   Deletes Created Item By assuming it is the topmost one in the list. Returns to content page afterwards.
@@ -88,11 +102,20 @@ Remove String And Strip Text
 	${value}=  Strip String   ${value} 
 	[Return]    ${value}
 
+Open Created Content
+	Wait Until Element Is Visible   css:div.messages__content > em > a
+	Wait Until Keyword Succeeds  5x  200ms  Click Element   css:div.messages__content > em > a
+	Element Should Not Be Visible   //a[contains(@href, '/node/add')]
+
+Accept Cookies
+	Wait Until Keyword Succeeds  5x  200ms  Click Button  //button[contains(text(), 'Accept all cookies')]
+
 Open Test Automation Created Content
 	Go To   ${URL_content_page}
-	Wait Until Keyword Succeeds  5x  200ms  Click Element  //a[contains(@href, '/fi/test-automation')]
-	Wait Until Keyword Succeeds  5x  200ms  Click Button  //button[contains(text(), 'Accept all cookies')]
+	Wait Until Keyword Succeeds  5x  200ms  Open Created Content
+	Run Keyword If  '${language}'=='fi'  	Accept Cookies
 	Maximize Browser Window
 	Execute javascript  document.body.style.zoom="40%"
 	Run keyword if  ('${picsize}'=='original') & ('${BROWSER}'=='chromeheadless')   Execute javascript  document.body.style.zoom="30%"
-	Capture Page Screenshot    filename=${BROWSER}_TESTRUN-${TEST NAME}.png
+	Capture Page Screenshot    filename=${BROWSER}_TESTRUN-${TEST NAME}_${language}.png
+	Execute javascript  document.body.style.zoom="100%"

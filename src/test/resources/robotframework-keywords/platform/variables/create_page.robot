@@ -10,6 +10,28 @@
 #				 Menu-item  = Mtm
 
 *** Variables ***
+#LISTS
+@{pic_1_texts_fi}  							Juna sillalla   Vanha juna kuljettaa matkustajia   Testi Valokuvaaja
+@{pic_1_texts_en}  							Train on The Bridge   Old Train Carries Passengers   Test Photographer
+@{pic_1_texts_sv}  							Träna på bron   Gammalt tåg bär passagerare   Testfotograf
+@{pic_1_texts_ru}  							Поезд на мосту  Старый поезд везет пассажиров   Тестовый фотограф
+@{pic_2_texts_fi}							Temppeli koreassa   Buddhalaistemppeli talvella Aasiassa   Testi Valokuvaaja2
+@{pic_2_texts_en}							Temple in Korea   Buddhist temple in winter in Asia   Test Photographer2
+@{pic_2_texts_sv}							Templet i Korea   Buddistisk tempel i vinter i Asien   Testfotograf2
+@{pic_2_texts_ru}							Храм в Корее   Буддийский храм зимой в Азии   Тестовый фотограф2		
+${pic_1_caption_fi}							Juna puksuttaa kohti uutta pysäkkiä
+${pic_1_caption_en}							The train pans towards a new stop
+${pic_1_caption_sv}							Tåget går mot ett nytt stopp
+${pic_1_caption_ru}							Кастрюли поезда к новой остановке
+${pic_2_caption_fi}							Buddhalaisessa temppelissä suoritetaan hartausharjoituksia
+${pic_2_caption_en}							In the Buddhist temple devotional exercises are performed
+${pic_2_caption_sv}							I de buddhistiska templet utförs devotionsövningarna
+${pic_2_caption_ru}							В буддийских храмах преданные упражнения выполняются
+${link_title_fi}							Tietoa teoksesta
+${link_title_en}							About a book
+${link_title_sv}							Om en bok
+${link_title_ru}							О книге
+
 #SHARED
 ${Btn_File_Upload}					    	name:files[upload]
 ${Inp_Pic_Name}								css:[data-drupal-selector=edit-media-0-fields-name-0-value]
@@ -22,11 +44,13 @@ ${Inp_Title}								//input[@id='edit-title-0-value']
 ${Inp_Hero_Title}							//input[contains(@id, 'edit-field-hero-0-subform')]
 ${Swh_HeroOnOff}						    //input[@id='edit-field-has-hero-value']
 ${Frm_Content}							    css:#cke_1_contents > iframe
+${Frm_Content_Translations}					css:#cke_2_contents > iframe
 ${Frm_Content_Description}				    css:#cke_58_contents > iframe
 ${Btn_Submit}							    //input[@id='edit-submit--2']		
 ${Mtm_Content}								//li[contains(@class, 'menu-item menu-item__system-admin_content')]
 ${Btn_Actions_Dropbutton}					//button[@class='dropbutton__toggle']
 ${Btn_Actions_ContentMenu_Deletebutton}		//li[contains(@class, 'delete dropbutton')]/child::a
+${Btn_Actions_ContentMenu_Translatebutton}	//li[contains(@class, 'translate dropbutton')]/child::a
 ${Btn_Actions_SelectedItem_Deletebutton}	//input[@id='edit-submit']
 #HERO
 ${Ddn_Hero_Alignment}						css:[data-drupal-selector=edit-field-hero-0-subform-field-hero-design]
@@ -85,4 +109,8 @@ ${Opt_Column_Left_Link_ButtonFramed}		//select[@data-drupal-selector='edit-field
 ${Opt_Column_Right_Link_ButtonFramed}		//select[@data-drupal-selector='edit-field-content-1-subform-field-columns-right-column-0-subform-field-link-design']//option[@value='secondary']
 ${Opt_Column_Left_Link_ButtonTransparent}	//select[@data-drupal-selector='edit-field-content-1-subform-field-columns-left-column-0-subform-field-link-design']//option[@value='supplementary']
 ${Opt_Column_Right_Link_ButtonTransparent}	//select[@data-drupal-selector='edit-field-content-1-subform-field-columns-right-column-0-subform-field-link-design']//option[@value='supplementary']
+# PAGE VIEW
+${Txt_Hero_Title}								css:.hero__title
+${Txt_Hero_Description}							css:.hero__description
+${Txt_Content}									css:.text__text-content
 

@@ -14,8 +14,10 @@ ${submitted}								false
 ${picalign} 		 						${EMPTY}
 ${picture} 			 						nopicture
 ${picsadded}								0
+${pagesadded}								0
 ${picsize}									cropped
 ${linkstyle} 		 						${EMPTY}
+${language}	 		 						fi
 
 *** Keywords ***
 
@@ -26,25 +28,40 @@ Input Title
 	
 Input Text Content
 	[Arguments]   ${content}
-	Input Text To Frame   ${Frm_Content}   //body   ${content}
+	Run Keyword If  '${language}'=='fi'	Input Text To Frame   ${Frm_Content}   //body   ${content}
+	Run Keyword If  '${language}'!='fi'   Input Text To Frame   ${Frm_Content_Translations}   //body   ${content}
 	
-Select Language
-	[Arguments]     ${value}
-	[Documentation]  fi = Finnish , sv = Swedish , en = English , ru = Russian
-	Click Element  ${Ddn_SelectLanguage}
-	Wait Until Keyword Succeeds  5x  200ms  Click Element With Value   ${value}
+
+Get Language Pointer
+	[Arguments]     ${language}
+	[Documentation]  fi = Finnish is default
+	${language_pointer}=  Set Variable If  '${language}'=='Finnish'   fi
+	...		'${language}'=='Swedish'   sv
+	...		'${language}'=='English'   en
+	...		'${language}'=='Russian'   ru
+	[Return]   ${language_pointer}
+
+Set Language Pointer
+	[Arguments]     ${language}
+	[Documentation]  Language to set to Test Variable
+	${language_pointer}=  Set Variable If  '${language}'=='Finnish'   fi
+	...		'${language}'=='Swedish'   sv
+	...		'${language}'=='English'   en
+	...		'${language}'=='Russian'   ru
+	Set Test Variable   ${language}   ${language_pointer}   
+
 	
 Submit Page
 	[Documentation]  User submits new page and it is saved and appears in content view
 	Wait Until Keyword Succeeds  5x  100ms  Click Button   ${Btn_Submit}
-	Set Test Variable   ${submitted}   true
+	Set Test Variable  ${pagesadded}    ${pagesadded}+1
 	
 Add ${linkstyle} Link To ${side} Column
 	${linkstyle}=  Remove String And Strip Text   ${linkstyle}   "
 	Wait Until Element Is Clickable  ${Opt_Column_${side}_AddContent_Link}   timeout=3
 	Click Element  ${Opt_Column_${side}_AddContent_Link}
 	Wait Until Keyword Succeeds  5x  100ms  Input Text   ${Inp_Column_${side}_Link_URL}   https://fi.wikipedia.org/wiki/Rautatie_(romaani)    
-	Input Text   ${Inp_Column_${side}_Link_Title}    Tietoa teoksesta
+	Input Text   ${Inp_Column_${side}_Link_Title}    ${link_title_${language}}
 	Click Element  ${Ddn_Column_${side}_Link_Design}
 	Run Keyword If  '${linkstyle}'=='Fullcolor'  Click Element   ${Opt_Column_${side}_Link_ButtonFullcolor}
 	Run Keyword If  '${linkstyle}'=='Framed'  Click Element   ${Opt_Column_${side}_Link_ButtonFramed}
@@ -73,8 +90,8 @@ Add Picture to Column
 	Set Test Variable  ${picture}    picture   
 
 Add Picture Caption to ${side}
-	Run Keyword If  '${side}'=='left'	Input Text    ${Inp_Column_Left_Picture_Caption}   Juna puksuttaa kohti uutta pysäkkiä
-	Run Keyword If  '${side}'=='right'	Input Text    ${Inp_Column_Right_Picture_Caption}   Buddhalaisessa temppelissä suoritetaan hartausharjoituksia
+	Run Keyword If  '${side}'=='left'	Input Text    ${Inp_Column_Left_Picture_Caption}   ${pic_1_caption_${language}}
+	Run Keyword If  '${side}'=='right'	Input Text    ${Inp_Column_Right_Picture_Caption}   ${pic_2_caption_${language}}
 
 Use Original Aspect Ratio on ${side}
 	Wait Until Keyword Succeeds  5x  200ms  Click Element   ${Swh_Column_${side}_Picture_Orig_Aspect_Ratio}
@@ -83,7 +100,7 @@ Use Original Aspect Ratio on ${side}
 Add Text Content To Column on ${side}
 	Wait Until Element Is Clickable  ${Opt_Column_${side}_AddContent_Text}   timeout=3
 	Wait Until Keyword Succeeds  10x  500ms  Click Element  ${Opt_Column_${side}_AddContent_Text}
-	${TextFileContent}=  Get File  ${CONTENT_PATH}/text_content_short_fi.txt
+	${TextFileContent}=  Get File  ${CONTENT_PATH}/text_content_short_${language}.txt
 	@{content} =	Split String	${TextFileContent}   .,.
 	${content_left}=  Get From List  ${content}   0
 	${content_right}=  Get From List  ${content}   1
@@ -98,9 +115,9 @@ Add ${content} to Left Column
 	...				 pictures with longer width value does not get cropped. Only long pictures do.
 	Focus   ${Ddn_Column_Left_AddContent}
 	Wait Until Keyword Succeeds  5x  100ms  Click Button  ${Ddn_Column_Left_AddContent}
-	${content_left}=  Create List  Juna sillalla   Vanha juna kuljettaa matkustajia   Testi Valokuvaaja
-	Run Keyword If  '${content}'=='picture'  Add Picture to Column   left    train   @{content_left}
-	Run Keyword If  '${content}'=='original picture'  Add Picture to Column   left    snowdrops   @{content_left}
+	#${content_left}=  Create List  Juna sillalla   Vanha juna kuljettaa matkustajia   Testi Valokuvaaja
+	Run Keyword If  '${content}'=='picture'  Add Picture to Column   left    train   @{pic_1_texts_${language}}
+	Run Keyword If  '${content}'=='original picture'  Add Picture to Column   left    snowdrops   @{pic_1_texts_${language}}
 	Run Keyword If  '${content}'=='text'  Add Text Content To Column on Left
 	${content}=  Remove String And Strip Text   ${content}   original
 	Set Test Variable  ${content1}   ${content}
@@ -111,14 +128,24 @@ Add ${content:[^"]+} to Right Column
 	Wait Until Element Is Clickable  ${Ddn_Column_Right_AddContent}   timeout=3
 	Focus   ${Ddn_Column_Right_AddContent}
 	Wait Until Keyword Succeeds  10x  500ms  Click Button  ${Ddn_Column_Right_AddContent}
-	${content_right}=  Create List  Temppeli koreassa   Buddhalaistemppeli talvella Aasiassa   Testi Valokuvaaja2
-	Run Keyword If  '${content}'=='Picture'  Add Picture to Column   right    temple   @{content_right}
+	#${content_right}=  Create List  Temppeli koreassa   Buddhalaistemppeli talvella Aasiassa   Testi Valokuvaaja2
+	Run Keyword If  '${content}'=='Picture'  Add Picture to Column   right    temple   @{pic_2_texts_${language}}
 	Run Keyword If  '${content}'=='Text'  Add Text Content To Column on Right
 	Run Keyword If  '${content}'=='Link'  Add "${linkstyle}" Link To Right Column
+
+Go To Translations Tab
+	#Focus   //a[contains(@href, 'translations')]
+	Click Button   //a[contains(text(),'Translate')]	
+	
+Go To ${language} Translation Page
+	${language_pointer}=  Get Language Pointer   ${language}
+	Click Element   //a[contains(@href, 'translations/add/fi/${language_pointer}')]
 		
 Cleanup and Close Browser
 	[Documentation]  Deletes content created by testcases. Page , if created and picture if added.
-	Run Keyword If  '${submitted}'!='false'  Wait Until Keyword Succeeds  2x  200ms  Delete Newly Created Item on Content Menu List
+	FOR    ${i}    IN RANGE    ${pagesadded}
+           Wait Until Keyword Succeeds  2x  200ms 	Delete Newly Created Item on Content Menu List
+    END
 	FOR    ${i}    IN RANGE    ${picsadded}
            Wait Until Keyword Succeeds  2x  200ms 	Delete Newly Created Item from Content Media List
     END
