@@ -35,6 +35,7 @@
             <properties>
                <robot.docker.adminurl.command>docker exec helfi-app drush uli</robot.docker.adminurl.command>
                <robot.baseurl>helfi.docker.sh</robot.baseurl>
+               <robot.protocol>https</robot.protocol>
             </properties>
             
             <build>
@@ -73,6 +74,7 @@
                            	 	<variable>SCREENSHOTS_PATH:${robot.screenshotspath}</variable>
                            	 	<variable>CONTENT_PATH:${robot.contentpath}</variable>
                            	 	<variable>IMAGES_PATH:${robot.imagespath}</variable>
+                           	 	<variable>PROTOCOL:${robot.protocol}</variable>
                           	</variables>
                         </configuration>
                     </plugin>
@@ -86,6 +88,7 @@
             <properties>
                <robot.docker.adminurl.command>docker exec helfi-app drush uli</robot.docker.adminurl.command>
                <robot.baseurl>127.0.0.1:8080</robot.baseurl>
+               <robot.protocol>http</robot.protocol>
             </properties>
             
             <build>
@@ -124,6 +127,7 @@
                            	 	<variable>SCREENSHOTS_PATH:${robot.screenshotspath}</variable>
                            	 	<variable>CONTENT_PATH:${robot.contentpath}</variable>
                            	 	<variable>IMAGES_PATH:${robot.imagespath}</variable>
+                           	 	<variable>PROTOCOL:${robot.protocol}</variable>
                           	</variables>
                         </configuration>
                     </plugin>
