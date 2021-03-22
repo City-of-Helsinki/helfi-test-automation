@@ -86,7 +86,7 @@
         <profile>
             <id>ci_platform</id>
             <properties>
-               <robot.docker.adminurl.command>docker exec helfi-app drush uli</robot.docker.adminurl.command>
+               <robot.docker.adminurl.command>cd ../vendor/bin; drush uli</robot.docker.adminurl.command>
                <robot.baseurl>127.0.0.1:8080</robot.baseurl>
                <robot.protocol>http</robot.protocol>
             </properties>
