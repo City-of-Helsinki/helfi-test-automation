@@ -33,7 +33,6 @@ Login And Go To Content Page
 	Open Browser  ${admin_url}  ${BROWSER}
 	Go To   ${URL_content_page}
 	Run Keyword If  '${BROWSER}'=='chromeheadless'	Set Window Size   1296   696
-	#Set Window Size   1920   1080
 
 Go To New Article Site
 	Click Add Content
