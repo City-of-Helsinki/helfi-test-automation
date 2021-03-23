@@ -40,7 +40,7 @@ Go To New Article Site
 	Click Add Article
 
 Go To New Page Site
-	#Maximize Browser Window
+	Maximize Browser Window
 	Wait Until Keyword Succeeds  5x  200ms  Click Add Content
 	Wait Until Keyword Succeeds  5x  200ms  Click Add Page
 
