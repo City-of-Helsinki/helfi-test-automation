@@ -43,9 +43,14 @@ Go To New Page Site
 	Click Add Content
 	Wait Until Keyword Succeeds  5x  200ms  Click Add Page
 
+Profile is CI
+	${isci}=  Run Keyword And Return Status  Should Match Regexp  ${BASE_URL}   127.0.0.1
+	[Return]  ${isci}
+
 Click Add Content
 	[Documentation]   Add Content ('Lisää sisältöä') in Content Menu
-	Sleep   10
+	#Run Keyword If  '${isci}'=='True'  Wait Until Element Is Visible   css:#block-hdbt-admin-local-actions > ul > li > a   timeout=3
+	Wait Until Element Is Visible   css:#block-hdbt-admin-local-actions > ul > li > a   timeout=3
 	Wait Until Element Is Visible   //a[contains(@href, '/node/add')]   timeout=3
 	Wait Until Keyword Succeeds  5x  200ms  Click Element  //a[contains(@href, '/node/add')]
 	
