@@ -32,20 +32,20 @@ Login And Go To Content Page
 	Get Admin Url
 	Open Browser  ${admin_url}  ${BROWSER}
 	Go To   ${URL_content_page}
-	#Run Keyword If  '${BROWSER}'=='chromeheadless'	Set Window Size   1296   696
-	Set Window Size   1920   1080
+	Run Keyword If  '${BROWSER}'=='chromeheadless'	Set Window Size   1296   696
+	#Set Window Size   1920   1080
 
 Go To New Article Site
 	Click Add Content
 	Click Add Article
 
 Go To New Page Site
-	Maximize Browser Window
-	Wait Until Keyword Succeeds  5x  200ms  Click Add Content
+	Click Add Content
 	Wait Until Keyword Succeeds  5x  200ms  Click Add Page
 
 Click Add Content
 	[Documentation]   Add Content ('Lisää sisältöä') in Content Menu
+	Sleep   10
 	Wait Until Element Is Visible   //a[contains(@href, '/node/add')]   timeout=3
 	Wait Until Keyword Succeeds  5x  200ms  Click Element  //a[contains(@href, '/node/add')]
 	
