@@ -41,10 +41,8 @@ ${Btn_Save_Pic}								//button[contains(text(),'Tallenna')]
 ${Btn_Insert_Pic}							//button[contains(text(),'Insert selected')]
 ${Ddn_SelectLanguage}						//select[@id='edit-langcode-0-value']
 ${Inp_Title}								//input[@id='edit-title-0-value']
-${Inp_Hero_Title}							//input[contains(@id, 'edit-field-hero-0-subform')]
-${Swh_HeroOnOff}						    //input[@id='edit-field-has-hero-value']
 ${Frm_Content}							    css:#cke_1_contents > iframe
-${Frm_Content_Translations}					css:#cke_2_contents > iframe
+${Frm_Content_Hero_Translations}			css:#cke_2_contents > iframe
 ${Frm_Content_Description}				    css:#cke_58_contents > iframe
 ${Btn_Submit}							    //input[@id='edit-submit--2']		
 ${Mtm_Content}								//li[contains(@class, 'menu-item menu-item__system-admin_content')]
@@ -53,6 +51,8 @@ ${Btn_Actions_ContentMenu_Deletebutton}		//li[contains(@class, 'delete dropbutto
 ${Btn_Actions_ContentMenu_Translatebutton}	//li[contains(@class, 'translate dropbutton')]/child::a
 ${Btn_Actions_SelectedItem_Deletebutton}	//input[@id='edit-submit']
 #HERO
+${Inp_Hero_Title}							//input[contains(@id, 'edit-field-hero-0-subform')]
+${Swh_HeroOnOff}						    //input[@id='edit-field-has-hero-value']
 ${Ddn_Hero_Alignment}						css:[data-drupal-selector=edit-field-hero-0-subform-field-hero-design]
 ${Opt_Hero_Alignment_Center}				css:[value=without-image-center]
 ${Opt_Hero_Picture_On_Right}				css:[value=with-image-right]
@@ -113,4 +113,6 @@ ${Opt_Column_Right_Link_ButtonTransparent}	//select[@data-drupal-selector='edit-
 ${Txt_Hero_Title}								css:.hero__title
 ${Txt_Hero_Description}							css:.hero__description
 ${Txt_Content}									css:.text__text-content
-
+${Txt_Column_Title}								css:.columns__title
+${Txt_Column_Description}						xpath://p[1]
+${Txt_Column_Content}							xpath://div[@class='columns columns--default columns--50-50']//p

@@ -198,7 +198,7 @@ Tram Background Color
 	And User Opens Created Content
 	Then Layout Should Not Have Changed
 
-English Swedish Translations
+Finnish English Swedish Translations
 	[Tags]   HERO   CRITICAL
 	Given User Creates a Left Aligned Page With Hero Block In Finnish Language
 	And User Creates a Left Aligned Page With Hero Block In English Language
@@ -276,6 +276,11 @@ User Starts Creating a ${value} Aligned Page With Hero Block
 	Input Text Content   ${TextFileContent}
 	Input Hero Description   ${TextFileDescription}
 
+Input Text Content
+	[Arguments]   ${content}
+	Run Keyword If  '${language}'=='fi'	Input Text To Frame   ${Frm_Content}   //body   ${content}
+	Run Keyword If  '${language}'!='fi'   Input Text To Frame   ${Frm_Content_Hero_Translations}   //body   ${content}
+
 User Starts Creating Hero Block Page with ${picalign} Picture 
 	User Starts Creating a Left Aligned Page With Hero Block
     Set Test Variable   ${picture}  picture
@@ -322,11 +327,8 @@ Input Hero Description
 	Run Keyword If  '${language}'=='fi'	Input Text To Frame   ${Frm_Content_Description}   //body   ${description}
 	Run Keyword If  '${language}'!='fi'   Input Text To Frame   ${Frm_Content}   //body   ${description}
 
-User Submits The New Page
-	Submit Page
-		
-User Opens Created Content
-	Open Test Automation Created Content
+User Submits The New Page	Submit Page
+User Opens Created Content	Open Test Automation Created Content
 
 Layout Should Not Have Changed
 	${originalpic} =  Set Variable If

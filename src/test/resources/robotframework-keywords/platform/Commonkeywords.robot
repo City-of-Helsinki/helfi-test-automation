@@ -26,25 +26,11 @@ Select Language
 	Run Keyword If  '${value}'=='English'  Click Element  css:[lang|=en]
 	Run Keyword If  '${value}'=='Russian'  Click Element  css:[lang|=ru]
 
-Run CI Setup ChromeHeadless
-	[Documentation]   CI-headless needs no-sandbox as argument so we need a separate keyword for CI-profile cases
-	${chrome_options}=    Evaluate    sys.modules['selenium.webdriver'].ChromeOptions()    sys, selenium.webdriver
-    Call Method    ${chrome_options}   add_argument    no-sandbox
-    ${options}=    Call Method     ${chrome_options}    to_capabilities
-	Open Browser  ${admin_url}  ${BROWSER}   desired_capabilities=${options}
-
-Profile is CI
-	${isci}=  Run Keyword And Return Status  Should Match Regexp  ${BASE_URL}   127.0.0.1
-	[Return]  ${isci}
-
 Login And Go To Content Page
 	[Documentation]   Preparatory action for platform tests: User logs in and then navigates to Content('Sisältö')
 	...				  page. Also accepts cookies here.
 	Get Admin Url
-#	${isci}=  Profile is CI
-#	Run Keyword If  '${isci}'=='True'  Run CI Setup ChromeHeadless
-    Open Browser  ${admin_url}  ${BROWSER}
-	
+	Open Browser  ${admin_url}  ${BROWSER}
 	Go To   ${URL_content_page}
 	Run Keyword If  '${BROWSER}'=='chromeheadless'	Set Window Size   1296   696
 

@@ -25,12 +25,7 @@ Input Title
 	[Arguments]   ${title}
 	Wait Until Element Is Visible   ${Inp_Title}   timeout=3  
 	Input Text  ${Inp_Title}   ${title}  
-	
-Input Text Content
-	[Arguments]   ${content}
-	Run Keyword If  '${language}'=='fi'	Input Text To Frame   ${Frm_Content}   //body   ${content}
-	Run Keyword If  '${language}'!='fi'   Input Text To Frame   ${Frm_Content_Translations}   //body   ${content}
-	
+
 
 Get Language Pointer
 	[Arguments]     ${language}
@@ -54,6 +49,7 @@ Set Language Pointer
 Submit Page
 	[Documentation]  User submits new page and it is saved and appears in content view
 	Wait Until Keyword Succeeds  5x  100ms  Click Button   ${Btn_Submit}
+	Wait Until Keyword Succeeds  5x  100ms  Element Should Not Be Visible   ${Btn_Submit}
 	Set Test Variable  ${pagesadded}    ${pagesadded}+1
 	
 Add ${linkstyle} Link To ${side} Column
@@ -90,16 +86,20 @@ Add Picture to Column
 	Set Test Variable  ${picture}    picture   
 
 Add Picture Caption to ${side}
-	Run Keyword If  '${side}'=='left'	Input Text    ${Inp_Column_Left_Picture_Caption}   ${pic_1_caption_${language}}
-	Run Keyword If  '${side}'=='right'	Input Text    ${Inp_Column_Right_Picture_Caption}   ${pic_2_caption_${language}}
+	Run Keyword If  '${side}'=='Left'	Input Text    ${Inp_Column_Left_Picture_Caption}   ${pic_1_caption_${language}}
+	Run Keyword If  '${side}'=='Right'	Input Text    ${Inp_Column_Right_Picture_Caption}   ${pic_2_caption_${language}}
+
 
 Use Original Aspect Ratio on ${side}
 	Wait Until Keyword Succeeds  5x  200ms  Click Element   ${Swh_Column_${side}_Picture_Orig_Aspect_Ratio}
 	Set Test Variable  ${picsize}   original
 	
-Add Text Content To Column on ${side}
+Click And Select Text As ${side} Content Type
 	Wait Until Element Is Clickable  ${Opt_Column_${side}_AddContent_Text}   timeout=3
 	Wait Until Keyword Succeeds  10x  500ms  Click Element  ${Opt_Column_${side}_AddContent_Text}
+
+Add Text Content To Column on ${side}
+	Run Keyword If  '${language}'=='fi'  Click And Select Text As ${side} Content Type
 	${TextFileContent}=  Get File  ${CONTENT_PATH}/text_content_short_${language}.txt
 	@{content} =	Split String	${TextFileContent}   .,.
 	${content_left}=  Get From List  ${content}   0
@@ -115,7 +115,6 @@ Add ${content} to Left Column
 	...				 pictures with longer width value does not get cropped. Only long pictures do.
 	Focus   ${Ddn_Column_Left_AddContent}
 	Wait Until Keyword Succeeds  5x  100ms  Click Button  ${Ddn_Column_Left_AddContent}
-	#${content_left}=  Create List  Juna sillalla   Vanha juna kuljettaa matkustajia   Testi Valokuvaaja
 	Run Keyword If  '${content}'=='picture'  Add Picture to Column   left    train   @{pic_1_texts_${language}}
 	Run Keyword If  '${content}'=='original picture'  Add Picture to Column   left    snowdrops   @{pic_1_texts_${language}}
 	Run Keyword If  '${content}'=='text'  Add Text Content To Column on Left
@@ -128,7 +127,6 @@ Add ${content:[^"]+} to Right Column
 	Wait Until Element Is Clickable  ${Ddn_Column_Right_AddContent}   timeout=3
 	Focus   ${Ddn_Column_Right_AddContent}
 	Wait Until Keyword Succeeds  10x  500ms  Click Button  ${Ddn_Column_Right_AddContent}
-	#${content_right}=  Create List  Temppeli koreassa   Buddhalaistemppeli talvella Aasiassa   Testi Valokuvaaja2
 	Run Keyword If  '${content}'=='Picture'  Add Picture to Column   right    temple   @{pic_2_texts_${language}}
 	Run Keyword If  '${content}'=='Text'  Add Text Content To Column on Right
 	Run Keyword If  '${content}'=='Link'  Add "${linkstyle}" Link To Right Column
