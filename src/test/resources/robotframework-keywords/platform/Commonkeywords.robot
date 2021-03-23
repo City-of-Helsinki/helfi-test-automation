@@ -39,6 +39,7 @@ Go To New Article Site
 	Click Add Article
 
 Go To New Page Site
+	Execute javascript  document.body.style.zoom="100%"
 	Wait Until Keyword Succeeds  5x  200ms  Click Add Content
 	Wait Until Keyword Succeeds  5x  200ms  Click Add Page
 
