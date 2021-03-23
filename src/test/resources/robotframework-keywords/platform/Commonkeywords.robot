@@ -32,14 +32,13 @@ Login And Go To Content Page
 	Get Admin Url
 	Open Browser  ${admin_url}  ${BROWSER}
 	Go To   ${URL_content_page}
-	Run Keyword If  '${BROWSER}'=='chromeheadless'	Set Window Size   1296   696
+#	Run Keyword If  '${BROWSER}'=='chromeheadless'	Set Window Size   1296   696
 
 Go To New Article Site
 	Click Add Content
 	Click Add Article
 
 Go To New Page Site
-	Execute javascript  document.body.style.zoom="100%"
 	Wait Until Keyword Succeeds  5x  200ms  Click Add Content
 	Wait Until Keyword Succeeds  5x  200ms  Click Add Page
 
