@@ -44,8 +44,7 @@ Go To New Page Site
 
 Click Add Content
 	[Documentation]   Add Content ('Lisää sisältöä') in Content Menu
-	Focus   //a[contains(@href, '/node/add')]
-	Wait Until Element Is Visible   //a[contains(@href, '/node/add')]   timeout=3
+#	Wait Until Element Is Visible   //a[contains(@href, '/node/add')]   timeout=3
 	Wait Until Keyword Succeeds  5x  200ms  Click Element  //a[contains(@href, '/fi/node/add')]
    
 Click Add Page
