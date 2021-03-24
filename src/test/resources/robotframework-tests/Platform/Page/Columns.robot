@@ -124,8 +124,9 @@ User Starts Creating a Page With ${division} Division And ${contenttype} Content
 	Input Title  Test Automation: ${TEST NAME}
 	${headertitle}=  Get File  ${CONTENT_PATH}/text_description_short_${language}.txt
 	Input Content Header Title  ${headertitle}
-	Wait Until Keyword Succeeds  5x  200ms  Focus   ${Ddn_AddContent}
-	#Wait Until Element Is Visible   ${Ddn_AddContent}   timeout=5
+	Execute JavaScript    window.document.evaluate("//ul[@data-drupal-selector='edit-field-content-add-more-operations']//li[2]/button", document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue.scrollIntoView(true);
+	Wait Until Element Is Visible   ${Ddn_AddContent}   timeout=5
+	Focus   ${Ddn_AddContent}
 	Run Keyword If  '${language}'=='fi'  Click Element	${Ddn_AddContent}
 	Run Keyword If  '${language}'=='fi'  Click Element   ${Opt_AddColumns}
 	${title}=  Return Correct Title   ${language}
