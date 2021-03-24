@@ -118,6 +118,7 @@ Add ${content} to Left Column
 	Run Keyword If  '${content}'=='picture'  Add Picture to Column   left    train   @{pic_1_texts_${language}}
 	Run Keyword If  '${content}'=='original picture'  Add Picture to Column   left    snowdrops   @{pic_1_texts_${language}}
 	Run Keyword If  '${content}'=='text'  Add Text Content To Column on Left
+	Run Keyword If  ('${content}'=='picture') & ('${language}'=='fi')  Add Picture Caption to Left
 	${content}=  Remove String And Strip Text   ${content}   original
 	Set Test Variable  ${content1}   ${content}
   
