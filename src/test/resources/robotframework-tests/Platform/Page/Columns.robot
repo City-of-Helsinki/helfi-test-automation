@@ -124,6 +124,8 @@ User Starts Creating a Page With ${division} Division And ${contenttype} Content
 	Input Title  Test Automation: ${TEST NAME}
 	${headertitle}=  Get File  ${CONTENT_PATH}/text_description_short_${language}.txt
 	Input Content Header Title  ${headertitle}
+	Execute JavaScript   document.querySelector("#edit-field-content-add-more > div > div > ul > li.dropbutton-toggle > button").singleNodeValue.scrollIntoView(true);
+	
 	Wait Until Element Is Visible   ${Ddn_AddContent}   timeout=3
 	Focus   ${Ddn_AddContent}
 	Run Keyword If  '${language}'=='fi'  Click Element	${Ddn_AddContent}
