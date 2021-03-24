@@ -124,6 +124,8 @@ User Starts Creating a Page With ${division} Division And ${contenttype} Content
 	Input Title  Test Automation: ${TEST NAME}
 	${headertitle}=  Get File  ${CONTENT_PATH}/text_description_short_${language}.txt
 	Input Content Header Title  ${headertitle}
+	Execute javascript  document.body.style.zoom="40%"
+	Capture Page Screenshot
 	Wait Until Element Is Visible   ${Ddn_AddContent}   timeout=3
 	Focus   ${Ddn_AddContent}
 	Run Keyword If  '${language}'=='fi'  Click Element	${Ddn_AddContent}
