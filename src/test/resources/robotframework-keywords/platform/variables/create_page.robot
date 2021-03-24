@@ -71,7 +71,7 @@ ${Opt_Hero_Link_ButtonTransparent}			css:[value=supplementary]
 ${Ddn_Hero_Color}							css:[data-drupal-selector=edit-field-hero-0-subform-field-hero-bg-color]
 
 #COLUMNS
-${Ddn_AddContent}							//ul[@data-drupal-selector='edit-field-content-add-more-operations']//li[2]/button
+${Ddn_AddContent}							css:#edit-field-content-add-more > div > div > ul > li.dropbutton-toggle > button
 ${Opt_AddColumns}						    name:field_content_columns_add_more
 ${Opt_AddImages}						    name:field_content_image_add_more
 ${Inp_Column_Title}	  						css:[data-drupal-selector=edit-field-content-1-subform-field-columns-title-0-value]
