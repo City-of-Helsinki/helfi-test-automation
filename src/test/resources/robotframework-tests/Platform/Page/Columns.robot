@@ -130,7 +130,7 @@ User Starts Creating a Page With ${division} Division And ${contenttype} Content
 	#Wait Until Element Is Visible   ${Ddn_AddContent}   timeout=5
 	#Focus   ${Ddn_AddContent}
 	Sleep   5
-	Execute JavaScript    document.evaluate("//ul[@data-drupal-selector='edit-field-content-add-more-operations']//li[2]/button",document.body,null,9,null).singleNodeValue.click();
+	Execute JavaScript    document.evaluate('//ul[@data-drupal-selector='edit-field-content-add-more-operations']//li[2]/button',document.body,null,9,null).singleNodeValue.click();
 	#Run Keyword If  '${language}'=='fi'  Click Element	${Ddn_AddContent}
 	Run Keyword If  '${language}'=='fi'  Click Element   ${Opt_AddColumns}
 	${title}=  Return Correct Title   ${language}
