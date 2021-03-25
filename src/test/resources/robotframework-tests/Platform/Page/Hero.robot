@@ -6,7 +6,7 @@ Resource        ../../../robotframework-keywords/platform/Commonkeywords.robot
 Resource        ../../../robotframework-keywords/platform/Page.robot
 Test Setup      Login And Go To Content Page
 Test Teardown   Cleanup and Close Browser	
-
+Force Tags		PAGE
 *** Variables ***
 ${color}	 		 ${EMPTY}
 

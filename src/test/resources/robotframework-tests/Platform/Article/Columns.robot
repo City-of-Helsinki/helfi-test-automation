@@ -2,128 +2,131 @@
 Documentation   Testing Columns Settings in Platform by comparing layout to default picture. Testing is performed with
 ...				Different text deviation like 50-50, 30-70 and with pictures and links added.
 Resource        ../../../robotframework-keywords/platform/Commonkeywords.robot
-Resource        ../../../robotframework-keywords/platform/Page.robot
+Resource        ../../../robotframework-keywords/platform/Article.robot
 Test Setup      Login And Go To Content Page
-Test Teardown   Cleanup and Close Browser	
-Force Tags		PAGE
+Test Teardown   Cleanup and Close Browser
+Force Tags		ARTICLE
 *** Variables ***
 
 
 *** Test Cases ***
 50-50
 	[Tags]  COLUMNS   CRITICAL
-	Given User Goes To New Page -Site
-	And User Starts Creating a Page With 50-50 Division And Text Content
+	Given User Goes To New Article Site
+	And User Starts Creating an Article With 50-50 Division And Text Content
 	And User Adds Text to Left Column
 	And User Adds Text to Right Column
-	When User Submits The New Page
+	When User Submits The New Article
 	And User Opens Created Content
-	Then Layout Should Not Have Changed	
+	Then Layout Should Not Have Changed
 	
 30-70
 	[Tags]  COLUMNS
-	Given User Goes To New Page -Site 
-	And User Starts Creating a Page With 30-70 Division And Text Content
+	Given User Goes To New Article Site 
+	And User Starts Creating an Article With 30-70 Division And Text Content
 	And User Adds Text to Left Column
 	And User Adds Text to Right Column
-	When User Submits The New Page
+	When User Submits The New Article
 	And User Opens Created Content
 	Then Layout Should Not Have Changed	
 
 70-30
 	[Tags]  COLUMNS
-	Given User Goes To New Page -Site
-	And User Starts Creating a Page With 70-30 Division And Text Content
+	Given User Goes To New Article Site
+	And User Starts Creating an Article With 70-30 Division And Text Content
 	And User Adds Text to Left Column
 	And User Adds Text to Right Column
-	When User Submits The New Page
+	When User Submits The New Article
 	And User Opens Created Content
 	Then Layout Should Not Have Changed	
 
 50-50 with picture
-	[Tags]  COLUMNS   CRITICAL
-	Given User Goes To New Page -Site  
-	And User Starts Creating a Page With 50-50 Division And Picture Content
+	[Tags]  COLUMNS   CRITICAL 
+	Given User Goes To New Article Site  
+	And User Starts Creating an Article With 50-50 Division And Picture Content
 	And User Adds Picture to Left Column
 	And User Adds Picture to Right Column
-	When User Submits The New Page
+	When User Submits The New Article
 	And User Opens Created Content
 	Then Layout Should Not Have Changed	
 
 50-50 with picture and text
 	[Tags]  COLUMNS   CRITICAL
-	Given User Goes To New Page -Site 
-	And User Starts Creating a Page With 50-50 Division And Mixed Content
+	Given User Goes To New Article Site 
+	And User Starts Creating an Article With 50-50 Division And Mixed Content
 	And User Adds Picture to Left Column
 	And User Adds Text to Right Column
-	When User Submits The New Page
+	When User Submits The New Article
 	And User Opens Created Content
 	Then Layout Should Not Have Changed
 
 70-30 with original size picture and text
 	[Tags]  COLUMNS   CRITICAL
-	Given User Goes To New Page -Site
-	And User Starts Creating a Page With 70-30 Division And Mixed Content
+	Given User Goes To New Article Site
+	And User Starts Creating an Article With 70-30 Division And Mixed Content
 	And User Adds Original Picture to Left Column
 	And Picture on Left Has Original Aspect Ratio Enabled
 	And User Adds Text to Right Column
-	When User Submits The New Page
+	When User Submits The New Article
 	And User Opens Created Content
 	Then Layout Should Not Have Changed
 
 50-50 with text and fullcolor link
 	[Tags]  COLUMNS   CRITICAL
-	Given User Goes To New Page -Site
-	And User Starts Creating a Page With 50-50 Division And Mixed Content
+	Given User Goes To New Article Site
+	And User Starts Creating an Article With 50-50 Division And Mixed Content
 	And User Adds Text to Left Column
 	And User Adds Link Button With Fullcolor Style into Right Column
-	When User Submits The New Page
+	When User Submits The New Article
 	And User Opens Created Content
 	Then Layout Should Not Have Changed
 
 50-50 With Text And Transparent Link
 	[Tags]  COLUMNS
-	Given Given User Goes To New Page -Site
-	And User Starts Creating a Page With 50-50 Division And Mixed Content
+	Given User Goes To New Article Site
+	And User Starts Creating an Article With 50-50 Division And Mixed Content
 	And User Adds Text to Left Column
 	And User Adds Link Button With Transparent Style into Right Column
-	When User Submits The New Page
+	When User Submits The New Article
 	And User Opens Created Content
 	Then Layout Should Not Have Changed
 
 50-50 With Text And Framed Link
 	[Tags]  COLUMNS 
-	Given User Goes To New Page -Site
-	And User Starts Creating a Page With 50-50 Division And Mixed Content
+	Given User Goes To New Article Site
+	And User Starts Creating an Article With 50-50 Division And Mixed Content
 	And User Adds Text to Left Column
 	And User Adds Link Button With Framed Style into Right Column
-	When User Submits The New Page
+	When User Submits The New Article
 	And User Opens Created Content
 	Then Layout Should Not Have Changed
 
 Finnish English Swedish Translations
 	[Tags]  COLUMNS   CRITICAL
-	Given User Creates a Page With 50-50 Division And Mixed Content in Finnish Language
-	And User Creates a Page With 50-50 Division And Mixed Content in English Language
-	And User Creates a Page With 50-50 Division And Mixed Content in Swedish Language
+	Given User Creates an Article With 50-50 Division And Mixed Content in Finnish Language
+	And User Creates an Article With 50-50 Division And Mixed Content in English Language
+	And User Creates an Article With 50-50 Division And Mixed Content in Swedish Language
 	Then Page Should Have Finnish Translation
 	And Page Should Have English Translation
 	And Page Should Have Swedish Translation
 
 *** Keywords ***
-User Goes To New Page -Site		Go To New Page Site
+User Goes To New Article Site  Go To New Article Site
 
 Input Content Header Title
 	[Arguments]   ${content}
 	Input Text To Frame   css:#cke_1_contents > iframe   //body   ${content}
-	
 
-User Starts Creating a Page With ${division} Division And ${contenttype} Content
+User Starts Creating an Article With ${division} Division And ${contenttype} Content
  	Set Test Variable  ${contenttype}   ${contenttype}
 	Set Test Variable   ${division}   ${division}
-	Input Title  Test Automation: ${TEST NAME}
+	Input Title  Test Automation: Article - ${TEST NAME}
+	Input Author   Test Automation Author
+	${ingress}=  Get File  ${CONTENT_PATH}/text_ingress_${language}.txt
+	Input Lead   ${ingress}
 	${headertitle}=  Get File  ${CONTENT_PATH}/text_description_short_${language}.txt
 	Input Content Header Title  ${headertitle}
+	
 	Wait Until Element Is Visible   ${Ddn_AddContent}   timeout=3
 	Focus   ${Ddn_AddContent}
 	Run Keyword If  '${language}'=='fi'  Click Element	${Ddn_AddContent}
@@ -133,21 +136,21 @@ User Starts Creating a Page With ${division} Division And ${contenttype} Content
 	Click Element    ${Ddn_Column_Style}
 	Click Element With Value   '${division}'
 
-User Creates a Page With ${division} Division And ${contenttype} Content in ${lang_selection} Language
+User Creates an Article With ${division} Division And ${contenttype} Content in ${lang_selection} Language
 	${language_pointer}=   Get Language Pointer   ${lang_selection}
 	Set Test Variable   ${language}   ${language_pointer}
-	Run Keyword If  '${lang_selection}'=='Finnish'  Go To New Page Site
-	Run Keyword If  '${lang_selection}'!='Finnish'  Go To New Page -View For ${lang_selection} Translation
-	User Starts Creating a Page With ${division} Division And ${contenttype} Content
+	Run Keyword If  '${lang_selection}'=='Finnish'  Go To New Article Site
+	Run Keyword If  '${lang_selection}'!='Finnish'  Go To New Article -View For ${lang_selection} Translation
+	User Starts Creating an Article With ${division} Division And ${contenttype} Content
 	Run Keyword If  '${lang_selection}'=='Finnish'  User Adds Picture to Left Column
 	Run Keyword If  '${lang_selection}'=='Finnish'  Add Picture Caption to Left
 	Run Keyword If  '${lang_selection}'!='Finnish'  Add Picture Caption to Left
 	Run Keyword If  '${lang_selection}'=='Finnish'  User Adds Text to Right Column
 	Run Keyword If  '${lang_selection}'!='Finnish'	Add Text Content To Column on Right
-	User Submits The New Page
+	User Submits The New Article
 	User Opens Created Content
 
-Go To New Page -View For ${language} Translation
+Go To New Article -View For ${language} Translation
 	Go To Translate Selection Page
 	Go To ${language} Translation Page
 
@@ -155,8 +158,7 @@ User Adds ${content} to Left Column
 	${content}=  Convert To Lower Case   ${content}
 	Add ${content} to Left Column
 
-User Adds ${content} to Right Column
-	Add ${content} to Right Column
+User Adds ${content} to Right Column	Add ${content} to Right Column
 
 User Adds Link Button With ${linkstyle} Style into ${side} Column
 	Set Test Variable   ${linkstyle}   ${linkstyle}
@@ -164,14 +166,9 @@ User Adds Link Button With ${linkstyle} Style into ${side} Column
 	Run Keyword If  '${side}'=='right'  Add Link to Right Column
 	Run Keyword If  '${side}'=='left'  Add Link to Left Column
 
-User Opens Created Content
-	Open Test Automation Created Content
-
-User Submits The New Page
-	Submit Page
-
-Picture on ${side} Has Original Aspect Ratio Enabled
-	Use Original Aspect Ratio on ${side}
+User Opens Created Content		Open Test Automation Created Content
+User Submits The New Article	Submit Article
+Picture on ${side} Has Original Aspect Ratio Enabled	Use Original Aspect Ratio on ${side}
 
 Return Correct Title
 	[Arguments]     ${language}
@@ -193,27 +190,39 @@ Layout Should Not Have Changed
 Page Should Have ${lang_input} Translation
 	Set Language Pointer   ${lang_input}
 	Select Language   ${lang_input}
-	Page Content Matches Language
+	Article Content Matches Language
 
-Return Title From Page
+Return Title From Article
 	${title}=	Get Text    ${Txt_Column_Title}
 	[Return]		${title}
 
-Return Description From Page
+Return Description From Article
 	${description}=	Get Text    ${Txt_Column_Description}
 	[Return]		${description}
 
-Return Content From Page
+Return Content From Article
 	${content}=	Get Text    ${Txt_Column_Content}
 	[Return]		${content}
+	
+Return Lead From Article
+	${lead}=	Get Text    ${Txt_Lead}
+	[Return]		${lead}
 
-Page Content Matches Language
-	${Title}=  Return Title From Page
-	${Description}=  Return Description From Page
-	${Content}=  Return Content From Page
+Return Author From Article
+	${author}=	Get Text    ${Txt_Author}
+	[Return]		${author}
+
+Article Content Matches Language
+	${Title}=  Return Title From Article
+	${Description}=  Return Description From Article
+	${Content}=  Return Content From Article
+	${Lead}=   Return Lead From Article
+	${Author}=   Return Author From Article
 	Title Should Match Current Language Selection   ${Title}
 	Description Should Match Current Language Selection   ${Description}	
 	Content Should Match Current Language Selection   ${Content}
+	Lead Should Match Current Language Selection   ${Lead}
+	Author Should Be Correct   ${Author}
 			
 Title Should Match Current Language Selection
 	[Arguments]   ${string}
@@ -232,4 +241,15 @@ Content Should Match Current Language Selection
 	[Arguments]   ${string}
 	Run Keyword If  '${language}'=='fi'  Should Match Regexp  ${string}   Viittatie teki niemen nenässä polvekkeen
 	Run Keyword If  '${language}'=='en'  Should Match Regexp  ${string}   If all else perished, and he remained
-	Run Keyword If  '${language}'=='sv'  Should Match Regexp  ${string}   Det är bara synd, att han inte är	
+	Run Keyword If  '${language}'=='sv'  Should Match Regexp  ${string}   Det är bara synd, att han inte är
+	
+Lead Should Match Current Language Selection
+	[Arguments]   ${string}
+	Run Keyword If  '${language}'=='fi'  Should Match Regexp  ${string}   Ingressi eli johdate on tekstin
+	Run Keyword If  '${language}'=='en'  Should Match Regexp  ${string}   A lead paragraph
+	Run Keyword If  '${language}'=='sv'  Should Match Regexp  ${string}   Ingressen är den inledande delen av en artikel
+
+Author Should Be Correct
+	[Arguments]   ${string}
+	Should Match Regexp  ${string}   Test Automation Author
+		

@@ -116,3 +116,9 @@ ${Txt_Content}									css:.text__text-content
 ${Txt_Column_Title}								css:.columns__title
 ${Txt_Column_Description}						xpath://p[1]
 ${Txt_Column_Content}							xpath://div[@class='columns columns--default columns--50-50']//p
+# ARTICLE SPESIFIC
+${Inp_Author}								name:field_author[0][value]
+${Inp_Lead}									name:field_lead[0][value]
+${Inp_Keywords}								css:.select2-search__field
+${Txt_Lead}									css:.article__lead
+${Txt_Author}								css:.article__author

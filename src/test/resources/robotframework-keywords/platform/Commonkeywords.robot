@@ -4,7 +4,7 @@ Library           SeleniumLibrary
 Library           OperatingSystem
 Library			  Collections
 Library			  String
-Resource		  ./variables/create_page.robot
+Resource		  ./variables/create_content.robot
 Library 		   helfi.ta.PictureCompare
  
 *** Variables ***
@@ -36,7 +36,7 @@ Login And Go To Content Page
 
 Go To New Article Site
 	Click Add Content
-	Click Add Article
+	Wait Until Keyword Succeeds  5x  200ms  Click Add Article
 
 Go To New Page Site
 	Click Add Content
@@ -56,7 +56,9 @@ Click Add Page
 	
 Click Add Article
 	[Documentation]   Add Article ('Artikkeli') click in Add Content('Lisää sisältöä') -menu
-	Wait Until Keyword Succeeds  5x  200ms  Click Element  //a[contains(@href, '/fi/node/add/article')]
+	Wait Until Element Is Visible  //a[contains(@href, '/node/add/article')]   timeout=3
+	Wait Until Keyword Succeeds  5x  200ms  Click Element  //a[contains(@href, '/node/add/article')]
+	Element Should Not Be Visible   //a[contains(@href, '/node/add/article')]
 
 Go To Translate Selection Page
 	[Documentation]   Goes To Translations Page for first document in the content list
