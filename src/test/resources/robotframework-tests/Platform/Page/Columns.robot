@@ -11,7 +11,7 @@ Force Tags		PAGE
 
 *** Test Cases ***
 50-50
-	[Tags]  COLUMNS   CRITICAL
+	[Tags]  COLUMNS   CRITICAL   TODO
 	Given User Goes To New Page -Site
 	And User Starts Creating a Page With 50-50 Division And Text Content
 	And User Adds Text to Left Column
