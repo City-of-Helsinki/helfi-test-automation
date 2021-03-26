@@ -177,7 +177,11 @@ Return Correct Title
 	...		 		'${language}'=='sv'  Selma Lagerlof: Bannlyst
 	[Return]		${title}
 
+
+
 Layout Should Not Have Changed
+	${excludeneeded}=  Image Comparison Needs To Exclude Areas
+	@{arealist}=  Run Keyword If   ${excludeneeded}    Add Excluded Areas To List
 	${contenttype}=  Convert To Lower Case   ${contenttype}
 	${originalpic} =  Set Variable If  
 	...  '${contenttype}'=='picture'   ${SCREENSHOTS_PATH}/${BROWSER}/${language}_short_COLUMNS_${division}_picture_${picsize}_${BROWSER}.png
@@ -185,7 +189,8 @@ Layout Should Not Have Changed
 	...  '${contenttype}'=='mixed'   ${SCREENSHOTS_PATH}/${BROWSER}/${language}_short_COLUMNS_${division}_left_${content1}_right_${content2}_${picsize}_${BROWSER}.png
 	...   ${SCREENSHOTS_PATH}/${BROWSER}/${language}_short_COLUMNS_${division}_text_${BROWSER}.png
 	${comparisonpic}=  Set Variable  ${REPORTS_PATH}/${BROWSER}_TESTRUN-${TEST NAME}_${language}.png
-	Compared Pictures Match   ${originalpic}    ${comparisonpic}
+	Run Keyword If  ${excludeneeded}   Compared Pictures Match   ${originalpic}    ${comparisonpic}    ${arealist}
+	Run Keyword Unless   ${excludeneeded}   Compared Pictures Match   ${originalpic}    ${comparisonpic}
 
 Page Should Have ${lang_input} Translation
 	Set Language Pointer   ${lang_input}

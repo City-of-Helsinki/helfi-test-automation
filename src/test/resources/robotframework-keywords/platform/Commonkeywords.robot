@@ -5,6 +5,7 @@ Library           OperatingSystem
 Library			  Collections
 Library			  String
 Resource		  ./variables/create_content.robot
+Resource		  ./variables/picture_comparison.robot
 Library 		   helfi.ta.PictureCompare
  
 *** Variables ***
@@ -90,8 +91,8 @@ Input Text To Frame
 	
 Compared Pictures Match
 	[Documentation]   Tests that two pictures look same --> layout is not broken
-	[Arguments]	   ${pic1}   ${pic2}
-	${results}=  compare      ${pic1}   ${pic2}   ${REPORTS_PATH}/pic_difference-${TEST NAME}.png
+	[Arguments]	   ${pic1}   ${pic2}   @{arealist}=${None}
+	${results}=  compare      ${pic1}   ${pic2}   ${REPORTS_PATH}/pic_difference-${TEST NAME}.png   ${arealist}
     Run keyword if  ${results}==False   fail    "Pictures are different"
     
 Click Element With Value
@@ -123,3 +124,27 @@ Open Test Automation Created Content
 	Run keyword if  ('${picsize}'=='original') & ('${BROWSER}'=='chromeheadless')   Execute javascript  document.body.style.zoom="30%"
 	Capture Page Screenshot    filename=${BROWSER}_TESTRUN-${TEST NAME}_${language}.png
 	Execute javascript  document.body.style.zoom="100%"
+
+Image Comparison Needs To Exclude Areas
+	[Documentation]   Image Comparison needs to exclude some parts of the picture in case of for example changing date
+	... 			  values and such which cause the test to fail in comparion stage. For this reason we check if
+	...				  excluding is needed and save possible excludetag in test variable so that right parts will later
+	...				  be excluded
+	Log List   ${TEST TAGS}
+	${count}=  Get Length   ${excludetaglist}
+	FOR    ${i}    IN RANGE    ${count}
+		   ${tag}=  Get From List  ${excludetaglist}   ${i}	
+           ${status}=   Run Keyword And Return Status   Should Contain Match   ${TEST TAGS}    ${tag}
+           Run Keyword If   '${status}'=='True'   Set Test Variable   ${excludetag}    ${tag}
+           Exit For Loop If   '${status}'=='True'   
+    END
+    [Return]   ${status}
+		
+Add Excluded Areas To List
+	[Documentation]    We get list of areas needed to be excluded from the picture compare and add them into list.
+	@{content} =	Split String	@{${excludetag}}   |
+	[Return]   @{content}
+	
+	
+	
+	
