@@ -120,8 +120,10 @@ Open Test Automation Created Content
 	Wait Until Keyword Succeeds  5x  200ms  Open Created Content
 	Run Keyword If  '${language}'=='fi'  	Accept Cookies
 	Maximize Browser Window
+	Run keyword if  ('${gallery}'=='true')  Wait Until Element Is Visible   ${Itm_Gallery_Slidetrack}   timeout=5
 	Execute javascript  document.body.style.zoom="40%"
-	Run keyword if  ('${picsize}'=='original') & ('${BROWSER}'=='chromeheadless')   Execute javascript  document.body.style.zoom="30%"
+	Run keyword if  ('${gallery}'=='true')    Execute javascript  document.body.style.zoom="30%"
+	Run keyword if  (('${picsize}'=='original') | ('${gallery}'=='true')) & ('${BROWSER}'=='chromeheadless')   Execute javascript  document.body.style.zoom="30%"
 	Capture Page Screenshot    filename=${BROWSER}_TESTRUN-${TEST NAME}_${language}.png
 	Execute javascript  document.body.style.zoom="100%"
 

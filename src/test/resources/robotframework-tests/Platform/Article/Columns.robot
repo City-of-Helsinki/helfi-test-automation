@@ -113,10 +113,6 @@ Finnish English Swedish Translations
 *** Keywords ***
 User Goes To New Article Site  Go To New Article Site
 
-Input Content Header Title
-	[Arguments]   ${content}
-	Input Text To Frame   css:#cke_1_contents > iframe   //body   ${content}
-
 User Starts Creating an Article With ${division} Division And ${contenttype} Content
  	Set Test Variable  ${contenttype}   ${contenttype}
 	Set Test Variable   ${division}   ${division}

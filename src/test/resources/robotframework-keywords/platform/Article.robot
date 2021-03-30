@@ -18,6 +18,7 @@ ${pagesadded}								0
 ${picsize}									cropped
 ${linkstyle} 		 						${EMPTY}
 ${language}	 		 						fi
+${gallery}									false
 
 *** Keywords ***
 
@@ -35,6 +36,10 @@ Input Lead
 	[Arguments]   ${lead}
 	Wait Until Element Is Visible   ${Inp_Lead}   timeout=3  
 	Input Text  ${Inp_Lead}   ${lead}  
+
+Input Content Header Title
+	[Arguments]   ${content}
+	Input Text To Frame   ${Frm_Content}   //body   ${content}
 
 Get Language Pointer
 	[Arguments]     ${language}
@@ -143,7 +148,6 @@ Add ${content:[^"]+} to Right Column
 	Run Keyword If  '${content}'=='Link'  Add "${linkstyle}" Link To Right Column
 
 Go To Translations Tab
-	#Focus   //a[contains(@href, 'translations')]
 	Click Button   //a[contains(text(),'Translate')]	
 	
 Go To ${language} Translation Page

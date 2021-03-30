@@ -8,6 +8,7 @@
 #				 Input      = Inp
 #				 Button     = Btn
 #				 Menu-item  = Mtm
+#				 Item		= Itm
 
 *** Variables ***
 #LISTS
@@ -50,6 +51,7 @@ ${Btn_Actions_Dropbutton}					//button[@class='dropbutton__toggle']
 ${Btn_Actions_ContentMenu_Deletebutton}		//li[contains(@class, 'delete dropbutton')]/child::a
 ${Btn_Actions_ContentMenu_Translatebutton}	//li[contains(@class, 'translate dropbutton')]/child::a
 ${Btn_Actions_SelectedItem_Deletebutton}	//input[@id='edit-submit']
+
 #HERO
 ${Inp_Hero_Title}							//input[contains(@id, 'edit-field-hero-0-subform')]
 ${Swh_HeroOnOff}						    //input[@id='edit-field-has-hero-value']
@@ -109,6 +111,11 @@ ${Opt_Column_Left_Link_ButtonFramed}		//select[@data-drupal-selector='edit-field
 ${Opt_Column_Right_Link_ButtonFramed}		//select[@data-drupal-selector='edit-field-content-1-subform-field-columns-right-column-0-subform-field-link-design']//option[@value='secondary']
 ${Opt_Column_Left_Link_ButtonTransparent}	//select[@data-drupal-selector='edit-field-content-1-subform-field-columns-left-column-0-subform-field-link-design']//option[@value='supplementary']
 ${Opt_Column_Right_Link_ButtonTransparent}	//select[@data-drupal-selector='edit-field-content-1-subform-field-columns-right-column-0-subform-field-link-design']//option[@value='supplementary']
+
+#GALLERY
+${Opt_AddGallery}						    name:field_content_gallery_add_more
+${Btn_Gallery_Picture}						name:field_gallery_slide_media-media-library-open-button-field_content-1-subform-field_gallery_slides-
+${Btn_Gallery_Picture_Addmore}				name:field_content_1_subform_field_gallery_slides_gallery_slide_add_more
 # PAGE VIEW
 ${Txt_Hero_Title}								css:.hero__title
 ${Txt_Hero_Description}							css:.hero__description
@@ -116,9 +123,12 @@ ${Txt_Content}									css:.text__text-content
 ${Txt_Column_Title}								css:.columns__title
 ${Txt_Column_Description}						xpath://p[1]
 ${Txt_Column_Content}							xpath://div[@class='columns columns--default columns--50-50']//p
+${Txt_Column_Content}
+${Itm_Gallery_Slidetrack}						id:splide01-track
 # ARTICLE SPESIFIC
 ${Inp_Author}								name:field_author[0][value]
 ${Inp_Lead}									name:field_lead[0][value]
 ${Inp_Keywords}								css:.select2-search__field
 ${Txt_Lead}									css:.article__lead
 ${Txt_Author}								css:.article__author
+
