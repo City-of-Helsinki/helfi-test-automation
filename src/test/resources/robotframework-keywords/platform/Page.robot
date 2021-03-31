@@ -118,8 +118,8 @@ Add ${content} to Left Column
 	...				 pictures with longer width value does not get cropped. Only long pictures do.
 	Focus   ${Ddn_Column_Left_AddContent}
 	Wait Until Keyword Succeeds  5x  100ms  Click Button  ${Ddn_Column_Left_AddContent}
-	Run Keyword If  '${content}'=='picture'  Add Picture to Column   left    train   @{pic_1_texts_${language}}
-	Run Keyword If  '${content}'=='original picture'  Add Picture to Column   left    snowdrops   @{pic_1_texts_${language}}
+	Run Keyword If  '${content}'=='picture'  Add Picture to Column   Left    train   @{pic_1_texts_${language}}
+	Run Keyword If  '${content}'=='original picture'  Add Picture to Column   Left    snowdrops   @{pic_1_texts_${language}}
 	Run Keyword If  '${content}'=='text'  Add Text Content To Column on Left
 	Run Keyword If  ('${content}'=='picture') & ('${language}'=='fi')  Add Picture Caption to Left
 	${content}=  Remove String And Strip Text   ${content}   original

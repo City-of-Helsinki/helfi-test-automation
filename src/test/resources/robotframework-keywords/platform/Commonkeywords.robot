@@ -33,7 +33,7 @@ Login And Go To Content Page
 	Get Admin Url
 	Open Browser  ${admin_url}  ${BROWSER}
 	Go To   ${URL_content_page}
-	Run Keyword If  '${BROWSER}'=='chromeheadless'	Set Window Size   1296   696
+	Set Window Size   1296   696
 
 Go To New Article Site
 	Click Add Content
@@ -92,7 +92,7 @@ Input Text To Frame
 Compared Pictures Match
 	[Documentation]   Tests that two pictures look same --> layout is not broken
 	[Arguments]	   ${pic1}   ${pic2}   @{arealist}=${None}
-	${results}=  compare      ${pic1}   ${pic2}   ${REPORTS_PATH}/pic_difference-${TEST NAME}.png   ${arealist}
+	${results}=  compare      ${pic1}   ${pic2}   ${REPORTS_PATH}/pic_difference-${SUITE NAME}-${TEST NAME}.png   ${arealist}
     Run keyword if  ${results}==False   fail    "Pictures are different"
     
 Click Element With Value
@@ -119,13 +119,6 @@ Open Test Automation Created Content
 	Go To   ${URL_content_page}
 	Wait Until Keyword Succeeds  5x  200ms  Open Created Content
 	Run Keyword If  '${language}'=='fi'  	Accept Cookies
-	Maximize Browser Window
-	Run keyword if  ('${gallery}'=='true')  Wait Until Element Is Visible   ${Itm_Gallery_Slidetrack}   timeout=5
-	Execute javascript  document.body.style.zoom="40%"
-	Run keyword if  ('${gallery}'=='true')    Execute javascript  document.body.style.zoom="30%"
-	Run keyword if  (('${picsize}'=='original') | ('${gallery}'=='true')) & ('${BROWSER}'=='chromeheadless')   Execute javascript  document.body.style.zoom="30%"
-	Capture Page Screenshot    filename=${BROWSER}_TESTRUN-${TEST NAME}_${language}.png
-	Execute javascript  document.body.style.zoom="100%"
 
 Image Comparison Needs To Exclude Areas
 	[Documentation]   Image Comparison needs to exclude some parts of the picture in case of for example changing date

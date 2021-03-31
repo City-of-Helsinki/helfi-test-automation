@@ -162,7 +162,18 @@ User Adds Link Button With ${linkstyle} Style into ${side} Column
 	Run Keyword If  '${side}'=='right'  Add Link to Right Column
 	Run Keyword If  '${side}'=='left'  Add Link to Left Column
 
-User Opens Created Content		Open Test Automation Created Content
+User Opens Created Content		
+	Open Test Automation Created Content
+	Take Screenshot Of Content
+	
+Take Screenshot Of Content
+	Maximize Browser Window
+	Execute javascript  document.body.style.zoom="40%"
+	Run keyword if  ('${picsize}'=='original') & ('${BROWSER}'=='chromeheadless')   Execute javascript  document.body.style.zoom="30%"
+	Capture Page Screenshot    filename=${BROWSER}_TESTRUN-${SUITE NAME}-${TEST NAME}_${language}.png
+	Execute javascript  document.body.style.zoom="100%"	
+	
+	
 User Submits The New Article	Submit Article
 Picture on ${side} Has Original Aspect Ratio Enabled	Use Original Aspect Ratio on ${side}
 
@@ -184,7 +195,7 @@ Layout Should Not Have Changed
 	...	 '${linkstyle}'!='${EMPTY}'   ${SCREENSHOTS_PATH}/${BROWSER}/${language}_short_COLUMNS_${division}_left_${content1}_right_${content2}_${linkstyle}_${BROWSER}.png
 	...  '${contenttype}'=='mixed'   ${SCREENSHOTS_PATH}/${BROWSER}/${language}_short_COLUMNS_${division}_left_${content1}_right_${content2}_${picsize}_${BROWSER}.png
 	...   ${SCREENSHOTS_PATH}/${BROWSER}/${language}_short_COLUMNS_${division}_text_${BROWSER}.png
-	${comparisonpic}=  Set Variable  ${REPORTS_PATH}/${BROWSER}_TESTRUN-${TEST NAME}_${language}.png
+	${comparisonpic}=  Set Variable  ${REPORTS_PATH}/${BROWSER}_TESTRUN-${SUITE NAME}-${TEST NAME}_${language}.png
 	Run Keyword If  ${excludeneeded}   Compared Pictures Match   ${originalpic}    ${comparisonpic}    ${arealist}
 	Run Keyword Unless   ${excludeneeded}   Compared Pictures Match   ${originalpic}    ${comparisonpic}
 

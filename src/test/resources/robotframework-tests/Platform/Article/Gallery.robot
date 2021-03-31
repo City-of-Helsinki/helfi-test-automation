@@ -60,11 +60,19 @@ Add Picture '${name}' And Caption To ${number}:th Picture
 User Submits The New Article	Submit Article    						
 User Goes To New Article Site  Go To New Article Site
 User Opens Created Content
-	Set Test Variable   ${gallery}    true
   	Open Test Automation Created Content
+  	Take Screenshot Of Content
+
+Take Screenshot Of Content
+	Maximize Browser Window
+	Wait Until Element Is Visible   ${Itm_Gallery_Slidetrack}   timeout=5
+	Execute javascript  document.body.style.zoom="30%"
+	Capture Page Screenshot    filename=${BROWSER}_TESTRUN-${SUITE NAME}-${TEST NAME}_${language}.png
+	Execute javascript  document.body.style.zoom="100%"
+
 
 Layout Should Not Have Changed
 	${originalpic} =  Set Variable   ${SCREENSHOTS_PATH}/${BROWSER}/${language}_short_GALLERY_ARTICLE_${BROWSER}.png
-	${comparisonpic}=  Set Variable  ${REPORTS_PATH}/${BROWSER}_TESTRUN-${TEST NAME}_${language}.png
+	${comparisonpic}=  Set Variable  ${REPORTS_PATH}/${BROWSER}_TESTRUN-${SUITE NAME}-${TEST NAME}_${language}.png
 	Compared Pictures Match   ${originalpic}    ${comparisonpic}
 	

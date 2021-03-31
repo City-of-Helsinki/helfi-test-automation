@@ -18,6 +18,9 @@ Browse Gallery Images
 		
 	
 *** Keywords ***
+User Goes To New Page -Site  	Go To New Page Site
+User Submits The New Page   	Submit Page 
+
 User Starts Creating Page With Gallery
 	Input Title  Test Automation: ${TEST NAME}
 	${headertitle}=  Get File  ${CONTENT_PATH}/text_description_short_${language}.txt
@@ -54,14 +57,18 @@ Add Picture '${name}' And Caption To ${number}:th Picture
 	Set Test Variable  ${picture}    picture 
     						
 User Opens Created Content
-	Set Test Variable   ${gallery}    true
   	Open Test Automation Created Content
+  	Take Screenshot Of Content
 
-User Submits The New Page
-   	Submit Page
+Take Screenshot Of Content
+	Maximize Browser Window
+	Wait Until Element Is Visible   ${Itm_Gallery_Slidetrack}   timeout=5
+	Execute javascript  document.body.style.zoom="28%"
+	Capture Page Screenshot    filename=${BROWSER}_TESTRUN-${SUITE NAME}-${TEST NAME}_${language}.png
+	Execute javascript  document.body.style.zoom="100%"
 
 Layout Should Not Have Changed
 	${originalpic} =  Set Variable   ${SCREENSHOTS_PATH}/${BROWSER}/${language}_short_GALLERY_${BROWSER}.png
-	${comparisonpic}=  Set Variable  ${REPORTS_PATH}/${BROWSER}_TESTRUN-${TEST NAME}_${language}.png
+	${comparisonpic}=  Set Variable  ${REPORTS_PATH}/${BROWSER}_TESTRUN-${SUITE NAME}-${TEST NAME}_${language}.png
 	Compared Pictures Match   ${originalpic}    ${comparisonpic}
 	

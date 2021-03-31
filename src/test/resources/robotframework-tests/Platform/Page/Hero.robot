@@ -328,7 +328,17 @@ Input Hero Description
 	Run Keyword If  '${language}'!='fi'   Input Text To Frame   ${Frm_Content}   //body   ${description}
 
 User Submits The New Page	Submit Page
-User Opens Created Content	Open Test Automation Created Content
+
+User Opens Created Content	
+	Open Test Automation Created Content
+	Take Screenshot Of Content
+
+Take Screenshot Of Content
+	Maximize Browser Window
+	Execute javascript  document.body.style.zoom="40%"
+	Capture Page Screenshot    filename=${BROWSER}_TESTRUN-${SUITE NAME}-${TEST NAME}_${language}.png
+	Execute javascript  document.body.style.zoom="100%"
+
 
 Layout Should Not Have Changed
 	${originalpic} =  Set Variable If
@@ -336,7 +346,7 @@ Layout Should Not Have Changed
 ...  '${linkstyle}'!='${EMPTY}'  ${SCREENSHOTS_PATH}/${BROWSER}/${language}_short_HERO_left_vaakuna_nopicture_${linkstyle}link_${BROWSER}.png
 ...  '${color}'!='${EMPTY}'  ${SCREENSHOTS_PATH}/${BROWSER}/${language}_short_HERO_left_${color}_nopicture_${BROWSER}.png
 ...   ${SCREENSHOTS_PATH}/${BROWSER}/${language}_short_HERO_${value}_vaakuna_nopicture_${BROWSER}.png
-	${comparisonpic}=  Set Variable  ${REPORTS_PATH}/${BROWSER}_TESTRUN-${TEST NAME}_${language}.png
+	${comparisonpic}=  Set Variable  ${REPORTS_PATH}/${BROWSER}_TESTRUN-${SUITE NAME}-${TEST NAME}_${language}.png
 	Compared Pictures Match   ${originalpic}    ${comparisonpic}
 
 Page Should Have ${lang_input} Translation

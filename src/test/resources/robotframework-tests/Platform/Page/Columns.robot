@@ -51,7 +51,7 @@ Force Tags		PAGE
 	Then Layout Should Not Have Changed	
 
 50-50 with picture and text
-	[Tags]  COLUMNS   CRITICAL
+	[Tags]  COLUMNS   CRITICAL 
 	Given User Goes To New Page -Site 
 	And User Starts Creating a Page With 50-50 Division And Mixed Content
 	And User Adds Picture to Left Column
@@ -61,7 +61,7 @@ Force Tags		PAGE
 	Then Layout Should Not Have Changed
 
 70-30 with original size picture and text
-	[Tags]  COLUMNS   CRITICAL
+	[Tags]  COLUMNS   CRITICAL 
 	Given User Goes To New Page -Site
 	And User Starts Creating a Page With 70-30 Division And Mixed Content
 	And User Adds Original Picture to Left Column
@@ -161,6 +161,15 @@ User Adds Link Button With ${linkstyle} Style into ${side} Column
 
 User Opens Created Content
 	Open Test Automation Created Content
+	Take Screenshot Of Content
+
+Take Screenshot Of Content
+	Maximize Browser Window
+	Execute javascript  document.body.style.zoom="40%"
+	Run keyword if  ('${picsize}'=='original') & ('${BROWSER}'=='chromeheadless')   Execute javascript  document.body.style.zoom="30%"
+	Capture Page Screenshot    filename=${BROWSER}_TESTRUN-${SUITE NAME}-${TEST NAME}_${language}.png
+	Execute javascript  document.body.style.zoom="100%"
+
 
 User Submits The New Page
 	Submit Page
@@ -182,7 +191,7 @@ Layout Should Not Have Changed
 	...	 '${linkstyle}'!='${EMPTY}'   ${SCREENSHOTS_PATH}/${BROWSER}/${language}_short_COLUMNS_${division}_left_${content1}_right_${content2}_${linkstyle}_${BROWSER}.png
 	...  '${contenttype}'=='mixed'   ${SCREENSHOTS_PATH}/${BROWSER}/${language}_short_COLUMNS_${division}_left_${content1}_right_${content2}_${picsize}_${BROWSER}.png
 	...   ${SCREENSHOTS_PATH}/${BROWSER}/${language}_short_COLUMNS_${division}_text_${BROWSER}.png
-	${comparisonpic}=  Set Variable  ${REPORTS_PATH}/${BROWSER}_TESTRUN-${TEST NAME}_${language}.png
+	${comparisonpic}=  Set Variable  ${REPORTS_PATH}/${BROWSER}_TESTRUN-${SUITE NAME}-${TEST NAME}_${language}.png
 	Compared Pictures Match   ${originalpic}    ${comparisonpic}
 
 Page Should Have ${lang_input} Translation

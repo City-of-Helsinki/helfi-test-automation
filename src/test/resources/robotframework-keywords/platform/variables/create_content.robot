@@ -34,6 +34,11 @@ ${link_title_sv}							Om en bok
 ${link_title_ru}							О книге
 
 #SHARED
+${Ddn_AddContent}							//ul[@data-drupal-selector='edit-field-content-add-more-operations']//li[2]/button
+${Opt_AddColumns}						    name:field_content_columns_add_more
+${Opt_AddPicture}						    name:field_content_image_add_more
+${Opt_AddText}								name:field_content_text_add_more
+${Opt_AddLink}								name:field-content-link-add-more
 ${Btn_File_Upload}					    	name:files[upload]
 ${Inp_Pic_Name}								css:[data-drupal-selector=edit-media-0-fields-name-0-value]
 ${Inp_Pic_AltText}							css:[data-drupal-selector=edit-media-0-fields-field-media-image-0-alt]
@@ -73,9 +78,6 @@ ${Opt_Hero_Link_ButtonTransparent}			css:[value=supplementary]
 ${Ddn_Hero_Color}							css:[data-drupal-selector=edit-field-hero-0-subform-field-hero-bg-color]
 
 #COLUMNS
-${Ddn_AddContent}							//ul[@data-drupal-selector='edit-field-content-add-more-operations']//li[2]/button
-${Opt_AddColumns}						    name:field_content_columns_add_more
-${Opt_AddImages}						    name:field_content_image_add_more
 ${Inp_Column_Title}	  						css:[data-drupal-selector=edit-field-content-1-subform-field-columns-title-0-value]
 ${Ddn_Column_Style}	  						css:[data-drupal-selector=edit-field-content-1-subform-field-columns-design]
 ${Ddn_Column_Left_AddContent}               //ul[@data-drupal-selector='edit-field-content-1-subform-field-columns-left-column-add-more-operations']//button
@@ -132,3 +134,5 @@ ${Inp_Keywords}								css:.select2-search__field
 ${Txt_Lead}									css:.article__lead
 ${Txt_Author}								css:.article__author
 
+#UNCATEGORIZED
+${Btn_Picture}								name:field_image-media-library-open-button-field_content-1-subform
