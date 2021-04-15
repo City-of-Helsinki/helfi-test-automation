@@ -22,7 +22,7 @@ Left Aligned
 	Then Layout Should Not Have Changed	
 
 Center Aligned
-	[Tags]  HERO   
+	[Tags]  HERO
 	Given User Goes To New Page -Site
 	And User Starts Creating a Center Aligned Page With Hero Block
 	When User Submits The New Page
@@ -47,7 +47,7 @@ Right Aligned Picture
 	Then Layout Should Not Have Changed
 	
 Bottom Aligned Picture
-	[Tags]  HERO
+	[Tags]  HERO    
 	Given User Goes To New Page -Site
 	And User Starts Creating Hero Block Page with Bottom Picture
 	When User Submits The New Page
@@ -72,7 +72,7 @@ Diagonal Picture
 
 Fullcolor Link
 	[Documentation]   Adds Left aligned page and a link with Fullcolor styling option selected
-	[Tags]   HERO    CRITICAL
+	[Tags]   HERO    CRITICAL   UHF-1399
 	Given User Goes To New Page -Site
 	And User Starts Creating a Left Aligned Page With Hero Block
 	And User Adds Hero Link Button With Fullcolor Style
@@ -81,7 +81,7 @@ Fullcolor Link
 	Then Layout Should Not Have Changed
 
 Framed Link
-	[Tags]   HERO
+	[Tags]   HERO    UHF-1399
 	Given User Goes To New Page -Site
 	And User Starts Creating a Left Aligned Page With Hero Block
 	And User Adds Hero Link Button With Framed Style
@@ -90,7 +90,7 @@ Framed Link
 	Then Layout Should Not Have Changed
 
 Transparent Link
-	[Tags]   HERO 
+	[Tags]   HERO    UHF-1399
 	Given User Goes To New Page -Site
 	And User Starts Creating a Left Aligned Page With Hero Block
 	And User Adds Hero Link Button With Transparent Style
@@ -100,7 +100,7 @@ Transparent Link
 
 Gold Background Color
 	[Documentation]   Left Aligned Hero Block with Background Color selection 'Gold' 
-	[Tags]   HERO    CRITICAL 
+	[Tags]   HERO    CRITICAL
 	Given User Goes To New Page -Site
 	And User Starts Creating a Left Aligned Page With Hero Block
 	And User Adds Gold As Background Color
@@ -347,6 +347,7 @@ Layout Should Not Have Changed
 ...  '${color}'!='${EMPTY}'  ${SCREENSHOTS_PATH}/${BROWSER}/${language}_short_HERO_left_${color}_nopicture_${BROWSER}.png
 ...   ${SCREENSHOTS_PATH}/${BROWSER}/${language}_short_HERO_${value}_vaakuna_nopicture_${BROWSER}.png
 	${comparisonpic}=  Set Variable  ${REPORTS_PATH}/${BROWSER}_TESTRUN-${SUITE NAME}-${TEST NAME}_${language}.png
+	Copy Original Screenshot To Reports Folder   ${originalpic}
 	Compared Pictures Match   ${originalpic}    ${comparisonpic}
 
 Page Should Have ${lang_input} Translation

@@ -19,7 +19,9 @@ Browse Gallery Images
 	
 *** Keywords ***
 User Goes To New Page -Site  	Go To New Page Site
-User Submits The New Page   	Submit Page 
+User Submits The New Page   	
+	Sleep  1
+	Submit Page 
 
 User Starts Creating Page With Gallery
 	Input Title  Test Automation: ${TEST NAME}
@@ -37,8 +39,9 @@ Add Picture '${name}' And Caption To ${number}:th Picture
 	${number}=   Convert To Integer   ${number}
 	Run Keyword If  ${number}>=2   Click Element   ${Btn_Gallery_Picture_Addmore}
 	${editgalleryvisible}=  Run Keyword And Return Status    Wait Until Element Is Visible  name:field_content_0_edit   timeout=1
+	Run Keyword If   ${editgalleryvisible}  Focus   name:field_content_0_edit
 	Run Keyword If   ${editgalleryvisible}   Click Element   name:field_content_0_edit
-	Run Keyword If  ${editgalleryvisible}  Wait Until Keyword Succeeds  5x  200ms  Click Element   ${Btn_Gallery_Picture_Addmore}
+	Run Keyword If  ${editgalleryvisible}  Wait Until Keyword Succeeds  6x  300ms  Click Element   ${Btn_Gallery_Picture_Addmore}
 	Wait Until Element Is Visible   ${Btn_Gallery_Picture}${number-1}-subform   timeout=3
 	Click Element	${Btn_Gallery_Picture}${number-1}-subform
 	@{content}=  Set Variable  @{pic_1_texts_${language}}
@@ -70,5 +73,6 @@ Take Screenshot Of Content
 Layout Should Not Have Changed
 	${originalpic} =  Set Variable   ${SCREENSHOTS_PATH}/${BROWSER}/${language}_short_GALLERY_${BROWSER}.png
 	${comparisonpic}=  Set Variable  ${REPORTS_PATH}/${BROWSER}_TESTRUN-${SUITE NAME}-${TEST NAME}_${language}.png
+	Copy Original Screenshot To Reports Folder   ${originalpic}
 	Compared Pictures Match   ${originalpic}    ${comparisonpic}
 	

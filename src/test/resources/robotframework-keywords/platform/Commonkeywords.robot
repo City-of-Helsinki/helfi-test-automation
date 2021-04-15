@@ -14,6 +14,10 @@ ${URL_media_page}							${PROTOCOL}://${BASE_URL}/fi/admin/content/media
 
 
 *** Keywords ***
+Copy Original Screenshot To Reports Folder
+	[Arguments]     ${source}
+	Copy File    ${source}    ${REPORTS_PATH}/originals/
+
 Get Admin Url
    [Documentation]   Gets URL needed in localhost testing.
    ${admin_url} =   Run  ${ADMIN_URL}
@@ -113,7 +117,7 @@ Open Created Content
 	Element Should Not Be Visible   //a[contains(@href, '/node/add')]
 
 Accept Cookies
-	Wait Until Keyword Succeeds  5x  200ms  Click Button  //button[contains(text(), 'Accept all cookies')]
+	Wait Until Keyword Succeeds  5x  400ms  Click Button  //button[@class='agree-button eu-cookie-compliance-default-button hds-button hds-button--primary']
 
 Open Test Automation Created Content
 	Go To   ${URL_content_page}

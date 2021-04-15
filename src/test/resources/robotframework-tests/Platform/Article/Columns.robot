@@ -41,7 +41,7 @@ Force Tags		ARTICLE
 	Then Layout Should Not Have Changed	
 
 50-50 with picture
-	[Tags]  COLUMNS   CRITICAL 
+	[Tags]  COLUMNS   CRITICAL
 	Given User Goes To New Article Site  
 	And User Starts Creating an Article With 50-50 Division And Picture Content
 	And User Adds Picture to Left Column
@@ -71,38 +71,8 @@ Force Tags		ARTICLE
 	And User Opens Created Content
 	Then Layout Should Not Have Changed
 
-50-50 with text and fullcolor link
-	[Tags]  COLUMNS   CRITICAL
-	Given User Goes To New Article Site
-	And User Starts Creating an Article With 50-50 Division And Mixed Content
-	And User Adds Text to Left Column
-	And User Adds Link Button With Fullcolor Style into Right Column
-	When User Submits The New Article
-	And User Opens Created Content
-	Then Layout Should Not Have Changed
-
-50-50 With Text And Transparent Link
-	[Tags]  COLUMNS
-	Given User Goes To New Article Site
-	And User Starts Creating an Article With 50-50 Division And Mixed Content
-	And User Adds Text to Left Column
-	And User Adds Link Button With Transparent Style into Right Column
-	When User Submits The New Article
-	And User Opens Created Content
-	Then Layout Should Not Have Changed
-
-50-50 With Text And Framed Link
-	[Tags]  COLUMNS 
-	Given User Goes To New Article Site
-	And User Starts Creating an Article With 50-50 Division And Mixed Content
-	And User Adds Text to Left Column
-	And User Adds Link Button With Framed Style into Right Column
-	When User Submits The New Article
-	And User Opens Created Content
-	Then Layout Should Not Have Changed
-
 Finnish English Swedish Translations
-	[Tags]  COLUMNS   CRITICAL
+	[Tags]  COLUMNS   CRITICAL 
 	Given User Creates an Article With 50-50 Division And Mixed Content in Finnish Language
 	And User Creates an Article With 50-50 Division And Mixed Content in English Language
 	And User Creates an Article With 50-50 Division And Mixed Content in Swedish Language
@@ -129,7 +99,6 @@ User Starts Creating an Article With ${division} Division And ${contenttype} Con
 	Run Keyword If  '${language}'=='fi'  Click Element   ${Opt_AddColumns}
 	${title}=  Return Correct Title   ${language}
 	Wait Until Keyword Succeeds  5x  100ms  Input Text   ${Inp_Column_Title}   ${title}
-	Click Element    ${Ddn_Column_Style}
 	Click Element With Value   '${division}'
 
 User Creates an Article With ${division} Division And ${contenttype} Content in ${lang_selection} Language
@@ -139,8 +108,7 @@ User Creates an Article With ${division} Division And ${contenttype} Content in 
 	Run Keyword If  '${lang_selection}'!='Finnish'  Go To New Article -View For ${lang_selection} Translation
 	User Starts Creating an Article With ${division} Division And ${contenttype} Content
 	Run Keyword If  '${lang_selection}'=='Finnish'  User Adds Picture to Left Column
-	Run Keyword If  '${lang_selection}'=='Finnish'  Add Picture Caption to Left
-	Run Keyword If  '${lang_selection}'!='Finnish'  Add Picture Caption to Left
+	Add Picture Caption to Left
 	Run Keyword If  '${lang_selection}'=='Finnish'  User Adds Text to Right Column
 	Run Keyword If  '${lang_selection}'!='Finnish'	Add Text Content To Column on Right
 	User Submits The New Article
@@ -174,7 +142,11 @@ Take Screenshot Of Content
 	Execute javascript  document.body.style.zoom="100%"	
 	
 	
-User Submits The New Article	Submit Article
+User Submits The New Article
+	[Documentation]   Sleeps 1 second in case of pictures added so that they have time to load into content view.
+	Run Keyword If  '${picture}'=='picture'   Sleep  1
+	Submit Article
+	
 Picture on ${side} Has Original Aspect Ratio Enabled	Use Original Aspect Ratio on ${side}
 
 Return Correct Title
@@ -196,6 +168,7 @@ Layout Should Not Have Changed
 	...  '${contenttype}'=='mixed'   ${SCREENSHOTS_PATH}/${BROWSER}/${language}_short_COLUMNS_${division}_left_${content1}_right_${content2}_${picsize}_${BROWSER}.png
 	...   ${SCREENSHOTS_PATH}/${BROWSER}/${language}_short_COLUMNS_${division}_text_${BROWSER}.png
 	${comparisonpic}=  Set Variable  ${REPORTS_PATH}/${BROWSER}_TESTRUN-${SUITE NAME}-${TEST NAME}_${language}.png
+	Copy Original Screenshot To Reports Folder   ${originalpic}
 	Run Keyword If  ${excludeneeded}   Compared Pictures Match   ${originalpic}    ${comparisonpic}    ${arealist}
 	Run Keyword Unless   ${excludeneeded}   Compared Pictures Match   ${originalpic}    ${comparisonpic}
 

@@ -101,4 +101,5 @@ Return Correct Content
 Layout Should Not Have Changed
 	${originalpic} =  Set Variable   ${SCREENSHOTS_PATH}/${BROWSER}/${language}_short_${content}_${BROWSER}.png
 	${comparisonpic}=  Set Variable  ${REPORTS_PATH}/${BROWSER}_TESTRUN-${SUITE NAME}-${TEST NAME}_${language}.png
+	Copy Original Screenshot To Reports Folder   ${originalpic}
 	Compared Pictures Match   ${originalpic}    ${comparisonpic}

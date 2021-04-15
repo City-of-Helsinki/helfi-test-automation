@@ -83,18 +83,25 @@ Add Picture to Column
 	Input Text    ${Inp_Pic_AltText}   ${picdescription} 
 	Input Text    ${Inp_Pic_Photographer}   ${pgrapher}
 	Click Button   ${Btn_Save_Pic}
-	Wait Until Keyword Succeeds  10x  500ms  Click Button   ${Btn_Insert_Pic}
-	Wait Until Keyword Succeeds  10x  500ms   Add Picture Caption to ${side}  
 	Set Test Variable  ${picsadded}    ${picsadded}+1
 	Set Test Variable  ${picture}    picture   
+	Wait Until Keyword Succeeds  10x  500ms  Click Button   ${Btn_Insert_Pic}
+	Wait Until Keyword Succeeds  10x  500ms   Add Picture Caption to ${side}  
+	
 
 Add Picture Caption to ${side}
-	Run Keyword If  '${side}'=='Left'	Input Text    ${Inp_Column_Left_Picture_Caption}   ${pic_1_caption_${language}}
-	Run Keyword If  '${side}'=='Right'	Input Text    ${Inp_Column_Right_Picture_Caption}   ${pic_2_caption_${language}}
+	${editpicturevisible}=  Run Keyword And Return Status    Element Should Not Be Visible  ${Btn_Column_${side}_Edit}   timeout=1
+	Run Keyword Unless   ${editpicturevisible}   Wait Until Keyword Succeeds  5x  200ms  Click Element   ${Btn_Column_${side}_Edit}
+	Run Keyword If  '${side}'=='Left'	Wait Until Keyword Succeeds  5x  200ms  Input Text    ${Inp_Column_Left_Picture_Caption}   ${pic_1_caption_${language}}
+	Run Keyword If  '${side}'=='Right'	Wait Until Keyword Succeeds  5x  200ms  Input Text    ${Inp_Column_Right_Picture_Caption}   ${pic_2_caption_${language}}
 
 
 Use Original Aspect Ratio on ${side}
+	Run keyword if  '${BROWSER}'=='chromeheadless'  Execute javascript  window.scrollTo(0, 1000)
+	Focus   ${Swh_Column_${side}_Picture_Orig_Aspect_Ratio}
+	Capture Page Screenshot
 	Wait Until Keyword Succeeds  5x  200ms  Click Element   ${Swh_Column_${side}_Picture_Orig_Aspect_Ratio}
+	Execute javascript  document.body.style.zoom="100%"
 	Set Test Variable  ${picsize}   original
 	
 Click And Select Text As ${side} Content Type
@@ -102,6 +109,7 @@ Click And Select Text As ${side} Content Type
 	Wait Until Keyword Succeeds  10x  500ms  Click Element  ${Opt_Column_${side}_AddContent_Text}
 
 Add Text Content To Column on ${side}
+	[Documentation]   Adds text content to selected column by selecting content type first and then inserting text
 	Run Keyword If  '${language}'=='fi'  Click And Select Text As ${side} Content Type
 	${TextFileContent}=  Get File  ${CONTENT_PATH}/text_content_short_${language}.txt
 	@{content} =	Split String	${TextFileContent}   .,.
@@ -110,6 +118,8 @@ Add Text Content To Column on ${side}
 	${content_text}=  Set Variable If
 	... 	 '${side}'=='Left'	${content_left}
 	... 	 '${side}'=='Right'	${content_right}
+	${editpicturevisible}=  Run Keyword And Return Status    Element Should Not Be Visible  ${Btn_Column_${side}_Edit}   timeout=1
+	Run Keyword Unless   ${editpicturevisible}   Wait Until Keyword Succeeds  5x  200ms  Click Element   ${Btn_Column_${side}_Edit}
 	Wait Until Keyword Succeeds  10x  500ms  Input Text To Frame   ${Frm_Column_${side}_Text}   //body   ${content_text}
 
 Add ${content} to Left Column
@@ -127,11 +137,12 @@ Add ${content} to Left Column
   
 
 Add ${content:[^"]+} to Right Column
+	[Documentation]   Adds given content to Right column.
 	Set Test Variable  ${content2}   ${content}
 	Wait Until Element Is Clickable  ${Ddn_Column_Right_AddContent}   timeout=3
 	Focus   ${Ddn_Column_Right_AddContent}
 	Wait Until Keyword Succeeds  10x  500ms  Click Button  ${Ddn_Column_Right_AddContent}
-	Run Keyword If  '${content}'=='Picture'  Add Picture to Column   right    temple   @{pic_2_texts_${language}}
+	Run Keyword If  '${content}'=='Picture'  Add Picture to Column   Right    temple   @{pic_2_texts_${language}}
 	Run Keyword If  '${content}'=='Text'  Add Text Content To Column on Right
 	Run Keyword If  '${content}'=='Link'  Add "${linkstyle}" Link To Right Column
 

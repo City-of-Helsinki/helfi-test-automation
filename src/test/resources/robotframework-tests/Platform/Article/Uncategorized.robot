@@ -10,7 +10,7 @@ Force Tags		ARTICLE
 *** Test Cases ***
 
 Only Text
-	[Tags]   
+	[Tags] 
 	Given User Goes To New Article Site
 	And User Starts Creating a New Page With Text Content  
 	When User Submits The New Article
@@ -18,7 +18,7 @@ Only Text
 	Then Layout Should Not Have Changed
 
 Only Picture
-	[Tags]    
+	[Tags]  
 	Given User Goes To New Article Site
 	And User Starts Creating a New Page With Picture Content  
 	When User Submits The New Article
@@ -26,7 +26,7 @@ Only Picture
 	Then Layout Should Not Have Changed
 
 Text And Picture
-	[Tags]   
+	[Tags] 
 	Given User Goes To New Article Site
 	And User Starts Creating a New Page With Mixed Content  
 	When User Submits The New Article
@@ -46,7 +46,10 @@ Take Screenshot Of Content
 	Capture Page Screenshot    filename=${BROWSER}_TESTRUN-${SUITE NAME}-${TEST NAME}_${language}.png
 	Execute javascript  document.body.style.zoom="100%"
 
-User Submits The New Article	Submit Article    						
+User Submits The New Article
+	Sleep  1	
+	Submit Article    			
+				
 User Goes To New Article Site  Go To New Article Site
 
 User Starts Creating a New Page With ${content} Content
@@ -104,4 +107,5 @@ Return Correct Content
 Layout Should Not Have Changed
 	${originalpic} =  Set Variable   ${SCREENSHOTS_PATH}/${BROWSER}/${language}_short_${content}_ARTICLE_${BROWSER}.png
 	${comparisonpic}=  Set Variable  ${REPORTS_PATH}/${BROWSER}_TESTRUN-${SUITE NAME}-${TEST NAME}_${language}.png
+	Copy Original Screenshot To Reports Folder   ${originalpic}
 	Compared Pictures Match   ${originalpic}    ${comparisonpic}

@@ -40,8 +40,7 @@ Add Picture '${name}' And Caption To ${number}:th Picture
 	Run Keyword If   ${editgalleryvisible}   Focus   name:field_content_0_edit
 	Run Keyword If   ${editgalleryvisible}   Wait Until Keyword Succeeds  6x  300ms  Click Element   name:field_content_0_edit
 	Run Keyword If  ${editgalleryvisible}  Wait Until Keyword Succeeds  5x  200ms  Click Element   ${Btn_Gallery_Picture_Addmore}
-	Wait Until Element Is Visible   ${Btn_Gallery_Picture}${number-1}-subform   timeout=3
-	Click Element	${Btn_Gallery_Picture}${number-1}-subform
+	Wait Until Keyword Succeeds  5x  500ms   Open Add Picture To Gallery Window   ${number}
 	@{content}=  Set Variable  @{pic_1_texts_${language}}
 	${pictitle}=  Get From List  ${content}   0
 	${picdescription}=  Get From List  ${content}   1
@@ -55,9 +54,19 @@ Add Picture '${name}' And Caption To ${number}:th Picture
 	${pic_caption_locator}=   Set Variable  name:field_content[1][subform][field_gallery_slides][${number-1}][subform][field_gallery_slide_caption][0][value]
 	Wait Until Keyword Succeeds  5x  200ms   Input Text      ${pic_caption_locator}   ${pic_1_caption_${language}}
 	Set Test Variable  ${picsadded}    ${picsadded}+1
-	Set Test Variable  ${picture}    picture 
+	Set Test Variable  ${picture}    picture
+	
+Open Add Picture To Gallery Window
+	[Arguments]   ${number}
+	Wait Until Element Is Clickable   ${Btn_Gallery_Picture}${number-1}-subform   timeout=4
+	Focus  ${Btn_Gallery_Picture}${number-1}-subform
+	Wait Until Keyword Succeeds  5x  200ms  Click Element	${Btn_Gallery_Picture}${number-1}-subform
+	Wait Until Keyword Succeeds  5x  300ms  Element Should Be Clickable   name:files[upload] 
     						
-User Submits The New Article	Submit Article    						
+User Submits The New Article
+	Sleep   1
+	Submit Article   
+	 						
 User Goes To New Article Site  Go To New Article Site
 User Opens Created Content
   	Open Test Automation Created Content
@@ -74,5 +83,6 @@ Take Screenshot Of Content
 Layout Should Not Have Changed
 	${originalpic} =  Set Variable   ${SCREENSHOTS_PATH}/${BROWSER}/${language}_short_GALLERY_ARTICLE_${BROWSER}.png
 	${comparisonpic}=  Set Variable  ${REPORTS_PATH}/${BROWSER}_TESTRUN-${SUITE NAME}-${TEST NAME}_${language}.png
+	Copy Original Screenshot To Reports Folder   ${originalpic}
 	Compared Pictures Match   ${originalpic}    ${comparisonpic}
 	

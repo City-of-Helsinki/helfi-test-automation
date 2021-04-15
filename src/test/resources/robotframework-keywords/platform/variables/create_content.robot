@@ -44,7 +44,7 @@ ${Inp_Pic_Name}								css:[data-drupal-selector=edit-media-0-fields-name-0-valu
 ${Inp_Pic_AltText}							css:[data-drupal-selector=edit-media-0-fields-field-media-image-0-alt]
 ${Inp_Pic_Photographer}						css:[data-drupal-selector=edit-media-0-fields-field-photographer-0-value]
 ${Btn_Save_Pic}								//button[contains(text(),'Tallenna')]
-${Btn_Insert_Pic}							//button[contains(text(),'Insert selected')]
+${Btn_Insert_Pic}							//button[contains(text(),'Poimi valitut mediatiedostot')]
 ${Ddn_SelectLanguage}						//select[@id='edit-langcode-0-value']
 ${Inp_Title}								//input[@id='edit-title-0-value']
 ${Frm_Content}							    css:#cke_1_contents > iframe
@@ -60,7 +60,7 @@ ${Btn_Actions_SelectedItem_Deletebutton}	//input[@id='edit-submit']
 #HERO
 ${Inp_Hero_Title}							//input[contains(@id, 'edit-field-hero-0-subform')]
 ${Swh_HeroOnOff}						    //input[@id='edit-field-has-hero-value']
-${Ddn_Hero_Alignment}						css:[data-drupal-selector=edit-field-hero-0-subform-field-hero-design]
+${Ddn_Hero_Alignment}						css:.select2-selection__arrow
 ${Opt_Hero_Alignment_Center}				css:[value=without-image-center]
 ${Opt_Hero_Picture_On_Right}				css:[value=with-image-right]
 ${Opt_Hero_Picture_On_Left}					css:[value=with-image-left]
@@ -79,7 +79,6 @@ ${Ddn_Hero_Color}							css:[data-drupal-selector=edit-field-hero-0-subform-fiel
 
 #COLUMNS
 ${Inp_Column_Title}	  						css:[data-drupal-selector=edit-field-content-1-subform-field-columns-title-0-value]
-${Ddn_Column_Style}	  						css:[data-drupal-selector=edit-field-content-1-subform-field-columns-design]
 ${Ddn_Column_Left_AddContent}               //ul[@data-drupal-selector='edit-field-content-1-subform-field-columns-left-column-add-more-operations']//button
 ${Ddn_Column_Right_AddContent}				//ul[@data-drupal-selector='edit-field-content-1-subform-field-columns-right-column-add-more-operations']//button
 ${Opt_Column_Left_AddContent_Image}			//ul[@data-drupal-selector='edit-field-content-1-subform-field-columns-left-column-add-more-operations']//input[@name='field_content_1_subform_field_columns_left_column_image_add_more']

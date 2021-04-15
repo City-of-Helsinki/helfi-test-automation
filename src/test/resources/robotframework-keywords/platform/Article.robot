@@ -101,8 +101,10 @@ Add Picture to Column
 	Set Test Variable  ${picture}    picture   
 
 Add Picture Caption to ${side}
-	Run Keyword If  '${side}'=='Left'	Input Text    ${Inp_Column_Left_Picture_Caption}   ${pic_1_caption_${language}}
-	Run Keyword If  '${side}'=='Right'	Input Text    ${Inp_Column_Right_Picture_Caption}   ${pic_2_caption_${language}}
+	${editpicturevisible}=  Run Keyword And Return Status    Element Should Not Be Visible  ${Btn_Column_${side}_Edit}   timeout=1
+	Run Keyword Unless   ${editpicturevisible}   Wait Until Keyword Succeeds  5x  200ms  Click Element   ${Btn_Column_${side}_Edit}
+	Run Keyword If  '${side}'=='Left'	Wait Until Keyword Succeeds  5x  200ms  Input Text    ${Inp_Column_Left_Picture_Caption}   ${pic_1_caption_${language}}
+	Run Keyword If  '${side}'=='Right'	Wait Until Keyword Succeeds  5x  200ms  Input Text    ${Inp_Column_Right_Picture_Caption}   ${pic_2_caption_${language}}
 
 
 Use Original Aspect Ratio on ${side}
@@ -122,6 +124,8 @@ Add Text Content To Column on ${side}
 	${content_text}=  Set Variable If
 	... 	 '${side}'=='Left'	${content_left}
 	... 	 '${side}'=='Right'	${content_right}
+	${editpicturevisible}=  Run Keyword And Return Status    Element Should Not Be Visible  ${Btn_Column_${side}_Edit}   timeout=1
+	Run Keyword Unless   ${editpicturevisible}   Wait Until Keyword Succeeds  5x  200ms  Click Element   ${Btn_Column_${side}_Edit}
 	Wait Until Keyword Succeeds  10x  500ms  Input Text To Frame   ${Frm_Column_${side}_Text}   //body   ${content_text}
 
 Add ${content} to Left Column

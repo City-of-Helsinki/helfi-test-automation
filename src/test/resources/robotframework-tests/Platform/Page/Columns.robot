@@ -51,7 +51,7 @@ Force Tags		PAGE
 	Then Layout Should Not Have Changed	
 
 50-50 with picture and text
-	[Tags]  COLUMNS   CRITICAL 
+	[Tags]  COLUMNS   CRITICAL
 	Given User Goes To New Page -Site 
 	And User Starts Creating a Page With 50-50 Division And Mixed Content
 	And User Adds Picture to Left Column
@@ -61,42 +61,12 @@ Force Tags		PAGE
 	Then Layout Should Not Have Changed
 
 70-30 with original size picture and text
-	[Tags]  COLUMNS   CRITICAL 
+	[Tags]  COLUMNS   CRITICAL
 	Given User Goes To New Page -Site
 	And User Starts Creating a Page With 70-30 Division And Mixed Content
 	And User Adds Original Picture to Left Column
 	And Picture on Left Has Original Aspect Ratio Enabled
 	And User Adds Text to Right Column
-	When User Submits The New Page
-	And User Opens Created Content
-	Then Layout Should Not Have Changed
-
-50-50 with text and fullcolor link
-	[Tags]  COLUMNS   CRITICAL
-	Given User Goes To New Page -Site
-	And User Starts Creating a Page With 50-50 Division And Mixed Content
-	And User Adds Text to Left Column
-	And User Adds Link Button With Fullcolor Style into Right Column
-	When User Submits The New Page
-	And User Opens Created Content
-	Then Layout Should Not Have Changed
-
-50-50 With Text And Transparent Link
-	[Tags]  COLUMNS
-	Given Given User Goes To New Page -Site
-	And User Starts Creating a Page With 50-50 Division And Mixed Content
-	And User Adds Text to Left Column
-	And User Adds Link Button With Transparent Style into Right Column
-	When User Submits The New Page
-	And User Opens Created Content
-	Then Layout Should Not Have Changed
-
-50-50 With Text And Framed Link
-	[Tags]  COLUMNS 
-	Given User Goes To New Page -Site
-	And User Starts Creating a Page With 50-50 Division And Mixed Content
-	And User Adds Text to Left Column
-	And User Adds Link Button With Framed Style into Right Column
 	When User Submits The New Page
 	And User Opens Created Content
 	Then Layout Should Not Have Changed
@@ -125,8 +95,9 @@ User Starts Creating a Page With ${division} Division And ${contenttype} Content
 	Run Keyword If  '${language}'=='fi'  Click Element   ${Opt_AddColumns}
 	${title}=  Return Correct Title   ${language}
 	Wait Until Keyword Succeeds  5x  100ms  Input Text   ${Inp_Column_Title}   ${title}
-	Click Element    ${Ddn_Column_Style}
 	Click Element With Value   '${division}'
+	
+	
 
 User Creates a Page With ${division} Division And ${contenttype} Content in ${lang_selection} Language
 	${language_pointer}=   Get Language Pointer   ${lang_selection}
@@ -135,8 +106,7 @@ User Creates a Page With ${division} Division And ${contenttype} Content in ${la
 	Run Keyword If  '${lang_selection}'!='Finnish'  Go To New Page -View For ${lang_selection} Translation
 	User Starts Creating a Page With ${division} Division And ${contenttype} Content
 	Run Keyword If  '${lang_selection}'=='Finnish'  User Adds Picture to Left Column
-	Run Keyword If  '${lang_selection}'=='Finnish'  Add Picture Caption to Left
-	Run Keyword If  '${lang_selection}'!='Finnish'  Add Picture Caption to Left
+	Add Picture Caption to Left
 	Run Keyword If  '${lang_selection}'=='Finnish'  User Adds Text to Right Column
 	Run Keyword If  '${lang_selection}'!='Finnish'	Add Text Content To Column on Right
 	User Submits The New Page
@@ -172,6 +142,8 @@ Take Screenshot Of Content
 
 
 User Submits The New Page
+	[Documentation]   Sleeps 1 second in case of pictures added so that they have time to load into content view.
+	Run Keyword If  '${picture}'=='picture'   Sleep  1
 	Submit Page
 
 Picture on ${side} Has Original Aspect Ratio Enabled
@@ -192,6 +164,7 @@ Layout Should Not Have Changed
 	...  '${contenttype}'=='mixed'   ${SCREENSHOTS_PATH}/${BROWSER}/${language}_short_COLUMNS_${division}_left_${content1}_right_${content2}_${picsize}_${BROWSER}.png
 	...   ${SCREENSHOTS_PATH}/${BROWSER}/${language}_short_COLUMNS_${division}_text_${BROWSER}.png
 	${comparisonpic}=  Set Variable  ${REPORTS_PATH}/${BROWSER}_TESTRUN-${SUITE NAME}-${TEST NAME}_${language}.png
+	Copy Original Screenshot To Reports Folder   ${originalpic}
 	Compared Pictures Match   ${originalpic}    ${comparisonpic}
 
 Page Should Have ${lang_input} Translation
