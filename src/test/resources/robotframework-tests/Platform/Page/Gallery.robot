@@ -60,8 +60,8 @@ Add Picture '${name}' And Caption To ${number}:th Picture
 	Set Test Variable  ${picture}    picture 
     						
 User Opens Created Content
-  	Open Test Automation Created Content
-  	Take Screenshot Of Content
+	 Open Created Content
+	 Take Screenshot Of Content
 
 Take Screenshot Of Content
 	Maximize Browser Window

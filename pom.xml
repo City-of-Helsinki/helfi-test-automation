@@ -75,6 +75,7 @@
                            	 	<variable>CONTENT_PATH:${robot.contentpath}</variable>
                            	 	<variable>IMAGES_PATH:${robot.imagespath}</variable>
                            	 	<variable>PROTOCOL:${robot.protocol}</variable>
+                           	 	<variable>CI:$false</variable>
                           	</variables>
                         </configuration>
                     </plugin>
@@ -128,6 +129,7 @@
                            	 	<variable>CONTENT_PATH:${robot.contentpath}</variable>
                            	 	<variable>IMAGES_PATH:${robot.imagespath}</variable>
                            	 	<variable>PROTOCOL:${robot.protocol}</variable>
+                           	 	<variable>CI:$true</variable>
                           	</variables>
                         </configuration>
                     </plugin>

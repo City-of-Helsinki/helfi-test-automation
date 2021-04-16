@@ -36,9 +36,10 @@ Text And Picture
 	
 *** Keywords ***
 User Submits The New Page	Submit Page
-User Opens Created Content	
-	Open Test Automation Created Content
-	Take Screenshot Of Content
+
+User Opens Created Content
+	 Open Created Content
+	 Take Screenshot Of Content
 	
 Take Screenshot Of Content
 	Maximize Browser Window

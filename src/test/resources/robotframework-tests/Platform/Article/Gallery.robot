@@ -68,9 +68,10 @@ User Submits The New Article
 	Submit Article   
 	 						
 User Goes To New Article Site  Go To New Article Site
+
 User Opens Created Content
-  	Open Test Automation Created Content
-  	Take Screenshot Of Content
+	 Open Created Content
+	 Take Screenshot Of Content
 
 Take Screenshot Of Content
 	Maximize Browser Window
@@ -81,7 +82,7 @@ Take Screenshot Of Content
 
 
 Layout Should Not Have Changed
-	${originalpic} =  Set Variable   ${SCREENSHOTS_PATH}/${BROWSER}/${language}_short_GALLERY_ARTICLE_${BROWSER}.png
+	${originalpic} =  Set Variable   ${SCREENSHOTS_PATH}/${BROWSER}/${language}_short_ARTICLE_GALLERY_${BROWSER}.png
 	${comparisonpic}=  Set Variable  ${REPORTS_PATH}/${BROWSER}_TESTRUN-${SUITE NAME}-${TEST NAME}_${language}.png
 	Copy Original Screenshot To Reports Folder   ${originalpic}
 	Compared Pictures Match   ${originalpic}    ${comparisonpic}

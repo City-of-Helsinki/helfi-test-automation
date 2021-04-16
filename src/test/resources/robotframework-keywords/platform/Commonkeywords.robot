@@ -111,7 +111,7 @@ Remove String And Strip Text
 	${value}=  Strip String   ${value} 
 	[Return]    ${value}
 
-Open Created Content
+Click Content Link From Notification Banner
 	Wait Until Element Is Visible   css:div.messages__content > em > a
 	Wait Until Keyword Succeeds  5x  200ms  Click Element   css:div.messages__content > em > a
 	Element Should Not Be Visible   //a[contains(@href, '/node/add')]
@@ -119,9 +119,17 @@ Open Created Content
 Accept Cookies
 	Wait Until Keyword Succeeds  5x  400ms  Click Button  //button[@class='agree-button eu-cookie-compliance-default-button hds-button hds-button--primary']
 
-Open Test Automation Created Content
+Open Created Content
+	Run Keyword Unless  ${CI}  Open Content In Non CI Environments
+	Run Keyword If   (${CI}) & ('${language}'=='fi')  	Accept Cookies
+	Run Keyword If   ${CI}  Reload Page
+	  
+
+Open Content In Non CI Environments
+	[Documentation]   Goes to content view of created content through content list page (since local environment errors prevent
+	...				  viewing it directly after creation)
 	Go To   ${URL_content_page}
-	Wait Until Keyword Succeeds  5x  200ms  Open Created Content
+	Wait Until Keyword Succeeds  5x  200ms  Click Content Link From Notification Banner
 	Run Keyword If  '${language}'=='fi'  	Accept Cookies
 
 Image Comparison Needs To Exclude Areas

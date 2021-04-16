@@ -130,8 +130,8 @@ User Adds Link Button With ${linkstyle} Style into ${side} Column
 	Run Keyword If  '${side}'=='left'  Add Link to Left Column
 
 User Opens Created Content
-	Open Test Automation Created Content
-	Take Screenshot Of Content
+	 Open Created Content
+	 Take Screenshot Of Content
 
 Take Screenshot Of Content
 	Maximize Browser Window

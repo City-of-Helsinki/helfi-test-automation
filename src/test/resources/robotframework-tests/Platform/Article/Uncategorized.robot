@@ -35,9 +35,9 @@ Text And Picture
 
 	
 *** Keywords ***
-User Opens Created Content	
-	Open Test Automation Created Content
-	Take Screenshot Of Content
+User Opens Created Content
+	 Open Created Content
+	 Take Screenshot Of Content
 	
 Take Screenshot Of Content
 	Maximize Browser Window

@@ -130,9 +130,9 @@ User Adds Link Button With ${linkstyle} Style into ${side} Column
 	Run Keyword If  '${side}'=='right'  Add Link to Right Column
 	Run Keyword If  '${side}'=='left'  Add Link to Left Column
 
-User Opens Created Content		
-	Open Test Automation Created Content
-	Take Screenshot Of Content
+User Opens Created Content
+	 Open Created Content
+	 Take Screenshot Of Content
 	
 Take Screenshot Of Content
 	Maximize Browser Window
@@ -163,10 +163,10 @@ Layout Should Not Have Changed
 	@{arealist}=  Run Keyword If   ${excludeneeded}    Add Excluded Areas To List
 	${contenttype}=  Convert To Lower Case   ${contenttype}
 	${originalpic} =  Set Variable If  
-	...  '${contenttype}'=='picture'   ${SCREENSHOTS_PATH}/${BROWSER}/${language}_short_COLUMNS_${division}_picture_${picsize}_${BROWSER}.png
-	...	 '${linkstyle}'!='${EMPTY}'   ${SCREENSHOTS_PATH}/${BROWSER}/${language}_short_COLUMNS_${division}_left_${content1}_right_${content2}_${linkstyle}_${BROWSER}.png
-	...  '${contenttype}'=='mixed'   ${SCREENSHOTS_PATH}/${BROWSER}/${language}_short_COLUMNS_${division}_left_${content1}_right_${content2}_${picsize}_${BROWSER}.png
-	...   ${SCREENSHOTS_PATH}/${BROWSER}/${language}_short_COLUMNS_${division}_text_${BROWSER}.png
+	...  '${contenttype}'=='picture'   ${SCREENSHOTS_PATH}/${BROWSER}/${language}_short_ARTICLE_COLUMNS_${division}_picture_${picsize}_${BROWSER}.png
+	...	 '${linkstyle}'!='${EMPTY}'   ${SCREENSHOTS_PATH}/${BROWSER}/${language}_short_ARTICLE_COLUMNS_${division}_left_${content1}_right_${content2}_${linkstyle}_${BROWSER}.png
+	...  '${contenttype}'=='mixed'   ${SCREENSHOTS_PATH}/${BROWSER}/${language}_short_ARTICLE_COLUMNS_${division}_left_${content1}_right_${content2}_${picsize}_${BROWSER}.png
+	...   ${SCREENSHOTS_PATH}/${BROWSER}/${language}_short_ARTICLE_COLUMNS_${division}_text_${BROWSER}.png
 	${comparisonpic}=  Set Variable  ${REPORTS_PATH}/${BROWSER}_TESTRUN-${SUITE NAME}-${TEST NAME}_${language}.png
 	Copy Original Screenshot To Reports Folder   ${originalpic}
 	Run Keyword If  ${excludeneeded}   Compared Pictures Match   ${originalpic}    ${comparisonpic}    ${arealist}
