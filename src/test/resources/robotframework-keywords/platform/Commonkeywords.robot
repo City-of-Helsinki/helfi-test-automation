@@ -38,10 +38,9 @@ Login And Go To Content Page
 	Open Browser  ${admin_url}  ${BROWSER}
 	Go To   ${URL_content_page}
 	Set Window Size   1296   696
-	Run Keyword If   ${DEBUG}   Register Keyword To Run On Failure   Debug Error
+	#Run Keyword If   ${DEBUG}   Register Keyword To Run On Failure   Debug Error
 
 Debug Error
-	Capture Page Screenshot	   filename=/debug/${SUITE NAME}-${TEST NAME}_error.png
 	Maximize Browser Window   
 	Execute javascript  document.body.style.zoom="30%"
 	Capture Page Screenshot    filename=/debug/${SUITE NAME}-${TEST NAME}_error_zoomout.png

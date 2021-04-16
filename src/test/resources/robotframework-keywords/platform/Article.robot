@@ -160,6 +160,7 @@ Go To ${language} Translation Page
 		
 Cleanup and Close Browser
 	[Documentation]  Deletes content created by testcases. Page , if created and picture if added.
+	Run Keyword If   ${DEBUG}   Run Keyword If Test Failed   Debug Error
 	FOR    ${i}    IN RANGE    ${pagesadded}
            Wait Until Keyword Succeeds  2x  200ms 	Delete Newly Created Item on Content Menu List
     END
