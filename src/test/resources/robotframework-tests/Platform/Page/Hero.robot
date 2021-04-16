@@ -306,7 +306,7 @@ User Starts Creating Hero Block Page with ${picalign} Picture
 
 User Adds Hero Link Button With ${style} Style
 	Set Test Variable   ${linkstyle}  ${style}
-	Click Button   ${Btn_Hero_AddLink}
+	Click Element   id:cke_81
 	Wait Until Keyword Succeeds  5x  100ms  Input Text   ${Inp_Hero_Link_URL}   https://fi.wikipedia.org/wiki/Rautatie_(romaani)    
 	Input Text   ${Inp_Hero_Link_Title}    ${link_title_${language}}
 	Focus   ${Ddn_Hero_Link_Design}
