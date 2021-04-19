@@ -34,6 +34,7 @@ ${link_title_sv}							Om en bok
 ${link_title_ru}							О книге
 
 #SHARED
+${Btn_Save}									//button[contains(text(),'Tallenna')]
 ${Ddn_AddContent}							//ul[@data-drupal-selector='edit-field-content-add-more-operations']//li[2]/button
 ${Opt_AddColumns}						    name:field_content_columns_add_more
 ${Opt_AddPicture}						    name:field_content_image_add_more
@@ -43,7 +44,6 @@ ${Btn_File_Upload}					    	name:files[upload]
 ${Inp_Pic_Name}								css:[data-drupal-selector=edit-media-0-fields-name-0-value]
 ${Inp_Pic_AltText}							css:[data-drupal-selector=edit-media-0-fields-field-media-image-0-alt]
 ${Inp_Pic_Photographer}						css:[data-drupal-selector=edit-media-0-fields-field-photographer-0-value]
-${Btn_Save_Pic}								//button[contains(text(),'Tallenna')]
 ${Btn_Insert_Pic}							//button[contains(text(),'Poimi valitut mediatiedostot')]
 ${Ddn_SelectLanguage}						//select[@id='edit-langcode-0-value']
 ${Inp_Title}								//input[@id='edit-title-0-value']
@@ -70,11 +70,17 @@ ${Opt_Hero_Diagonal}						css:[value=diagonal]
 ${Btn_Hero_Picture}							name:field_hero_image-media-library-open-button-field_hero-0-subform
 ${Btn_Hero_AddLink}						    name:field_hero_0_subform_field_hero_cta_link_add_more
 ${Inp_Hero_Link_URL}						css:[data-drupal-selector=edit-field-hero-0-subform-field-hero-cta-0-subform-field-link-link-0-uri]
+${Inp_Hero_Link_Texteditor_URL}				css:[data-drupal-selector=edit-attributes-href]
 ${Inp_Hero_Link_Title}						css:[data-drupal-selector=edit-field-hero-0-subform-field-hero-cta-0-subform-field-link-link-0-title]
+${Inp_Hero_Link_Texteditor_Title}			css:[data-drupal-selector=edit-attributes-data-link-text]
 ${Ddn_Hero_Link_Design}						css:[data-drupal-selector=edit-field-hero-0-subform-field-hero-cta-0-subform-field-link-design]
+${Ddn_Hero_Link_Texteditor_Design}			css:[data-drupal-selector=edit-attributes-class]
 ${Opt_Hero_Link_ButtonFullcolor}			css:[value=primary]
+${Opt_Hero_Link_Texteditor_ButtonFullcolor}		//option[@value='hds-button hds-button--primary']
 ${Opt_Hero_Link_ButtonFramed}				css:[value=secondary]
+${Opt_Hero_Link_Texteditor_ButtonFramed}		//option[@value='hds-button hds-button--secondary']
 ${Opt_Hero_Link_ButtonTransparent}			css:[value=supplementary]
+${Opt_Hero_Link_Texteditor_ButtonTransparent}	//option[@value='hds-button hds-button--supplementary']
 ${Ddn_Hero_Color}							css:[data-drupal-selector=edit-field-hero-0-subform-field-hero-bg-color]
 
 #COLUMNS

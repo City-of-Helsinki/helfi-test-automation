@@ -52,7 +52,7 @@ Add Picture '${name}' And Caption To ${number}:th Picture
 	Wait Until Keyword Succeeds  5x  200ms  Input Text    ${Inp_Pic_Name}   ${pictitle}
 	Input Text    ${Inp_Pic_AltText}   ${picdescription} 
 	Input Text    ${Inp_Pic_Photographer}   ${pgrapher}
-	Click Button   ${Btn_Save_Pic}
+	Click Button   ${Btn_Save}
 	Wait Until Keyword Succeeds  5x  200ms  Click Button   ${Btn_Insert_Pic}
 	${pic_caption_locator}=   Set Variable  name:field_content[1][subform][field_gallery_slides][${number-1}][subform][field_gallery_slide_caption][0][value]
 	Wait Until Keyword Succeeds  5x  200ms   Input Text      ${pic_caption_locator}   ${pic_1_caption_${language}}

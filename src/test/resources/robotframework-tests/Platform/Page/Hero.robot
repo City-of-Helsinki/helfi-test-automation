@@ -72,7 +72,7 @@ Diagonal Picture
 
 Fullcolor Link
 	[Documentation]   Adds Left aligned page and a link with Fullcolor styling option selected
-	[Tags]   HERO    CRITICAL   UHF-1399
+	[Tags]   HERO    CRITICAL
 	Given User Goes To New Page -Site
 	And User Starts Creating a Left Aligned Page With Hero Block
 	And User Adds Hero Link Button With Fullcolor Style
@@ -81,7 +81,7 @@ Fullcolor Link
 	Then Layout Should Not Have Changed
 
 Framed Link
-	[Tags]   HERO    UHF-1399
+	[Tags]   HERO
 	Given User Goes To New Page -Site
 	And User Starts Creating a Left Aligned Page With Hero Block
 	And User Adds Hero Link Button With Framed Style
@@ -90,7 +90,7 @@ Framed Link
 	Then Layout Should Not Have Changed
 
 Transparent Link
-	[Tags]   HERO    UHF-1399
+	[Tags]   HERO
 	Given User Goes To New Page -Site
 	And User Starts Creating a Left Aligned Page With Hero Block
 	And User Adds Hero Link Button With Transparent Style
@@ -274,7 +274,10 @@ User Starts Creating a ${value} Aligned Page With Hero Block
 	${TextFileContent}=  Return Correct Content   ${language}
 	${TextFileDescription}=  Return Correct Description   ${language}
 	Input Text Content   ${TextFileContent}
-	Input Hero Description   ${TextFileDescription}
+	# In case of link we need to add some linebreaks
+	${containslink}=    Run Keyword And Return Status    Should Contain    ${TEST NAME}    Link
+	Run Keyword Unless   ${containslink}   Input Hero Description   ${TextFileDescription}
+	Run Keyword If   ${containslink}  Input Hero Description   ${TextFileDescription}\n
 
 Input Text Content
 	[Arguments]   ${content}
@@ -297,16 +300,19 @@ User Starts Creating Hero Block Page with ${picalign} Picture
 	Input Text    ${Inp_Pic_Name}   Juna sillalla
 	Input Text    ${Inp_Pic_AltText}   Vanha juna kuljettaa matkustajia 
 	Input Text    ${Inp_Pic_Photographer}   Testi Valokuvaaja
-	Click Button   ${Btn_Save_Pic}
+	Click Button   ${Btn_Save}
 	Wait Until Keyword Succeeds  5x  100ms  Click Button   ${Btn_Insert_Pic}
 	Wait Until Element Is Visible  //input[@data-drupal-selector='edit-field-hero-0-subform-field-hero-image-selection-0-remove-button']   timeout=3
 	Set Test Variable  ${picsadded}    ${picsadded}+1   
 
 
-
 User Adds Hero Link Button With ${style} Style
 	Set Test Variable   ${linkstyle}  ${style}
-	Click Element   id:cke_81
+	Run Keyword If  '${picalign}'=='Background'   Add ${style} Link In Hero Content Paragraph   
+	...    ELSE 	Add ${style} Link In Text Editor
+
+Add ${style} Link In Hero Content Paragraph
+	Click Button   ${Btn_Hero_AddLink}
 	Wait Until Keyword Succeeds  5x  100ms  Input Text   ${Inp_Hero_Link_URL}   https://fi.wikipedia.org/wiki/Rautatie_(romaani)    
 	Input Text   ${Inp_Hero_Link_Title}    ${link_title_${language}}
 	Focus   ${Ddn_Hero_Link_Design}
@@ -314,6 +320,19 @@ User Adds Hero Link Button With ${style} Style
 	Run Keyword If  '${style}'=='Fullcolor'  Click Element   ${Opt_Hero_Link_ButtonFullcolor}
 	Run Keyword If  '${style}'=='Framed'  Click Element   ${Opt_Hero_Link_ButtonFramed}
 	Run Keyword If  '${style}'=='Transparent'  Click Element   ${Opt_Hero_Link_ButtonTransparent}
+
+
+Add ${style} Link In Text Editor
+	Focus   id:cke_81
+	Click Element   id:cke_81
+	Wait Until Keyword Succeeds  5x  100ms  Input Text   ${Inp_Hero_Link_Texteditor_URL}   https://fi.wikipedia.org/wiki/Rautatie_(romaani)    
+	Input Text   ${Inp_Hero_Link_Texteditor_Title}    ${link_title_${language}}
+	Focus   ${Ddn_Hero_Link_Texteditor_Design}
+	Click Element  ${Ddn_Hero_Link_Texteditor_Design}
+	Run Keyword If  '${style}'=='Fullcolor'  Click Element   ${Opt_Hero_Link_Texteditor_ButtonFullcolor}
+	Run Keyword If  '${style}'=='Framed'  Click Element   ${Opt_Hero_Link_Texteditor_ButtonFramed}
+	Run Keyword If  '${style}'=='Transparent'  Click Element   ${Opt_Hero_Link_Texteditor_ButtonTransparent}
+	Click Button   ${Btn_Save}
 
 User Adds ${color} As Background Color
 	Set Test Variable   ${color}  ${color}

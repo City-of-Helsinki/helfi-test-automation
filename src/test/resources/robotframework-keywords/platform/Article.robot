@@ -94,7 +94,7 @@ Add Picture to Column
 	Wait Until Keyword Succeeds  10x  500ms  Input Text    ${Inp_Pic_Name}   ${pictitle}
 	Input Text    ${Inp_Pic_AltText}   ${picdescription} 
 	Input Text    ${Inp_Pic_Photographer}   ${pgrapher}
-	Click Button   ${Btn_Save_Pic}
+	Click Button   ${Btn_Save}
 	Wait Until Keyword Succeeds  10x  500ms  Click Button   ${Btn_Insert_Pic}
 	Wait Until Keyword Succeeds  10x  500ms   Add Picture Caption to ${side}  
 	Set Test Variable  ${picsadded}    ${picsadded}+1
