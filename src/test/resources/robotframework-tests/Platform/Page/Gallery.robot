@@ -15,6 +15,7 @@ Browse Gallery Images
 	When User Submits The New Page
 	And User Opens Created Content
 	Then Layout Should Not Have Changed
+	And Moving Between Gallery Images Works
 		
 	
 *** Keywords ***
@@ -42,6 +43,7 @@ Add Picture '${name}' And Caption To ${number}:th Picture
 	Run Keyword If   ${editgalleryvisible}  Focus   name:field_content_0_edit
 	Run Keyword If   ${editgalleryvisible}   Click Element   name:field_content_0_edit
 	Run Keyword If  ${editgalleryvisible}  Wait Until Keyword Succeeds  6x  300ms  Click Element   ${Btn_Gallery_Picture_Addmore}
+	Run Keyword If  '${name}'=='tulips'   Sleep   1    # Sleep due issues of missing paragraph in page
 	Wait Until Element Is Visible   ${Btn_Gallery_Picture}${number-1}-subform   timeout=3
 	Click Element	${Btn_Gallery_Picture}${number-1}-subform
 	@{content}=  Set Variable  @{pic_1_texts_${language}}
@@ -76,3 +78,12 @@ Layout Should Not Have Changed
 	Copy Original Screenshot To Reports Folder   ${originalpic}
 	Compared Pictures Match   ${originalpic}    ${comparisonpic}
 	
+Moving Between Gallery Images Works
+	Click Element   //button[@class='splide__arrow splide__arrow--next']
+	Sleep   1   # Sleep so that element attribute value is changed
+	${value}=  Get Element Attribute  //li[contains(@class, 'is-active is-visible')]//img@src
+	Should Contain   ${value}   temple
+	Click Element   //button[@class='splide__arrow splide__arrow--prev']
+	Sleep   1   # Sleep so that element attribute value is changed
+	${value}=  Get Element Attribute  //li[contains(@class, 'is-active is-visible')]//img@src
+	Should Contain   ${value}   train
