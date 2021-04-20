@@ -1,8 +1,7 @@
 *** Settings ***
 Documentation   Testing Columns Settings in Platform by comparing layout to default picture. Testing is performed with
 ...				Different text deviation like 50-50, 30-70 and with pictures and links added.
-Resource        ../../../robotframework-keywords/platform/Commonkeywords.robot
-Resource        ../../../robotframework-keywords/platform/Page.robot
+Resource        ../../../robotframework-keywords/platform/Paragraphs/Columns.robot
 Test Setup      Login And Go To Content Page
 Test Teardown   Cleanup and Close Browser	
 Force Tags		PAGE
@@ -13,7 +12,7 @@ Force Tags		PAGE
 50-50
 	[Tags]  COLUMNS   CRITICAL   TODO
 	Given User Goes To New Page -Site
-	And User Starts Creating a Page With 50-50 Division And Text Content
+	And User Starts Creating Page With 50-50 Division And Text Content
 	And User Adds Text to Left Column
 	And User Adds Text to Right Column
 	When User Submits The New Page
@@ -23,7 +22,7 @@ Force Tags		PAGE
 30-70
 	[Tags]  COLUMNS
 	Given User Goes To New Page -Site 
-	And User Starts Creating a Page With 30-70 Division And Text Content
+	And User Starts Creating Page With 30-70 Division And Text Content
 	And User Adds Text to Left Column
 	And User Adds Text to Right Column
 	When User Submits The New Page
@@ -33,7 +32,7 @@ Force Tags		PAGE
 70-30
 	[Tags]  COLUMNS
 	Given User Goes To New Page -Site
-	And User Starts Creating a Page With 70-30 Division And Text Content
+	And User Starts Creating Page With 70-30 Division And Text Content
 	And User Adds Text to Left Column
 	And User Adds Text to Right Column
 	When User Submits The New Page
@@ -43,7 +42,7 @@ Force Tags		PAGE
 50-50 with picture
 	[Tags]  COLUMNS   CRITICAL
 	Given User Goes To New Page -Site  
-	And User Starts Creating a Page With 50-50 Division And Picture Content
+	And User Starts Creating Page With 50-50 Division And Picture Content
 	And User Adds Picture to Left Column
 	And User Adds Picture to Right Column
 	When User Submits The New Page
@@ -53,7 +52,7 @@ Force Tags		PAGE
 50-50 with picture and text
 	[Tags]  COLUMNS   CRITICAL
 	Given User Goes To New Page -Site 
-	And User Starts Creating a Page With 50-50 Division And Mixed Content
+	And User Starts Creating Page With 50-50 Division And Mixed Content
 	And User Adds Picture to Left Column
 	And User Adds Text to Right Column
 	When User Submits The New Page
@@ -63,7 +62,7 @@ Force Tags		PAGE
 70-30 with original size picture and text
 	[Tags]  COLUMNS   CRITICAL
 	Given User Goes To New Page -Site
-	And User Starts Creating a Page With 70-30 Division And Mixed Content
+	And User Starts Creating Page With 70-30 Division And Mixed Content
 	And User Adds Original Picture to Left Column
 	And Picture on Left Has Original Aspect Ratio Enabled
 	And User Adds Text to Right Column
@@ -73,48 +72,23 @@ Force Tags		PAGE
 
 Finnish English Swedish Translations
 	[Tags]  COLUMNS   CRITICAL
-	Given User Creates a Page With 50-50 Division And Mixed Content in Finnish Language
-	And User Creates a Page With 50-50 Division And Mixed Content in English Language
-	And User Creates a Page With 50-50 Division And Mixed Content in Swedish Language
+	Given User Creates Page With 50-50 Division And Mixed Content in Finnish Language
+	And User Creates Page With 50-50 Division And Mixed Content in English Language
+	And User Creates Page With 50-50 Division And Mixed Content in Swedish Language
 	Then Page Should Have Finnish Translation
 	And Page Should Have English Translation
 	And Page Should Have Swedish Translation
 
 *** Keywords ***
 User Goes To New Page -Site		Go To New Page Site
+User Submits The New Page
+	Submit The New Page
 
-User Starts Creating a Page With ${division} Division And ${contenttype} Content
- 	Set Test Variable  ${contenttype}   ${contenttype}
-	Set Test Variable   ${division}   ${division}
-	Input Title  Test Automation: ${TEST NAME}
-	${headertitle}=  Get File  ${CONTENT_PATH}/text_description_short_${language}.txt
-	Input Content Header Title  ${headertitle}
-	Wait Until Element Is Visible   ${Ddn_AddContent}   timeout=3
-	Focus   ${Ddn_AddContent}
-	Run Keyword If  '${language}'=='fi'  Click Element	${Ddn_AddContent}
-	Run Keyword If  '${language}'=='fi'  Click Element   ${Opt_AddColumns}
-	${title}=  Return Correct Title   ${language}
-	Wait Until Keyword Succeeds  5x  100ms  Input Text   ${Inp_Column_Title}   ${title}
-	Click Element With Value   '${division}'
-	
-	
+User Starts Creating ${pagetype} With ${division} Division And ${contenttype} Content
+	Create ${pagetype} With ${division} Division And ${contenttype} Content
 
-User Creates a Page With ${division} Division And ${contenttype} Content in ${lang_selection} Language
-	${language_pointer}=   Get Language Pointer   ${lang_selection}
-	Set Test Variable   ${language}   ${language_pointer}
-	Run Keyword If  '${lang_selection}'=='Finnish'  Go To New Page Site
-	Run Keyword If  '${lang_selection}'!='Finnish'  Go To New Page -View For ${lang_selection} Translation
-	User Starts Creating a Page With ${division} Division And ${contenttype} Content
-	Run Keyword If  '${lang_selection}'=='Finnish'  User Adds Picture to Left Column
-	Add Picture Caption to Left
-	Run Keyword If  '${lang_selection}'=='Finnish'  User Adds Text to Right Column
-	Run Keyword If  '${lang_selection}'!='Finnish'	Add Text Content To Column on Right
-	User Submits The New Page
-	User Opens Created Content
-
-Go To New Page -View For ${language} Translation
-	Go To Translate Selection Page
-	Go To ${language} Translation Page
+User Creates ${pagetype} With ${division} Division And ${contenttype} Content in ${lang_selection} Language
+	Create ${pagetype} With ${division} Division And ${contenttype} Content in ${lang_selection} Language
 
 User Adds ${content} to Left Column
 	${content}=  Convert To Lower Case   ${content}
@@ -133,28 +107,8 @@ User Opens Created Content
 	 Open Created Content
 	 Take Screenshot Of Content
 
-Take Screenshot Of Content
-	Maximize Browser Window
-	Execute javascript  document.body.style.zoom="40%"
-	Run keyword if  ('${picsize}'=='original') & ('${BROWSER}'=='chromeheadless')   Execute javascript  document.body.style.zoom="30%"
-	Capture Page Screenshot    filename=${BROWSER}_TESTRUN-${SUITE NAME}-${TEST NAME}_${language}.png
-	Execute javascript  document.body.style.zoom="100%"
-
-
-User Submits The New Page
-	[Documentation]   Sleeps 1 second in case of pictures added so that they have time to load into content view.
-	Run Keyword If  '${picture}'=='picture'   Sleep  1
-	Submit Page
-
 Picture on ${side} Has Original Aspect Ratio Enabled
 	Use Original Aspect Ratio on ${side}
-
-Return Correct Title
-	[Arguments]     ${language}
-	${title}=	Set Variable If  '${language}'=='fi'  Juhani Aho: Rautatie
-	...				'${language}'=='en'  Emily Bronte: Wuthering Heights
-	...		 		'${language}'=='sv'  Selma Lagerlof: Bannlyst
-	[Return]		${title}
 
 Layout Should Not Have Changed
 	${contenttype}=  Convert To Lower Case   ${contenttype}
@@ -191,22 +145,3 @@ Page Content Matches Language
 	Title Should Match Current Language Selection   ${Title}
 	Description Should Match Current Language Selection   ${Description}	
 	Content Should Match Current Language Selection   ${Content}
-			
-Title Should Match Current Language Selection
-	[Arguments]   ${string}
-	${string}=   Encode String To Bytes   ${string}   UTF-8
-	Run Keyword If  '${language}'=='fi'  Should Match   ${string.replace('\xc2\xad', '')}	Juhani Aho: Rautatie
-	Run Keyword If  '${language}'=='en'  Should Match   ${string.replace('\xc2\xad', '')}   Emily Bronte: Wuthering Heights
-	Run Keyword If  '${language}'=='sv'  Should Match   ${string.replace('\xc2\xad', '')}   Selma Lagerlof: Bannlyst  
-
-Description Should Match Current Language Selection
-	[Arguments]   ${string}
-	Run Keyword If  '${language}'=='fi'  Should Match Regexp  ${string}   "Rautatie" on Juhani Ahon
-	Run Keyword If  '${language}'=='en'  Should Match Regexp  ${string}   In the late winter months
-	Run Keyword If  '${language}'=='sv'  Should Match Regexp  ${string}   Sven Elversson var nära att dö under en nordpolsexpedtion
-
-Content Should Match Current Language Selection
-	[Arguments]   ${string}
-	Run Keyword If  '${language}'=='fi'  Should Match Regexp  ${string}   Viittatie teki niemen nenässä polvekkeen
-	Run Keyword If  '${language}'=='en'  Should Match Regexp  ${string}   If all else perished, and he remained
-	Run Keyword If  '${language}'=='sv'  Should Match Regexp  ${string}   Det är bara synd, att han inte är	

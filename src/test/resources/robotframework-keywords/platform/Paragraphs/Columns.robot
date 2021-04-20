@@ -1,5 +1,5 @@
 *** Settings ***
-Documentation   New Page creation spesific keywords here. Variables are
+Documentation   Column creation spesific keywords here. Variables are
 ...				Submitted:  Is the new page submitted. This is needed when tearing down creating content after test.
 ...				Picalign:   Picture alignment value in hero cases.
 ...				Picture:    Is at least one picture added to content = picture , else 'nopicture'
@@ -7,66 +7,44 @@ Documentation   New Page creation spesific keywords here. Variables are
 ...				Picsize:   Picture size for column pictures. Original=  If use original aspect ratio. Cropped otherwise  
 ...				gets deleted succesfully. Please note that pictures with greater value of width than length are not 
 ...				modified in any way by drupal.
-Resource        Commonkeywords.robot
-
-*** Variables ***
-${submitted}								false
-${picalign} 		 						${EMPTY}
-${picture} 			 						nopicture
-${picsadded}								0
-${pagesadded}								0
-${picsize}									cropped
-${linkstyle} 		 						${EMPTY}
-${language}	 		 						fi
-${gallery}									false
+Resource        ../Contenthandler.robot
+Resource        ../Commonkeywords.robot
 
 *** Keywords ***
-
-Input Title
-	[Arguments]   ${title}
-	Wait Until Element Is Visible   ${Inp_Title}   timeout=3  
-	Input Text  ${Inp_Title}   ${title}  
-
-Input Author
-	[Arguments]   ${author}
-	Wait Until Element Is Visible   ${Inp_Author}   timeout=3  
-	Input Text  ${Inp_Author}   ${author}  
-
-Input Lead
-	[Arguments]   ${lead}
-	Wait Until Element Is Visible   ${Inp_Lead}   timeout=3  
-	Input Text  ${Inp_Lead}   ${lead}  
-
-Input Content Header Title
-	[Arguments]   ${content}
-	Input Text To Frame   ${Frm_Content}   //body   ${content}
-
-Get Language Pointer
-	[Arguments]     ${language}
-	[Documentation]  fi = Finnish is default
-	${language_pointer}=  Set Variable If  '${language}'=='Finnish'   fi
-	...		'${language}'=='Swedish'   sv
-	...		'${language}'=='English'   en
-	...		'${language}'=='Russian'   ru
-	[Return]   ${language_pointer}
-
-Set Language Pointer
-	[Arguments]     ${language}
-	[Documentation]  Language to set to Test Variable
-	${language_pointer}=  Set Variable If  '${language}'=='Finnish'   fi
-	...		'${language}'=='Swedish'   sv
-	...		'${language}'=='English'   en
-	...		'${language}'=='Russian'   ru
-	Set Test Variable   ${language}   ${language_pointer}   
-
-Submit Page      Submit New Content
-Submit Article   Submit New Content	
-Submit New Content
-	[Documentation]  User submits new page and it is saved and appears in content view
-	Wait Until Keyword Succeeds  5x  100ms  Click Button   ${Btn_Submit}
-	Wait Until Keyword Succeeds  5x  100ms  Element Should Not Be Visible   ${Btn_Submit}
-	Set Test Variable  ${pagesadded}    ${pagesadded}+1
+Set Article Spesific Values
+	Input Author   Test Automation Author
+	${ingress}=  Get File  ${CONTENT_PATH}/text_ingress_${language}.txt
+	Input Lead   ${ingress}
 	
+Create ${pagetype} With ${division} Division And ${contenttype} Content
+ 	Set Test Variable  ${contenttype}   ${contenttype}
+ 	Input Title  Test Automation: ${TEST NAME}
+ 	Run Keyword If  '${pagetype}'=='Article'   Set Article Spesific Values
+	Set Test Variable   ${division}   ${division}
+	${headertitle}=  Get File  ${CONTENT_PATH}/text_description_short_${language}.txt
+	Input Content Header Title  ${headertitle}
+	Wait Until Element Is Visible   ${Ddn_AddContent}   timeout=3
+	Focus   ${Ddn_AddContent}
+	Run Keyword If  '${language}'=='fi'  Click Element	${Ddn_AddContent}
+	Run Keyword If  '${language}'=='fi'  Click Element   ${Opt_AddColumns}
+	${title}=  Return Correct Title   ${language}
+	Wait Until Keyword Succeeds  5x  100ms  Input Text   ${Inp_Column_Title}   ${title}
+	Click Element With Value   '${division}'
+
+Create ${pagetype} With ${division} Division And ${contenttype} Content in ${lang_selection} Language
+	${language_pointer}=   Get Language Pointer   ${lang_selection}
+	Set Test Variable   ${language}   ${language_pointer}
+	Run Keyword If  '${lang_selection}'=='Finnish'  Go To New ${pagetype} Site
+	Run Keyword If  '${lang_selection}'!='Finnish'  Go To New ${pagetype} -View For ${lang_selection} Translation
+	User Starts Creating ${pagetype} With ${division} Division And ${contenttype} Content
+	Run Keyword If  '${lang_selection}'=='Finnish'  User Adds Picture to Left Column
+	Add Picture Caption to Left
+	Run Keyword If  '${lang_selection}'=='Finnish'  User Adds Text to Right Column
+	Run Keyword If  '${lang_selection}'!='Finnish'	Add Text Content To Column on Right
+	Submit The New ${pagetype}
+	Open Created Content
+	Take Screenshot Of Content
+
 Add ${linkstyle} Link To ${side} Column
 	${linkstyle}=  Remove String And Strip Text   ${linkstyle}   "
 	Wait Until Element Is Clickable  ${Opt_Column_${side}_AddContent_Link}   timeout=3
@@ -95,10 +73,11 @@ Add Picture to Column
 	Input Text    ${Inp_Pic_AltText}   ${picdescription} 
 	Input Text    ${Inp_Pic_Photographer}   ${pgrapher}
 	Click Button   ${Btn_Save}
-	Wait Until Keyword Succeeds  10x  500ms  Click Button   ${Btn_Insert_Pic}
-	Wait Until Keyword Succeeds  10x  500ms   Add Picture Caption to ${side}  
 	Set Test Variable  ${picsadded}    ${picsadded}+1
 	Set Test Variable  ${picture}    picture   
+	Wait Until Keyword Succeeds  10x  500ms  Click Button   ${Btn_Insert_Pic}
+	Wait Until Keyword Succeeds  10x  500ms   Add Picture Caption to ${side}  
+	
 
 Add Picture Caption to ${side}
 	${editpicturevisible}=  Run Keyword And Return Status    Element Should Not Be Visible  ${Btn_Column_${side}_Edit}   timeout=1
@@ -108,6 +87,10 @@ Add Picture Caption to ${side}
 
 
 Use Original Aspect Ratio on ${side}
+	#Element is behind another. --> Scroll it into view so we can click it
+	${containspage}=    Suite Name Contains Text   Page
+	Run Keyword If   ${containspage}   Execute javascript  window.scrollTo(0, 400)
+	Focus   ${Swh_Column_${side}_Picture_Orig_Aspect_Ratio}
 	Wait Until Keyword Succeeds  5x  200ms  Click Element   ${Swh_Column_${side}_Picture_Orig_Aspect_Ratio}
 	Set Test Variable  ${picsize}   original
 	
@@ -116,6 +99,7 @@ Click And Select Text As ${side} Content Type
 	Wait Until Keyword Succeeds  10x  500ms  Click Element  ${Opt_Column_${side}_AddContent_Text}
 
 Add Text Content To Column on ${side}
+	[Documentation]   Adds text content to selected column by selecting content type first and then inserting text
 	Run Keyword If  '${language}'=='fi'  Click And Select Text As ${side} Content Type
 	${TextFileContent}=  Get File  ${CONTENT_PATH}/text_content_short_${language}.txt
 	@{content} =	Split String	${TextFileContent}   .,.
@@ -134,8 +118,8 @@ Add ${content} to Left Column
 	...				 pictures with longer width value does not get cropped. Only long pictures do.
 	Focus   ${Ddn_Column_Left_AddContent}
 	Wait Until Keyword Succeeds  5x  100ms  Click Button  ${Ddn_Column_Left_AddContent}
-	Run Keyword If  '${content}'=='picture'  Add Picture to Column   left    train   @{pic_1_texts_${language}}
-	Run Keyword If  '${content}'=='original picture'  Add Picture to Column   left    snowdrops   @{pic_1_texts_${language}}
+	Run Keyword If  '${content}'=='picture'  Add Picture to Column   Left    train   @{pic_1_texts_${language}}
+	Run Keyword If  '${content}'=='original picture'  Add Picture to Column   Left    snowdrops   @{pic_1_texts_${language}}
 	Run Keyword If  '${content}'=='text'  Add Text Content To Column on Left
 	Run Keyword If  ('${content}'=='picture') & ('${language}'=='fi')  Add Picture Caption to Left
 	${content}=  Remove String And Strip Text   ${content}   original
@@ -143,28 +127,61 @@ Add ${content} to Left Column
   
 
 Add ${content:[^"]+} to Right Column
+	[Documentation]   Adds given content to Right column.
 	Set Test Variable  ${content2}   ${content}
 	Wait Until Element Is Clickable  ${Ddn_Column_Right_AddContent}   timeout=3
 	Focus   ${Ddn_Column_Right_AddContent}
 	Wait Until Keyword Succeeds  10x  500ms  Click Button  ${Ddn_Column_Right_AddContent}
-	Run Keyword If  '${content}'=='Picture'  Add Picture to Column   right    temple   @{pic_2_texts_${language}}
+	Run Keyword If  '${content}'=='Picture'  Add Picture to Column   Right    temple   @{pic_2_texts_${language}}
 	Run Keyword If  '${content}'=='Text'  Add Text Content To Column on Right
 	Run Keyword If  '${content}'=='Link'  Add "${linkstyle}" Link To Right Column
 
-Go To Translations Tab
-	Click Button   //a[contains(text(),'Translate')]	
+
+Take Screenshot Of Content
+	Maximize Browser Window
+	Execute javascript  document.body.style.zoom="40%"
+	Run keyword if  ('${picsize}'=='original') & ('${BROWSER}'=='chromeheadless')   Execute javascript  document.body.style.zoom="30%"
+	Capture Page Screenshot    filename=${BROWSER}_TESTRUN-${SUITE NAME}-${TEST NAME}_${language}.png
+	Execute javascript  document.body.style.zoom="100%"
+
+${pagetype} Content Matches Language
+	${Title}=  Return Title From ${pagetype}
+	${Description}=  Return Description From ${pagetype}
+	${Content}=   Return Content From ${pagetype}
+	${Lead}=  Run Keyword If  '${pagetype}'=='Article'  Return Lead From Article
+	${Author}=  Run Keyword If  '${pagetype}'=='Article'   Return Author From Article
+	Title Should Match Current Language Selection   ${Title}
+	Description Should Match Current Language Selection   ${Description}	
+	Content Should Match Current Language Selection   ${Content}
+	Run Keyword If  '${pagetype}'=='Article'  Lead Should Match Current Language Selection   ${Lead}
+	Run Keyword If  '${pagetype}'=='Article'  Author Should Be Correct   ${Author}
 	
-Go To ${language} Translation Page
-	${language_pointer}=  Get Language Pointer   ${language}
-	Click Element   //a[contains(@href, 'translations/add/fi/${language_pointer}')]
-		
-Cleanup and Close Browser
-	[Documentation]  Deletes content created by testcases. Page , if created and picture if added.
-	Run Keyword If   ${DEBUG}   Run Keyword If Test Failed   Debug Error
-	FOR    ${i}    IN RANGE    ${pagesadded}
-           Wait Until Keyword Succeeds  2x  200ms 	Delete Newly Created Item on Content Menu List
-    END
-	FOR    ${i}    IN RANGE    ${picsadded}
-           Wait Until Keyword Succeeds  2x  200ms 	Delete Newly Created Item from Content Media List
-    END
-	Close Browser
+Return Title From ${pagetype}
+	${title}=	Get Text    ${Txt_Column_Title}
+	[Return]		${title}
+
+Return Description From ${pagetype}
+	${description}=	Get Text    ${Txt_Column_Description}
+	[Return]		${description}
+
+Return Content From ${pagetype}
+	${content}=	Get Text    ${Txt_Column_Content}
+	[Return]		${content}
+	
+Return Lead From Article
+	${lead}=	Get Text    ${Txt_Lead}
+	[Return]		${lead}
+
+Return Author From Article
+	${author}=	Get Text    ${Txt_Author}
+	[Return]		${author}
+	
+Lead Should Match Current Language Selection
+	[Arguments]   ${string}
+	Run Keyword If  '${language}'=='fi'  Should Match Regexp  ${string}   Ingressi eli johdate on tekstin
+	Run Keyword If  '${language}'=='en'  Should Match Regexp  ${string}   A lead paragraph
+	Run Keyword If  '${language}'=='sv'  Should Match Regexp  ${string}   Ingressen är den inledande delen av en artikel
+
+Author Should Be Correct
+	[Arguments]   ${string}
+	Should Match Regexp  ${string}   Test Automation Author
