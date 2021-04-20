@@ -150,7 +150,7 @@ Click Add Content
    
 Click Add Page
 	[Documentation]   Add Page ('Sivu') click in Add Content('Lisää sisältöä') -menu
-	Wait Until Element Is Visible  //a[contains(@href, '/node/add/page')]   timeout=3
+	Wait Until Element Is Clickable  //a[contains(@href, '/node/add/page')]   timeout=3
 	Wait Until Keyword Succeeds  5x  200ms  Click Element  //a[contains(@href, '/node/add/page')]
 	Element Should Not Be Visible   //a[contains(@href, '/node/add/page')]
 	
