@@ -154,16 +154,15 @@ Click Add Content
    
 Click Add Page
 	[Documentation]   Add Page ('Sivu') click in Add Content('Lisää sisältöä') -menu
-	Run Keyword If   ${CI}   Execute javascript  window.scrollTo(0, 400)
-	Wait Until Element Is Clickable  //a[contains(@href, '/node/add/page')]   timeout=3
-	Wait Until Keyword Succeeds  5x  200ms  Click Element  //a[contains(@href, '/node/add/page')]
-	Element Should Not Be Visible   //a[contains(@href, '/node/add/page')]
+	Wait Until Element Is Clickable  //a[contains(@href, '/node/add/page')][@class='admin-item__link']   timeout=3
+	Wait Until Keyword Succeeds  5x  200ms  Click Element  //a[contains(@href, '/node/add/page')][@class='admin-item__link']
+	Element Should Not Be Visible   //a[contains(@href, '/node/add/page')][@class='admin-item__link']
 	
 Click Add Article
 	[Documentation]   Add Article ('Artikkeli') click in Add Content('Lisää sisältöä') -menu
-	Wait Until Element Is Visible  //a[contains(@href, '/node/add/article')]   timeout=3
-	Wait Until Keyword Succeeds  5x  200ms  Click Element  //a[contains(@href, '/node/add/article')]
-	Element Should Not Be Visible   //a[contains(@href, '/node/add/article')]
+	Wait Until Element Is Visible  //a[contains(@href, '/node/add/article')][@class='admin-item__link']   timeout=3
+	Wait Until Keyword Succeeds  5x  200ms  Click Element  //a[contains(@href, '/node/add/article')][@class='admin-item__link']
+	Element Should Not Be Visible   //a[contains(@href, '/node/add/article')][@class='admin-item__link']
 
 Go To Translate Selection Page
 	[Documentation]   Goes To Translations Page for first document in the content list
