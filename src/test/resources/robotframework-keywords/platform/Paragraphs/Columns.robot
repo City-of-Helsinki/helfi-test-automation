@@ -1,12 +1,4 @@
 *** Settings ***
-Documentation   Column creation spesific keywords here. Variables are
-...				Submitted:  Is the new page submitted. This is needed when tearing down creating content after test.
-...				Picalign:   Picture alignment value in hero cases.
-...				Picture:    Is at least one picture added to content = picture , else 'nopicture'
-...				Picsadded:  Number of pictures added to content. This is needed in teardown after test, so all media
-...				Picsize:   Picture size for column pictures. Original=  If use original aspect ratio. Cropped otherwise  
-...				gets deleted succesfully. Please note that pictures with greater value of width than length are not 
-...				modified in any way by drupal.
 Resource        ../Contenthandler.robot
 Resource        ../Commonkeywords.robot
 

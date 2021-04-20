@@ -1,5 +1,6 @@
 *** Settings ***
-Documentation   New Page creation spesific keywords here. Variables are
+Documentation   Handler class for several content handling keywords.
+...				Variables:
 ...				Submitted:  Is the new page submitted. This is needed when tearing down creating content after test.
 ...				Picalign:   Picture alignment value in hero cases.
 ...				Picture:    Is at least one picture added to content = picture , else 'nopicture'
@@ -7,6 +8,9 @@ Documentation   New Page creation spesific keywords here. Variables are
 ...				Picsize:   Picture size for column pictures. Original=  If use original aspect ratio. Cropped otherwise  
 ...				gets deleted succesfully. Please note that pictures with greater value of width than length are not 
 ...				modified in any way by drupal.
+...				Linkstyle:	Styling of the link used in some test cases.
+...				language:  Not UI language but content translation.
+...				gallery:  is gallery paragraph used in this test.  
 Resource        Commonkeywords.robot
 Resource		  ./variables/create_content.robot
 Resource		  ./variables/picture_comparison.robot
@@ -150,6 +154,7 @@ Click Add Content
    
 Click Add Page
 	[Documentation]   Add Page ('Sivu') click in Add Content('Lisää sisältöä') -menu
+	Run Keyword If   ${CI}   Execute javascript  window.scrollTo(0, 400)
 	Wait Until Element Is Clickable  //a[contains(@href, '/node/add/page')]   timeout=3
 	Wait Until Keyword Succeeds  5x  200ms  Click Element  //a[contains(@href, '/node/add/page')]
 	Element Should Not Be Visible   //a[contains(@href, '/node/add/page')]
