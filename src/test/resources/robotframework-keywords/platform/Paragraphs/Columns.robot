@@ -15,12 +15,8 @@ Create ${pagetype} With ${division} Division And ${contenttype} Content
 	Set Test Variable   ${division}   ${division}
 	${headertitle}=  Get File  ${CONTENT_PATH}/text_description_short_${language}.txt
 	Input Content Header Title  ${headertitle}
-	Wait Until Element Is Visible   ${Ddn_AddContent}   timeout=3
-	Focus   ${Ddn_AddContent}
-	Run Keyword If  '${language}'=='fi'  Click Element	${Ddn_AddContent}
-	Run Keyword If  '${language}'=='fi'  Click Element   ${Opt_AddColumns}
-	${title}=  Return Correct Title   ${language}
-	Wait Until Keyword Succeeds  5x  100ms  Input Text   ${Inp_Column_Title}   ${title}
+	Run Keyword If  '${language}'=='fi'  Open Paragraph For Edit   ${Opt_AddColumns}
+	Wait Until Keyword Succeeds  5x  100ms  Input Title To Paragraph   ${Inp_Column_Title}
 	Click Element With Value   '${division}'
 
 Create ${pagetype} With ${division} Division And ${contenttype} Content in ${lang_selection} Language
@@ -28,10 +24,10 @@ Create ${pagetype} With ${division} Division And ${contenttype} Content in ${lan
 	Set Test Variable   ${language}   ${language_pointer}
 	Run Keyword If  '${lang_selection}'=='Finnish'  Go To New ${pagetype} Site
 	Run Keyword If  '${lang_selection}'!='Finnish'  Go To New ${pagetype} -View For ${lang_selection} Translation
-	User Starts Creating ${pagetype} With ${division} Division And ${contenttype} Content
-	Run Keyword If  '${lang_selection}'=='Finnish'  User Adds Picture to Left Column
+	Create ${pagetype} With ${division} Division And ${contenttype} Content
+	Run Keyword If  '${lang_selection}'=='Finnish'  Add Picture to Left Column
 	Add Picture Caption to Left
-	Run Keyword If  '${lang_selection}'=='Finnish'  User Adds Text to Right Column
+	Run Keyword If  '${lang_selection}'=='Finnish'  Add Text to Right Column
 	Run Keyword If  '${lang_selection}'!='Finnish'	Add Text Content To Column on Right
 	Submit The New ${pagetype}
 	Open Created Content

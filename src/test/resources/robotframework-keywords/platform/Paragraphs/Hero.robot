@@ -7,29 +7,15 @@ Resource        ../Commonkeywords.robot
 ${color}	 		 ${EMPTY}
 
 *** Keywords ***
-Return Correct Description
-	[Arguments]     ${language}
-	${description}=	Get File  ${CONTENT_PATH}/text_description_short_${language}.txt
-	[Return]		${description}
 
-Return Correct Content
-	[Arguments]     ${language}
-	${content}=	Get File  ${CONTENT_PATH}/text_content_short_${language}.txt
-	[Return]		${content}
-
-Return Title From Page
+Return Hero Title From Page
 	${title}=	Get Text    ${Txt_Hero_Title}
 	[Return]		${title}
 
-Return Description From Page
+Return Hero Description From Page
 	${description}=	Get Text    ${Txt_Hero_Description}
 	[Return]		${description}
-
-Return Content From Page
-	${content}=	Get Text    ${Txt_Content}
-	[Return]		${content}
-
- 
+	
 Create a ${value} Aligned Page With Hero Block In ${lang_selection} Language
 	${language_pointer}=   Get Language Pointer   ${lang_selection}
 	Set Test Variable   ${language}   ${language_pointer}
@@ -40,10 +26,6 @@ Create a ${value} Aligned Page With Hero Block In ${lang_selection} Language
 	Open Created Content
 	Take Screenshot Of Content
  
-Input Title To Hero Block
-	${title}=  Return Correct Title   ${language}
-	Input Text  ${Inp_Hero_Title}   ${title}
- 
 Start Creating a ${value} Aligned Page With Hero Block 
 	Set Test Variable   ${value}    ${value} 
     Input Title  Test Automation: ${value} Aligned Hero Block Page
@@ -52,7 +34,7 @@ Start Creating a ${value} Aligned Page With Hero Block
 	Wait Until Keyword Succeeds  5x  100ms  Focus   ${Ddn_Hero_Alignment}
 	Wait Until Keyword Succeeds  5x  100ms  Run Keyword If  '${value}'=='Center'  Click Element   ${Ddn_Hero_Alignment}
 	Run Keyword If  '${value}'=='Center'  Click Element   ${Opt_Hero_Alignment_Center} 
-	Wait Until Keyword Succeeds  5x  100ms   Input Title To Hero Block
+	Wait Until Keyword Succeeds  5x  100ms   Input Title To Paragraph   ${Inp_Hero_Title}
 		
 	${TextFileContent}=  Return Correct Content   ${language}
 	${TextFileDescription}=  Return Correct Description   ${language}
@@ -68,7 +50,7 @@ Input Text Content
 	Run Keyword If  '${language}'!='fi'   Input Text To Frame   ${Frm_Content_Hero_Translations}   //body   ${content}
 
 Start Creating Hero Block Page with ${picalign} Picture 
-	User Starts Creating a Left Aligned Page With Hero Block
+	Start Creating a Left Aligned Page With Hero Block
     Set Test Variable   ${picture}  picture
     Set Test Variable   ${picalign}   ${picalign}    
 	Run Keyword If  '${picalign}'=='Left'  Click Element   ${Opt_Hero_Picture_On_Left}
@@ -113,9 +95,9 @@ Add ${style} Link In Text Editor
 	Input Text   ${Inp_Hero_Link_Texteditor_Title}    ${link_title_${language}}
 	Focus   ${Ddn_Hero_Link_Texteditor_Design}
 	Click Element  ${Ddn_Hero_Link_Texteditor_Design}
-	Run Keyword If  '${style}'=='Fullcolor'  Click Element   ${Opt_Hero_Link_Texteditor_ButtonFullcolor}
-	Run Keyword If  '${style}'=='Framed'  Click Element   ${Opt_Hero_Link_Texteditor_ButtonFramed}
-	Run Keyword If  '${style}'=='Transparent'  Click Element   ${Opt_Hero_Link_Texteditor_ButtonTransparent}
+	Run Keyword If  '${style}'=='Fullcolor'  Click Element   ${Opt_Link_Fullcolor}
+	Run Keyword If  '${style}'=='Framed'  Click Element   ${Opt_Link_Framed}
+	Run Keyword If  '${style}'=='Transparent'  Click Element   ${Opt_Link_Transparent}
 	Click Button   ${Btn_Save}
 
 Add ${color} As Background Color

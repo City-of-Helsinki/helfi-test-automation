@@ -33,6 +33,23 @@ ${URL_content_page}							${PROTOCOL}://${BASE_URL}/fi/admin/content
 ${URL_media_page}							${PROTOCOL}://${BASE_URL}/fi/admin/content/media		
 *** Keywords ***
 
+Open Paragraph For Edit
+	[Arguments]   ${paragraph}
+	Wait Until Element Is Visible   ${Ddn_AddContent}   timeout=3
+	Focus   ${Ddn_AddContent}
+	Click Element	${Ddn_AddContent}
+	Click Element   ${paragraph}
+
+Input Title To Paragraph
+	[Arguments]    ${paragraph_title_locator}
+	${title}=  Return Correct Title   ${language}
+	Input Text  ${paragraph_title_locator}   ${title}
+
+Input Description To Paragraph
+	[Arguments]    ${paragraph_description_locator}
+	${TextFileDescription}=  Return Correct Description   ${language}
+	Input Text To Frame   ${paragraph_description_locator}   //body   ${TextFileDescription}
+
 Input Title
 	[Arguments]   ${title}
 	Wait Until Element Is Visible   ${Inp_Title}   timeout=3  
@@ -146,6 +163,10 @@ Go To New Page Site
 	Click Add Content
 	Wait Until Keyword Succeeds  5x  200ms  Click Add Page
 
+Go To New LandingPage Site
+	Click Add Content
+	Wait Until Keyword Succeeds  5x  200ms  Click Add Landing Page
+
 Click Add Content
 	[Documentation]   Add Content ('Lisää sisältöä') in Content Menu
 	Wait Until Element Is Visible   css:#block-hdbt-admin-local-actions > ul > li > a   timeout=3
@@ -157,6 +178,12 @@ Click Add Page
 	Wait Until Element Is Clickable  //a[contains(@href, '/node/add/page')][@class='admin-item__link']   timeout=3
 	Wait Until Keyword Succeeds  5x  200ms  Click Element  //a[contains(@href, '/node/add/page')][@class='admin-item__link']
 	Element Should Not Be Visible   //a[contains(@href, '/node/add/page')][@class='admin-item__link']
+
+Click Add Landing Page
+	[Documentation]   Add LandingPage ('Laskeutumissivu') click in Add Content('Lisää sisältöä') -menu
+	Wait Until Element Is Clickable  //a[contains(@href, '/node/add/landing_page')][@class='admin-item__link']   timeout=3
+	Wait Until Keyword Succeeds  5x  200ms  Click Element  //a[contains(@href, '/node/add/landing_page')][@class='admin-item__link']
+	Element Should Not Be Visible   //a[contains(@href, '/node/add/landing_page')][@class='admin-item__link']
 	
 Click Add Article
 	[Documentation]   Add Article ('Artikkeli') click in Add Content('Lisää sisältöä') -menu
@@ -223,6 +250,20 @@ Return Correct Title
 	...				'${language}'=='en'  Emily Bronte: Wuthering Heights
 	...		 		'${language}'=='sv'  Selma Lagerlof: Bannlyst
 	[Return]		${title}
+
+Return Correct Description
+	[Arguments]     ${language}
+	${description}=	Get File  ${CONTENT_PATH}/text_description_short_${language}.txt
+	[Return]		${description}
+
+Return Correct Content
+	[Arguments]     ${language}
+	${content}=	Get File  ${CONTENT_PATH}/text_content_short_${language}.txt
+	[Return]		${content}
+
+Return Content From Page
+	${content}=	Get Text    ${Txt_Content}
+	[Return]		${content}
 
 Title Should Match Current Language Selection
 	[Arguments]   ${string}

@@ -14,10 +14,7 @@ Start Creating ${pagetype} With Gallery
 	Run Keyword If  '${pagetype}'=='Article'   Set Article Spesific Values
 	${headertitle}=  Get File  ${CONTENT_PATH}/text_description_short_${language}.txt
 	Input Content Header Title  ${headertitle}
-	Wait Until Element Is Visible   ${Ddn_AddContent}   timeout=3
-	Focus   ${Ddn_AddContent}
-	Click Element	${Ddn_AddContent}
-	Click Element	${Opt_AddGallery}
+	Open Paragraph For Edit   ${Opt_AddGallery}
 	Add Picture 'train' And Caption To 1:th Picture
 	Add Picture 'temple' And Caption To 2:th Picture
 	Add Picture 'tulips' And Caption To 3:th Picture

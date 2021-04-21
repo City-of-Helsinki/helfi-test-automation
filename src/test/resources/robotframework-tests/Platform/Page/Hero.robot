@@ -241,8 +241,8 @@ Page Should Have ${lang_input} Translation
 	Page Content Matches Language
 
 Page Content Matches Language
-	${Title}=  Return Title From Page
-	${Description}=  Return Description From Page
+	${Title}=  Return Hero Title From Page
+	${Description}=  Return Hero Description From Page
 	${Content}=  Return Content From Page
 	Title Should Match Current Language Selection   ${Title}
 	Description Should Match Current Language Selection   ${Description}	

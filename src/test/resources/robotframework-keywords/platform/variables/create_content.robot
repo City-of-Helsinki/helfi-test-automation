@@ -40,6 +40,7 @@ ${Opt_AddColumns}						    name:field_content_columns_add_more
 ${Opt_AddPicture}						    name:field_content_image_add_more
 ${Opt_AddText}								name:field_content_text_add_more
 ${Opt_AddLink}								name:field-content-link-add-more
+${Opt_AddBanner}   							name:field_content_banner_add_more
 ${Btn_File_Upload}					    	name:files[upload]
 ${Inp_Pic_Name}								css:[data-drupal-selector=edit-media-0-fields-name-0-value]
 ${Inp_Pic_AltText}							css:[data-drupal-selector=edit-media-0-fields-field-media-image-0-alt]
@@ -56,6 +57,9 @@ ${Btn_Actions_Dropbutton}					//button[@class='dropbutton__toggle']
 ${Btn_Actions_ContentMenu_Deletebutton}		//li[contains(@class, 'delete dropbutton')]/child::a
 ${Btn_Actions_ContentMenu_Translatebutton}	//li[contains(@class, 'translate dropbutton')]/child::a
 ${Btn_Actions_SelectedItem_Deletebutton}	//input[@id='edit-submit']
+${Opt_Link_Fullcolor}			css:[value=primary]
+${Opt_Link_Framed}				css:[value=secondary]
+${Opt_Link_Transparent}			css:[value=supplementary]
 
 #HERO
 ${Inp_Hero_Title}							//input[contains(@id, 'edit-field-hero-0-subform')]
@@ -75,11 +79,8 @@ ${Inp_Hero_Link_Title}						css:[data-drupal-selector=edit-field-hero-0-subform-
 ${Inp_Hero_Link_Texteditor_Title}			css:[data-drupal-selector=edit-attributes-data-link-text]
 ${Ddn_Hero_Link_Design}						css:[data-drupal-selector=edit-field-hero-0-subform-field-hero-cta-0-subform-field-link-design]
 ${Ddn_Hero_Link_Texteditor_Design}			css:[data-drupal-selector=edit-attributes-class]
-${Opt_Hero_Link_ButtonFullcolor}			css:[value=primary]
 ${Opt_Hero_Link_Texteditor_ButtonFullcolor}		//option[@value='hds-button hds-button--primary']
-${Opt_Hero_Link_ButtonFramed}				css:[value=secondary]
 ${Opt_Hero_Link_Texteditor_ButtonFramed}		//option[@value='hds-button hds-button--secondary']
-${Opt_Hero_Link_ButtonTransparent}			css:[value=supplementary]
 ${Opt_Hero_Link_Texteditor_ButtonTransparent}	//option[@value='hds-button hds-button--supplementary']
 ${Ddn_Hero_Color}							css:[data-drupal-selector=edit-field-hero-0-subform-field-hero-bg-color]
 
@@ -138,6 +139,13 @@ ${Inp_Lead}									name:field_lead[0][value]
 ${Inp_Keywords}								css:.select2-search__field
 ${Txt_Lead}									css:.article__lead
 ${Txt_Author}								css:.article__author
+
+# BANNER
+${Opt_Banner_Left}							css:[value=align-left]
+${Inp_Banner_Title}							name:field_content[0][subform][field_banner_title][0][value]
+${Ddn_Banner_Icon}		 					name:field_content[0][subform][field_icon][0][icon]
+${Inp_Banner_Link_Uri}						name:field_content[0][subform][field_banner_link][0][uri]
+${Inp_Banner_Link_Title}					name:field_content[0][subform][field_banner_link][0][title]
 
 #UNCATEGORIZED
 ${Btn_Picture}								name:field_image-media-library-open-button-field_content-1-subform
