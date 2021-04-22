@@ -53,11 +53,26 @@ Center Aligned Banner With Framed Link
 	When New Landingpage is Submitted
 	And User Opens Created Content	
 	Then Layout Should Not Have Changed		
+
+Link Opens In New Window
+	[Tags]  BANNER   CRITICAL
+	Given User Goes To New LandingPage Site
+	And User Starts Creating Left Aligned Banner With Fullcolor Link
+	When New Landingpage is Submitted
+	And User Opens Created Content	
+	And User Clicks The Content Link
+	Then Link Should Be Opened In New Window
+	
 	
 *** Keywords ***
 User Goes To New LandingPage Site   Go To New LandingPage Site
 New Landingpage is Submitted	Submit The New Landingpage
 User Starts Creating ${alignment} Aligned Banner With ${linkstyle} Link   Create LandingPage With ${alignment} Aligned Banner And With ${linkstyle} Link
+
+User Clicks The Content Link   
+	Wait Until Keyword Succeeds  5x  200ms  Click Link In Content
+
+Link Should Be Opened In New Window   New Window Should Be Opened
 
 User Opens Created Content
 	 Open Created Content

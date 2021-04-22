@@ -146,6 +146,6 @@ ${Inp_Banner_Title}							name:field_content[0][subform][field_banner_title][0][
 ${Ddn_Banner_Icon}		 					name:field_content[0][subform][field_icon][0][icon]
 ${Inp_Banner_Link_Uri}						name:field_content[0][subform][field_banner_link][0][uri]
 ${Inp_Banner_Link_Title}					name:field_content[0][subform][field_banner_link][0][title]
-
+${Swh_Banner_Link_OpenInNewWindow}   		name:field_content[0][subform][field_banner_link][0][options][target_new]
 #UNCATEGORIZED
 ${Btn_Picture}								name:field_image-media-library-open-button-field_content-1-subform
