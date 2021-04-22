@@ -29,7 +29,30 @@ Left Aligned Banner With Framed Link
 	When New Landingpage is Submitted
 	And User Opens Created Content	
 	Then Layout Should Not Have Changed	
+
+Center Aligned Banner With Fullcolor Link
+	[Tags]  BANNER   CRITICAL
+	Given User Goes To New LandingPage Site
+	And User Starts Creating Center Aligned Banner With Fullcolor Link
+	When New Landingpage is Submitted
+	And User Opens Created Content	
+	Then Layout Should Not Have Changed
+
+Center Aligned Banner With Transparent Link
+	[Tags]  BANNER   CRITICAL
+	Given User Goes To New LandingPage Site
+	And User Starts Creating Center Aligned Banner With Transparent Link
+	When New Landingpage is Submitted
+	And User Opens Created Content	
+	Then Layout Should Not Have Changed
 	
+Center Aligned Banner With Framed Link
+	[Tags]  BANNER   CRITICAL
+	Given User Goes To New LandingPage Site
+	And User Starts Creating Center Aligned Banner With Framed Link
+	When New Landingpage is Submitted
+	And User Opens Created Content	
+	Then Layout Should Not Have Changed		
 	
 *** Keywords ***
 User Goes To New LandingPage Site   Go To New LandingPage Site
