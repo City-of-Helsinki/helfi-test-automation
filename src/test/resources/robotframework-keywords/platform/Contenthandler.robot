@@ -291,3 +291,10 @@ Login And Go To Content Page
 	Open Browser  ${admin_url}  ${BROWSER}
 	Go To   ${URL_content_page}
 	Set Window Size   1296   696
+	
+Rename Picture With New Name
+	[Documentation]   Idea is to Replace Reports file picture with new name in order to help in 
+	...				  maintenance of comparison pictures
+	[Arguments]   ${originalpic}   ${comparisonpic}
+	${newname}=  Fetch From Right   ${originalpic}   ${BROWSER}/   
+	Move File   ${comparisonpic}   ${REPORTS_PATH}/${newname}

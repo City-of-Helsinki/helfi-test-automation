@@ -36,3 +36,17 @@ Suite Name Contains Text
 	[Arguments]  ${text}
 	${containstext}=    Run Keyword And Return Status    Should Contain    ${SUITE NAME}    ${text}
 	[Return]   ${containstext}
+
+Click Element Using JavaScript Xpath
+	[Arguments]  ${xpath}
+    Execute JavaScript    document.evaluate("${xpath}",document.body,null,9,null).singleNodeValue.click();
+
+Click Element Using JavaScript Id
+	[Arguments]  ${id}
+    Execute JavaScript    document.getElementById(${id}).click();
+	
+Rename Reports Picture To Use Original Picture Name
+	[Documentation]   Renames File In given source folder. Full path must be given in first argument and
+	...				  only new name in second one.
+	[Arguments]  ${fullpath}   ${newname}
+	Move File  ${fullpath}  ${newname}

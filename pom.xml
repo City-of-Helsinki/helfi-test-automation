@@ -77,6 +77,7 @@
                            	 	<variable>PROTOCOL:${robot.protocol}</variable>
                            	 	<variable>CI:$false</variable>
                            	 	<variable>DEBUG:$true</variable>
+                           	 	<variable>USEORIGINALNAME:$false</variable>
                           	</variables>
                         </configuration>
                     </plugin>
@@ -132,6 +133,7 @@
                            	 	<variable>PROTOCOL:${robot.protocol}</variable>
                            	 	<variable>CI:$true</variable>
                            	 	<variable>DEBUG:$true</variable>
+                           	 	<variable>USEORIGINALNAME:$false</variable>
                           	</variables>
                         </configuration>
                     </plugin>

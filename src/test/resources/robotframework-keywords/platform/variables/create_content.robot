@@ -82,31 +82,32 @@ ${Ddn_Hero_Link_Texteditor_Design}			css:[data-drupal-selector=edit-attributes-c
 ${Opt_Hero_Link_Texteditor_ButtonFullcolor}		//option[@value='hds-button hds-button--primary']
 ${Opt_Hero_Link_Texteditor_ButtonFramed}		//option[@value='hds-button hds-button--secondary']
 ${Opt_Hero_Link_Texteditor_ButtonTransparent}	//option[@value='hds-button hds-button--supplementary']
-${Ddn_Hero_Color}							css:[data-drupal-selector=edit-field-hero-0-subform-field-hero-bg-color]
+#${Ddn_Hero_Color}							css:[data-drupal-selector=edit-field-hero-0-subform-field-hero-bg-color]
+${Ddn_Hero_Color}							//select[@data-drupal-selector='edit-field-hero-0-subform-field-hero-bg-color']
 
 #COLUMNS
-${Inp_Column_Title}	  						css:[data-drupal-selector=edit-field-content-1-subform-field-columns-title-0-value]
-${Ddn_Column_Left_AddContent}               //ul[@data-drupal-selector='edit-field-content-1-subform-field-columns-left-column-add-more-operations']//button
-${Ddn_Column_Right_AddContent}				//ul[@data-drupal-selector='edit-field-content-1-subform-field-columns-right-column-add-more-operations']//button
-${Opt_Column_Left_AddContent_Image}			//ul[@data-drupal-selector='edit-field-content-1-subform-field-columns-left-column-add-more-operations']//input[@name='field_content_1_subform_field_columns_left_column_image_add_more']
-${Opt_Column_Left_AddContent_Text}			//ul[@data-drupal-selector='edit-field-content-1-subform-field-columns-left-column-add-more-operations']//input[@name='field_content_1_subform_field_columns_left_column_text_add_more']
+${Inp_Column_Title}	  						//input[contains(@data-drupal-selector, 'subform-field-columns-title-0-value')]
+${Ddn_Column_Left_AddContent}               //ul[contains(@data-drupal-selector, 'subform-field-columns-left-column-add-more-operations')]//button
+${Ddn_Column_Right_AddContent}				//ul[contains(@data-drupal-selector, 'subform-field-columns-right-column-add-more-operations')]//button
+${Opt_Column_Left_AddContent_Image}			//ul[contains(@data-drupal-selector, 'subform-field-columns-left-column-add-more-operations')]//input[contains(@name,'subform_field_columns_left_column_image_add_more')]
+${Opt_Column_Left_AddContent_Text}			//ul[contains(@data-drupal-selector, 'subform-field-columns-left-column-add-more-operations')]//input[contains(@name,'subform_field_columns_left_column_text_add_more')]
 ${Opt_Column_Left_AddContent_ListOfLinks}	//ul[@data-drupal-selector='edit-field-content-1-subform-field-columns-left-column-add-more-operations']//input[@name='field_content_1_subform_field_columns_left_column_list_of_links_add_more']
-${Opt_Column_Left_AddContent_Link}			//ul[@data-drupal-selector='edit-field-content-1-subform-field-columns-left-column-add-more-operations']//input[@name='field_content_1_subform_field_columns_left_column_link_add_more']
-${Opt_Column_Right_AddContent_Link}			//ul[@data-drupal-selector='edit-field-content-1-subform-field-columns-right-column-add-more-operations']//input[@name='field_content_1_subform_field_columns_right_column_link_add_more']
-${Opt_Column_Right_AddContent_Image}		//ul[@data-drupal-selector='edit-field-content-1-subform-field-columns-right-column-add-more-operations']//input[@name='field_content_1_subform_field_columns_right_column_image_add_more']
-${Opt_Column_Right_AddContent_Text}			//ul[@data-drupal-selector='edit-field-content-1-subform-field-columns-right-column-add-more-operations']//input[@name='field_content_1_subform_field_columns_right_column_text_add_more']
+${Opt_Column_Left_AddContent_Link}			//ul[contains(@data-drupal-selector, 'subform-field-columns-left-column-add-more-operations')]//input[contains(@name,'subform_field_columns_left_column_link_add_more')]
+${Opt_Column_Right_AddContent_Link}			//ul[contains(@data-drupal-selector, 'subform-field-columns-right-column-add-more-operations')]//input[contains(@name,'subform_field_columns_right_column_link_add_more')]
+${Opt_Column_Right_AddContent_Image}		//ul[contains(@data-drupal-selector, 'subform-field-columns-right-column-add-more-operations')]//input[contains(@name,'subform_field_columns_right_column_image_add_more')]
+${Opt_Column_Right_AddContent_Text}			//ul[contains(@data-drupal-selector, 'subform-field-columns-right-column-add-more-operations')]//input[contains(@name,'subform_field_columns_right_column_text_add_more')]
 ${Btn_Column_Left_AddPicture}				name:field_image-media-library-open-button-field_content-1-subform-field_columns_left_column-0-subform
 ${Btn_Column_Right_AddPicture}				name:field_image-media-library-open-button-field_content-1-subform-field_columns_right_column-0-subform
-${Frm_Column_Left_Text}						//div[contains(@id,'cke_edit-field-content-1-subform-field-columns-left-column-0-subform-field-text-0-value')]//iframe
-${Frm_Column_Right_Text}					//div[contains(@id,'cke_edit-field-content-1-subform-field-columns-right-column-0-subform-field-text-0-value')]//iframe
-${Btn_Column_Left_Picture}					name:field_image-media-library-open-button-field_content-1-subform-field_columns_left_column-0-subform
-${Btn_Column_Right_Picture}					name:field_image-media-library-open-button-field_content-1-subform-field_columns_right_column-0-subform
+${Frm_Column_Left_Text}						//div[contains(@id,'cke_edit-field-content')][contains(@id,'left')]//iframe
+${Frm_Column_Right_Text}					//div[contains(@id,'cke_edit-field-content')][contains(@id,'right')]//iframe
+${Btn_Column_Left_Picture}					//input[contains(@data-drupal-selector, 'subform-field-image-open-button')][contains(@data-drupal-selector, 'left')]
+${Btn_Column_Right_Picture}					//input[contains(@data-drupal-selector, 'subform-field-image-open-button')][contains(@data-drupal-selector, 'right')]
 ${Btn_Column_Right_Edit}					name:field_content_1_subform_field_columns_right_column_0_edit
 ${Btn_Column_Left_Edit}						name:field_content_1_subform_field_columns_left_column_0_edit
-${Inp_Column_Left_Picture_Caption}			css:[data-drupal-selector=edit-field-content-1-subform-field-columns-left-column-0-subform-field-image-caption-0-value]
-${Inp_Column_Right_Picture_Caption}			css:[data-drupal-selector=edit-field-content-1-subform-field-columns-right-column-0-subform-field-image-caption-0-value]
-${Swh_Column_Left_Picture_Orig_Aspect_Ratio}   css:[data-drupal-selector=edit-field-content-1-subform-field-columns-left-column-0-subform-field-original-aspect-ratio-value]
-${Swh_Column_Right_Picture_Orig_Aspect_Ratio}   css:[data-drupal-selector=edit-field-content-1-subform-field-columns-right-column-0-subform-field-original-aspect-ratio-value]
+${Inp_Column_Left_Picture_Caption}			//textarea[contains(@data-drupal-selector, 'subform-field-image-caption')][contains(@data-drupal-selector, 'left')]
+${Inp_Column_Right_Picture_Caption}			//textarea[contains(@data-drupal-selector, 'subform-field-image-caption')][contains(@data-drupal-selector, 'right')]
+${Swh_Column_Left_Picture_Orig_Aspect_Ratio}   //input[contains(@data-drupal-selector, 'field-original-aspect-ratio-value')][contains(@data-drupal-selector, 'left')]
+${Swh_Column_Right_Picture_Orig_Aspect_Ratio}   //input[contains(@data-drupal-selector, 'field-original-aspect-ratio-value')][contains(@data-drupal-selector, 'right')]
 ${Inp_Column_Left_Link_Title}				css:[data-drupal-selector=edit-field-content-1-subform-field-columns-left-column-0-subform-field-link-link-0-title]
 ${Inp_Column_Right_Link_Title}				css:[data-drupal-selector=edit-field-content-1-subform-field-columns-right-column-0-subform-field-link-link-0-title]
 ${Inp_Column_Left_Link_URL}					css:[data-drupal-selector=edit-field-content-1-subform-field-columns-left-column-0-subform-field-link-link-0-uri]

@@ -3,7 +3,7 @@ Documentation   Testing Banner paragraph in landing page content type
 Resource        ../../../robotframework-keywords/platform/Paragraphs/Banner.robot
 Test Setup      Login And Go To Content Page
 Test Teardown   Cleanup and Close Browser
-Force Tags		LANDING_PAGE
+Force Tags		LANDINGPAGE
 
 *** Test Cases ***
 Left Aligned Banner With Fullcolor Link

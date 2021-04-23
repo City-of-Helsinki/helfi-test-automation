@@ -19,7 +19,7 @@ Return Hero Description From Page
 Create a ${value} Aligned Page With Hero Block In ${lang_selection} Language
 	${language_pointer}=   Get Language Pointer   ${lang_selection}
 	Set Test Variable   ${language}   ${language_pointer}
-	Run Keyword If  '${lang_selection}'=='Finnish'  User Goes To New Page -Site
+	Run Keyword If  '${lang_selection}'=='Finnish'  Go To New Page Site
 	Run Keyword If  '${lang_selection}'!='Finnish'  Go To New Page -View For ${lang_selection} Translation
 	Start Creating a ${value} Aligned Page With Hero Block
 	Submit The New Page
@@ -28,21 +28,25 @@ Create a ${value} Aligned Page With Hero Block In ${lang_selection} Language
  
 Start Creating a ${value} Aligned Page With Hero Block 
 	Set Test Variable   ${value}    ${value} 
-    Input Title  Test Automation: ${value} Aligned Hero Block Page
+	${islandingpage}=   Suite Name Contains Text   Landing Page
+	Set Test Variable   ${islandingpage}   ${islandingpage}
+	${containslink}=    Run Keyword And Return Status    Should Contain    ${TEST NAME}    Link
+	Input Title  Test Automation: ${value} Aligned Hero Block Page
 	${titleisvisible}=  Run Keyword And Return Status   Element Should Be Enabled   ${Inp_Hero_Title}
 	Run Keyword Unless  ${titleisvisible} 	Click Element   ${Swh_HeroOnOff}
 	Wait Until Keyword Succeeds  5x  100ms  Focus   ${Ddn_Hero_Alignment}
 	Wait Until Keyword Succeeds  5x  100ms  Run Keyword If  '${value}'=='Center'  Click Element   ${Ddn_Hero_Alignment}
 	Run Keyword If  '${value}'=='Center'  Click Element   ${Opt_Hero_Alignment_Center} 
 	Wait Until Keyword Succeeds  5x  100ms   Input Title To Paragraph   ${Inp_Hero_Title}
-		
 	${TextFileContent}=  Return Correct Content   ${language}
 	${TextFileDescription}=  Return Correct Description   ${language}
-	Input Text Content   ${TextFileContent}
 	# In case of link we need to add some linebreaks
-	${containslink}=    Run Keyword And Return Status    Should Contain    ${TEST NAME}    Link
-	Run Keyword Unless   ${containslink}   Input Hero Description   ${TextFileDescription}
-	Run Keyword If   ${containslink}  Input Hero Description   ${TextFileDescription}\n
+	# main content
+	Run Keyword Unless  ${containslink}  Input Text Content   ${TextFileContent}
+	Run Keyword If      ${containslink}  Input Text Content   ${TextFileContent}\n
+	# description
+	Run Keyword Unless   ${containslink} | ${islandingpage}   Input Hero Description   ${TextFileDescription}
+	Run Keyword If   ${containslink} & (${islandingpage}!=True)  Input Hero Description   ${TextFileDescription}\n
 
 Input Text Content
 	[Arguments]   ${content}
@@ -89,21 +93,24 @@ Add ${style} Link In Hero Content Paragraph
 
 
 Add ${style} Link In Text Editor
-	Focus   id:cke_81
-	Click Element   id:cke_81
+	${cke}=   Set Variable If  ${islandingpage}   id:cke_24 
+	...		  id:cke_81
+	Focus   ${cke}
+	Click Element   ${cke}
 	Wait Until Keyword Succeeds  5x  100ms  Input Text   ${Inp_Hero_Link_Texteditor_URL}   https://fi.wikipedia.org/wiki/Rautatie_(romaani)    
 	Input Text   ${Inp_Hero_Link_Texteditor_Title}    ${link_title_${language}}
 	Focus   ${Ddn_Hero_Link_Texteditor_Design}
 	Click Element  ${Ddn_Hero_Link_Texteditor_Design}
-	Run Keyword If  '${style}'=='Fullcolor'  Click Element   ${Opt_Link_Fullcolor}
-	Run Keyword If  '${style}'=='Framed'  Click Element   ${Opt_Link_Framed}
-	Run Keyword If  '${style}'=='Transparent'  Click Element   ${Opt_Link_Transparent}
+	
+	Run Keyword If  '${style}'=='Fullcolor'  Click Element   ${Opt_Hero_Link_Texteditor_ButtonFullcolor}
+	Run Keyword If  '${style}'=='Framed'  Click Element   ${Opt_Hero_Link_Texteditor_ButtonFramed}
+	Run Keyword If  '${style}'=='Transparent'  Click Element   ${Opt_Hero_Link_Texteditor_ButtonTransparent}
 	Click Button   ${Btn_Save}
 
 Add ${color} As Background Color
 	Set Test Variable   ${color}  ${color}
 	Focus    ${Ddn_Hero_Color}
-	Click Element   ${Ddn_Hero_Color}
+	Click Element Using JavaScript Xpath  ${Ddn_Hero_Color}
 	Click Element With Value   ${color}
 
 Input Hero Description
@@ -119,12 +126,3 @@ Take Screenshot Of Content
 	Execute javascript  document.body.style.zoom="100%"
 
 
-Layout Should Not Have Changed
-	${originalpic} =  Set Variable If
-...  '${picalign}'!='${EMPTY}'  ${SCREENSHOTS_PATH}/${BROWSER}/${language}_short_HERO_${picalign}_vaakuna_${picture}_${BROWSER}.png
-...  '${linkstyle}'!='${EMPTY}'  ${SCREENSHOTS_PATH}/${BROWSER}/${language}_short_HERO_left_vaakuna_nopicture_${linkstyle}link_${BROWSER}.png
-...  '${color}'!='${EMPTY}'  ${SCREENSHOTS_PATH}/${BROWSER}/${language}_short_HERO_left_${color}_nopicture_${BROWSER}.png
-...   ${SCREENSHOTS_PATH}/${BROWSER}/${language}_short_HERO_${value}_vaakuna_nopicture_${BROWSER}.png
-	${comparisonpic}=  Set Variable  ${REPORTS_PATH}/${BROWSER}_TESTRUN-${SUITE NAME}-${TEST NAME}_${language}.png
-	Copy Original Screenshot To Reports Folder   ${originalpic}
-	Compared Pictures Match   ${originalpic}    ${comparisonpic}

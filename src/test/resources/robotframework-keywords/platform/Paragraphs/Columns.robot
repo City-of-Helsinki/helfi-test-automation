@@ -14,7 +14,8 @@ Create ${pagetype} With ${division} Division And ${contenttype} Content
  	Run Keyword If  '${pagetype}'=='Article'   Set Article Spesific Values
 	Set Test Variable   ${division}   ${division}
 	${headertitle}=  Get File  ${CONTENT_PATH}/text_description_short_${language}.txt
-	Input Content Header Title  ${headertitle}
+	${islandingpage}=  Suite Name Contains Text    Landing Page
+	Run Keyword Unless  ${islandingpage}   Input Content Header Title  ${headertitle}
 	Run Keyword If  '${language}'=='fi'  Open Paragraph For Edit   ${Opt_AddColumns}
 	Wait Until Keyword Succeeds  5x  100ms  Input Title To Paragraph   ${Inp_Column_Title}
 	Click Element With Value   '${division}'
@@ -76,8 +77,7 @@ Add Picture Caption to ${side}
 
 Use Original Aspect Ratio on ${side}
 	#Element is behind another. --> Scroll it into view so we can click it
-	${containspage}=    Suite Name Contains Text   Page
-	Run Keyword If   ${containspage}   Execute javascript  window.scrollTo(0, 400)
+	Execute javascript  window.scrollTo(0, 400)
 	Focus   ${Swh_Column_${side}_Picture_Orig_Aspect_Ratio}
 	Wait Until Keyword Succeeds  5x  200ms  Click Element   ${Swh_Column_${side}_Picture_Orig_Aspect_Ratio}
 	Set Test Variable  ${picsize}   original
@@ -104,6 +104,7 @@ Add ${content} to Left Column
 	[Documentation]  Here we need to do some tricks in case picture tests original size. Content -string is modified
 	...				 so that picture compare assertion works. Also long, snowdrops picture is used in the case because
 	...				 pictures with longer width value does not get cropped. Only long pictures do.
+	${content}=  Convert To Lower Case   ${content}
 	Focus   ${Ddn_Column_Left_AddContent}
 	Wait Until Keyword Succeeds  5x  100ms  Click Button  ${Ddn_Column_Left_AddContent}
 	Run Keyword If  '${content}'=='picture'  Add Picture to Column   Left    train   @{pic_1_texts_${language}}
