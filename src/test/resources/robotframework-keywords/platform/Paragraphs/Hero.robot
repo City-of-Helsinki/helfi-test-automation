@@ -63,6 +63,7 @@ Start Creating Hero Block Page with ${picalign} Picture
 	Run Keyword If  '${picalign}'=='Background'  Click Element   ${Opt_Hero_Picture_On_Background}
 	Run Keyword If  '${picalign}'=='Diagonal'  Click Element   ${Opt_Hero_Diagonal}
 	Wait Until Keyword Succeeds  5x  100ms  Focus   ${Btn_Hero_Picture}
+	Wait Until Keyword Succeeds  5x  100ms  Run Keyword If  ('${BROWSER}'=='chromeheadless')  Execute javascript  window.scrollTo(0, 400)
 	Wait Until Keyword Succeeds  5x  100ms  Click Button   ${Btn_Hero_Picture}
 	Wait Until Keyword Succeeds  5x  100ms  Choose File   ${Btn_File_Upload}   ${IMAGES_PATH}/train.jpg
 	Wait Until Keyword Succeeds  5x  100ms  Focus  ${Inp_Pic_Name}

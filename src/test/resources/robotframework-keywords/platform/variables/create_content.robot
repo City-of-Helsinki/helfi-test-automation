@@ -71,6 +71,7 @@ ${Opt_Hero_Picture_On_Left}					css:[value=with-image-left]
 ${Opt_Hero_Picture_On_Bottom}				css:[value=with-image-bottom]
 ${Opt_Hero_Picture_On_Background}			css:[value=background-image]
 ${Opt_Hero_Diagonal}						css:[value=diagonal]
+#${Btn_Hero_Picture}							//input[contains(@name, 'field_hero_image-media-library-open-button-field_hero')][contains(@name, 'subform')]
 ${Btn_Hero_Picture}							name:field_hero_image-media-library-open-button-field_hero-0-subform
 ${Btn_Hero_AddLink}						    name:field_hero_0_subform_field_hero_cta_link_add_more
 ${Inp_Hero_Link_URL}						css:[data-drupal-selector=edit-field-hero-0-subform-field-hero-cta-0-subform-field-link-link-0-uri]
