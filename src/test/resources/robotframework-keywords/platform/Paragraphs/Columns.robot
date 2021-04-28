@@ -44,35 +44,7 @@ Add ${linkstyle} Link To ${side} Column
 	Run Keyword If  '${linkstyle}'=='Fullcolor'  Click Element   ${Opt_Column_${side}_Link_ButtonFullcolor}
 	Run Keyword If  '${linkstyle}'=='Framed'  Click Element   ${Opt_Column_${side}_Link_ButtonFramed}
 	Run Keyword If  '${linkstyle}'=='Transparent'  Click Element   ${Opt_Column_${side}_Link_ButtonTransparent}
-	
-Add Picture to Column
-	[Documentation]  Adds picture and fills given content. selection= picture name from images -folder at src/main/
-	...			     resources.  side = 'left' of 'right' column  . content = content as list items.    
-	[Arguments]     ${side}   ${selection}   @{content}
-	Wait Until Element Is Clickable  ${Opt_Column_${side}_AddContent_Image}   timeout=3
-	Click Element  ${Opt_Column_${side}_AddContent_Image}
-	${pictitle}=  Get From List  ${content}   0
-	${picdescription}=  Get From List  ${content}   1
-	${pgrapher}=  Get From List  ${content}   2
-	Wait Until Element Is Clickable  ${Btn_Column_${side}_Picture}   timeout=3
-	Focus   ${Btn_Column_${side}_Picture}
-	Wait Until Keyword Succeeds  10x  500ms  Click Element  ${Btn_Column_${side}_Picture}
-	Wait Until Keyword Succeeds  10x  500ms  Choose File   ${Btn_File_Upload}   ${IMAGES_PATH}/${selection}.jpg
-	Wait Until Keyword Succeeds  10x  500ms  Input Text    ${Inp_Pic_Name}   ${pictitle}
-	Input Text    ${Inp_Pic_AltText}   ${picdescription} 
-	Input Text    ${Inp_Pic_Photographer}   ${pgrapher}
-	Click Button   ${Btn_Save}
-	Set Test Variable  ${picsadded}    ${picsadded}+1
-	Set Test Variable  ${picture}    picture   
-	Wait Until Keyword Succeeds  10x  500ms  Click Button   ${Btn_Insert_Pic}
-	Wait Until Keyword Succeeds  10x  500ms   Add Picture Caption to ${side}  
-	
 
-Add Picture Caption to ${side}
-	${editpicturevisible}=  Run Keyword And Return Status    Element Should Not Be Visible  ${Btn_Column_${side}_Edit}   timeout=1
-	Run Keyword Unless   ${editpicturevisible}   Wait Until Keyword Succeeds  5x  200ms  Click Element   ${Btn_Column_${side}_Edit}
-	Run Keyword If  '${side}'=='Left'	Wait Until Keyword Succeeds  5x  200ms  Input Text    ${Inp_Column_Left_Picture_Caption}   ${pic_1_caption_${language}}
-	Run Keyword If  '${side}'=='Right'	Wait Until Keyword Succeeds  5x  200ms  Input Text    ${Inp_Column_Right_Picture_Caption}   ${pic_2_caption_${language}}
 
 
 Use Original Aspect Ratio on ${side}
@@ -81,50 +53,6 @@ Use Original Aspect Ratio on ${side}
 	Focus   ${Swh_Column_${side}_Picture_Orig_Aspect_Ratio}
 	Wait Until Keyword Succeeds  5x  200ms  Click Element   ${Swh_Column_${side}_Picture_Orig_Aspect_Ratio}
 	Set Test Variable  ${picsize}   original
-	
-Click And Select Text As ${side} Content Type
-	Wait Until Element Is Clickable  ${Opt_Column_${side}_AddContent_Text}   timeout=3
-	Wait Until Keyword Succeeds  10x  500ms  Click Element  ${Opt_Column_${side}_AddContent_Text}
-
-Add Text Content To Column on ${side}
-	[Documentation]   Adds text content to selected column by selecting content type first and then inserting text
-	Run Keyword If  '${language}'=='fi'  Click And Select Text As ${side} Content Type
-	${TextFileContent}=  Get File  ${CONTENT_PATH}/text_content_short_${language}.txt
-	@{content} =	Split String	${TextFileContent}   .,.
-	${content_left}=  Get From List  ${content}   0
-	${content_right}=  Get From List  ${content}   1
-	${content_text}=  Set Variable If
-	... 	 '${side}'=='Left'	${content_left}
-	... 	 '${side}'=='Right'	${content_right}
-	${editpicturevisible}=  Run Keyword And Return Status    Element Should Not Be Visible  ${Btn_Column_${side}_Edit}   timeout=1
-	Run Keyword Unless   ${editpicturevisible}   Wait Until Keyword Succeeds  5x  200ms  Click Element   ${Btn_Column_${side}_Edit}
-	Wait Until Keyword Succeeds  10x  500ms  Input Text To Frame   ${Frm_Column_${side}_Text}   //body   ${content_text}
-
-Add ${content} to Left Column
-	[Documentation]  Here we need to do some tricks in case picture tests original size. Content -string is modified
-	...				 so that picture compare assertion works. Also long, snowdrops picture is used in the case because
-	...				 pictures with longer width value does not get cropped. Only long pictures do.
-	${content}=  Convert To Lower Case   ${content}
-	Focus   ${Ddn_Column_Left_AddContent}
-	Wait Until Keyword Succeeds  5x  100ms  Click Button  ${Ddn_Column_Left_AddContent}
-	Run Keyword If  '${content}'=='picture'  Add Picture to Column   Left    train   @{pic_1_texts_${language}}
-	Run Keyword If  '${content}'=='original picture'  Add Picture to Column   Left    snowdrops   @{pic_1_texts_${language}}
-	Run Keyword If  '${content}'=='text'  Add Text Content To Column on Left
-	Run Keyword If  ('${content}'=='picture') & ('${language}'=='fi')  Add Picture Caption to Left
-	${content}=  Remove String And Strip Text   ${content}   original
-	Set Test Variable  ${content1}   ${content}
-  
-
-Add ${content:[^"]+} to Right Column
-	[Documentation]   Adds given content to Right column.
-	Set Test Variable  ${content2}   ${content}
-	Wait Until Element Is Clickable  ${Ddn_Column_Right_AddContent}   timeout=3
-	Focus   ${Ddn_Column_Right_AddContent}
-	Wait Until Keyword Succeeds  10x  500ms  Click Button  ${Ddn_Column_Right_AddContent}
-	Run Keyword If  '${content}'=='Picture'  Add Picture to Column   Right    temple   @{pic_2_texts_${language}}
-	Run Keyword If  '${content}'=='Text'  Add Text Content To Column on Right
-	Run Keyword If  '${content}'=='Link'  Add "${linkstyle}" Link To Right Column
-
 
 Take Screenshot Of Content
 	Maximize Browser Window

@@ -76,7 +76,7 @@ Link Should Be Opened In New Window   New Window Should Be Opened
 
 User Opens Created Content
 	 Open Created Content
-	 Take Screenshot Of Content
+	 Banner.Take Screenshot Of Content
 	 
 Layout Should Not Have Changed
 	${excludeneeded}=  Image Comparison Needs To Exclude Areas

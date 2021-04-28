@@ -20,14 +20,13 @@ Browse Gallery Images
 *** Keywords ***
 User Goes To New Page -Site  	Go To New Page Site
 User Submits The New Page   	
-	Sleep  1
 	Submit The New Page 
 
 User Starts Creating Page With Gallery  Start Creating Page With Gallery
 
 User Opens Created Content
 	 Open Created Content
-	 Take Screenshot Of Content
+	 Gallery.Take Screenshot Of Content
 
 Layout Should Not Have Changed
 	${originalpic} =  Set Variable   ${SCREENSHOTS_PATH}/${BROWSER}/${language}_short_GALLERY_${BROWSER}.png

@@ -50,3 +50,8 @@ Rename Reports Picture To Use Original Picture Name
 	...				  only new name in second one.
 	[Arguments]  ${fullpath}   ${newname}
 	Move File  ${fullpath}  ${newname}
+	
+Zoom Out And Capture Page Screenshot
+	Execute javascript  document.body.style.zoom="25%"
+	Capture Page Screenshot
+	Execute javascript  document.body.style.zoom="100%"

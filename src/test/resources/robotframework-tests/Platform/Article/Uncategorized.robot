@@ -36,7 +36,7 @@ Text And Picture
 *** Keywords ***
 User Opens Created Content
 	 Open Created Content
-	 Take Screenshot Of Content
+	 Uncategorized.Take Screenshot Of Content
 	
 
 User Submits The New Article

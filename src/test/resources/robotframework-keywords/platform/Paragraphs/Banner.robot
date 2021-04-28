@@ -38,8 +38,3 @@ Click Link In Content
 New Window Should Be Opened
 	${titles}=  Get Window Titles
 	Should Contain   ${titles}   Rautatie (romaani) – Wikipedia
-	
-Select Icon With Name
-	[Arguments]   ${icon_name}
-	Focus   ${Ddn_Banner_Icon}
-	Click Element With Value   ${icon_name}

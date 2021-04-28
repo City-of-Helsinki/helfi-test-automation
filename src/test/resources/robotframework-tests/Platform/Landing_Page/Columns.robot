@@ -104,7 +104,7 @@ User Adds Link Button With ${linkstyle} Style into ${side} Column
 
 User Opens Created Content
 	 Open Created Content
-	 Take Screenshot Of Content
+	 Columns.Take Screenshot Of Content
 
 Picture on ${side} Has Original Aspect Ratio Enabled
 	Use Original Aspect Ratio on ${side}

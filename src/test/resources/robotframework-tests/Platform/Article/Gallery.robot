@@ -27,7 +27,7 @@ User Goes To New Article Site  Go To New Article Site
 
 User Opens Created Content
 	 Open Created Content
-	 Take Screenshot Of Content
+	 Gallery.Take Screenshot Of Content
 
 Layout Should Not Have Changed
 	${originalpic} =  Set Variable   ${SCREENSHOTS_PATH}/${BROWSER}/${language}_short_ARTICLE_GALLERY_${BROWSER}.png

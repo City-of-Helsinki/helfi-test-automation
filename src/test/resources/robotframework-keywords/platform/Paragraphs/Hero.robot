@@ -119,11 +119,6 @@ Input Hero Description
 	[Documentation]	  Here. In translation cases cke -identifier numbers have changed. Thus some if else is needed.
 	Run Keyword If  '${language}'=='fi'	Input Text To Frame   ${Frm_Content_Description}   //body   ${description}
 	Run Keyword If  '${language}'!='fi'   Input Text To Frame   ${Frm_Content}   //body   ${description}
-	
-Take Screenshot Of Content
-	Maximize Browser Window
-	Execute javascript  document.body.style.zoom="40%"
-	Capture Page Screenshot    filename=${BROWSER}_TESTRUN-${SUITE NAME}-${TEST NAME}_${language}.png
-	Execute javascript  document.body.style.zoom="100%"
+
 
 

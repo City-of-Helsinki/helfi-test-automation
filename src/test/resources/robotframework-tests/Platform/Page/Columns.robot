@@ -10,7 +10,7 @@ Force Tags		PAGE
 
 *** Test Cases ***
 50-50
-	[Tags]  COLUMNS   CRITICAL
+	[Tags]  COLUMNS   CRITICAL   TODO
 	Given User Goes To New Page -Site
 	And User Starts Creating Page With 50-50 Division And Text Content
 	And User Adds Text to Left Column
@@ -105,7 +105,7 @@ User Adds Link Button With ${linkstyle} Style into ${side} Column
 
 User Opens Created Content
 	 Open Created Content
-	 Take Screenshot Of Content
+	 Columns.Take Screenshot Of Content
 
 Picture on ${side} Has Original Aspect Ratio Enabled
 	Use Original Aspect Ratio on ${side}

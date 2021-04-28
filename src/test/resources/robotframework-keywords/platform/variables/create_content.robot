@@ -41,6 +41,7 @@ ${Opt_AddPicture}						    name:field_content_image_add_more
 ${Opt_AddText}								name:field_content_text_add_more
 ${Opt_AddLink}								name:field-content-link-add-more
 ${Opt_AddBanner}   							name:field_content_banner_add_more
+${Opt_AddAccordion}   						name:field_content_accordion_add_more
 ${Btn_File_Upload}					    	name:files[upload]
 ${Inp_Pic_Name}								css:[data-drupal-selector=edit-media-0-fields-name-0-value]
 ${Inp_Pic_AltText}							css:[data-drupal-selector=edit-media-0-fields-field-media-image-0-alt]
@@ -60,6 +61,7 @@ ${Btn_Actions_SelectedItem_Deletebutton}	//input[@id='edit-submit']
 ${Opt_Link_Fullcolor}			css:[value=primary]
 ${Opt_Link_Framed}				css:[value=secondary]
 ${Opt_Link_Transparent}			css:[value=supplementary]
+${Ddn_Icon} 							//select[contains(@data-drupal-selector, 'subform-field-icon')]
 
 #HERO
 ${Inp_Hero_Title}							//input[contains(@id, 'edit-field-hero-0-subform')]
@@ -145,9 +147,19 @@ ${Txt_Author}								css:.article__author
 # BANNER
 ${Opt_Banner_Left}							css:[value=align-left]
 ${Inp_Banner_Title}							name:field_content[0][subform][field_banner_title][0][value]
-${Ddn_Banner_Icon}		 					name:field_content[0][subform][field_icon][0][icon]
+
 ${Inp_Banner_Link_Uri}						name:field_content[0][subform][field_banner_link][0][uri]
 ${Inp_Banner_Link_Title}					name:field_content[0][subform][field_banner_link][0][title]
 ${Swh_Banner_Link_OpenInNewWindow}   		name:field_content[0][subform][field_banner_link][0][options][target_new]
 #UNCATEGORIZED
 ${Btn_Picture}								name:field_image-media-library-open-button-field_content-1-subform
+
+#ACCORDION
+${Inp_Accordion_Title}	  					//input[contains(@data-drupal-selector, 'subform-field-accordion-item-heading-0-value')]
+${Ddn_Accordion_AddContent}					//ul[contains(@data-drupal-selector, 'subform-field-accordion-item-content-add-more-operations')]//li[2]/button
+${Opt_Accordion_Content_Text}				//input[contains(@name, 'subform_field_accordion_item_content_text_add_more')]
+${Opt_Accordion_Content_Columns}			//input[contains(@name, 'subform_field_accordion_item_content_columns_add_more')]
+${Frm_Accordion_Content}					css:#cke_121_contents > iframe	
+${Btn_Accordion_View}						css:#handorgel1-fold1-header > button
+${Opt_Accordion_Column_Left_AddContent_Text}	//ul[contains(@data-drupal-selector, 'subform-field-columns-left-column-add-more-operations')]//input[contains(@name,'subform_field_accordion_item_content_text_add_more')]
+${Opt_Accordion_Column_Right_AddContent_Text}	//ul[contains(@data-drupal-selector, 'subform-field-columns-right-column-add-more-operations')]//input[contains(@name,'subform_field_accordion_item_content_text_add_more')]

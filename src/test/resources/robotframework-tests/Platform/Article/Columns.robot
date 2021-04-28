@@ -102,7 +102,7 @@ User Adds Link Button With ${linkstyle} Style into ${side} Column
 
 User Opens Created Content
 	 Open Created Content
-	 Take Screenshot Of Content
+	 Columns.Take Screenshot Of Content
 	
 User Submits The New Article
 	Submit The New Article
