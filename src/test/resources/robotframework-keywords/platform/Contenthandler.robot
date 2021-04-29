@@ -309,6 +309,11 @@ Take Screenshot Of Content
 	Execute javascript  document.body.style.zoom="30%"
 	Capture Page Screenshot    filename=${BROWSER}_TESTRUN-${SUITE NAME}-${TEST NAME}_${language}.png
 	Execute javascript  document.body.style.zoom="100%"
+
+New Window Should Be Opened
+	[Arguments]   ${title}
+	${titles}=  Get Window Titles
+	Should Contain   ${titles}   ${title}
 	
 # COLUMNS RELATED
 	
@@ -383,3 +388,9 @@ Add Text Content To Column on ${side}
 Click And Select Text As ${side} Content Type
 	Wait Until Element Is Clickable  ${Opt_Column_${side}_AddContent_Text}   timeout=3
 	Wait Until Keyword Succeeds  3x  100ms  Click Element  ${Opt_Column_${side}_AddContent_Text}
+	
+Compare Pictures And Handle PictureData
+	[Arguments]   ${originalpic}   ${comparisonpic}
+	Run Keyword If   ${USEORIGINALNAME}   Rename Picture With New Name   ${originalpic}   ${comparisonpic}
+	Compared Pictures Match   ${originalpic}    ${comparisonpic}
+	Run Keyword Unless   ${USEORIGINALNAME}   Copy Original Screenshot To Reports Folder   ${originalpic}

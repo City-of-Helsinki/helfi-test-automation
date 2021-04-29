@@ -33,8 +33,3 @@ Set Banner Title
 
 Click Link In Content
 	Run Keyword If  '${language}'=='fi'   Click Link   css:div.banner__content-wrapper > a
-	
-
-New Window Should Be Opened
-	${titles}=  Get Window Titles
-	Should Contain   ${titles}   Rautatie (romaani) – Wikipedia

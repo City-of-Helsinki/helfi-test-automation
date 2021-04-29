@@ -248,9 +248,7 @@ Layout Should Not Have Changed
 ...  '${color}'!='${EMPTY}'  ${SCREENSHOTS_PATH}/${BROWSER}/${language}_short_LANDINGPAGE_HERO_left_${color}_nopicture_${BROWSER}.png
 ...   ${SCREENSHOTS_PATH}/${BROWSER}/${language}_short_LANDINGPAGE_HERO_${value}_vaakuna_nopicture_${BROWSER}.png
 	${comparisonpic}=  Set Variable  ${REPORTS_PATH}/${BROWSER}_TESTRUN-${SUITE NAME}-${TEST NAME}_${language}.png
-	Run Keyword If   ${USEORIGINALNAME}   Rename Picture With New Name   ${originalpic}   ${comparisonpic}
-	Compared Pictures Match   ${originalpic}    ${comparisonpic}
-	Run Keyword Unless   ${USEORIGINALNAME}   Copy Original Screenshot To Reports Folder   ${originalpic}
+	Compare Pictures And Handle PictureData	  ${originalpic}   ${comparisonpic}
 	
 
 	

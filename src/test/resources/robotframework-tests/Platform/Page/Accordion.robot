@@ -19,7 +19,7 @@ White Accordion
 	And Accordion Component Works As Expected	
 	
 Grey Accordion
-	[Tags]  CRITICAL
+	[Tags]
 	Given User Goes To New Page -Site
 	And User Starts Creating Grey Accordion With h2 Heading And Text Content
 	And User Adds Content to Text Subcategory
@@ -39,7 +39,7 @@ Columns With Pictures
 	And Accordion Component Works As Expected	
 
 Columns With Text
-	[Tags]  CRITICAL
+	[Tags]
 	Given User Goes To New Page -Site
 	And User Starts Creating White Accordion With h2 Heading And Columns Content
 	User Adds Text Content to Columns Subcategory

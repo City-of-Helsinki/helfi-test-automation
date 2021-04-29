@@ -42,6 +42,7 @@ ${Opt_AddText}								name:field_content_text_add_more
 ${Opt_AddLink}								name:field-content-link-add-more
 ${Opt_AddBanner}   							name:field_content_banner_add_more
 ${Opt_AddAccordion}   						name:field_content_accordion_add_more
+${Opt_AddContentCards} 						name:field_content_content_cards_add_more
 ${Btn_File_Upload}					    	name:files[upload]
 ${Inp_Pic_Name}								css:[data-drupal-selector=edit-media-0-fields-name-0-value]
 ${Inp_Pic_AltText}							css:[data-drupal-selector=edit-media-0-fields-field-media-image-0-alt]
@@ -163,3 +164,10 @@ ${Frm_Accordion_Content}					css:#cke_121_contents > iframe
 ${Btn_Accordion_View}						css:#handorgel1-fold1-header > button
 ${Opt_Accordion_Column_Left_AddContent_Text}	//ul[contains(@data-drupal-selector, 'subform-field-columns-left-column-add-more-operations')]//input[contains(@name,'subform_field_accordion_item_content_text_add_more')]
 ${Opt_Accordion_Column_Right_AddContent_Text}	//ul[contains(@data-drupal-selector, 'subform-field-columns-right-column-add-more-operations')]//input[contains(@name,'subform_field_accordion_item_content_text_add_more')]
+
+# CONTENT_CARDS
+${Inp_ContentCard_Title}							name:field_content[1][subform][field_content_cards_title][0][value]
+${Inp_ContentCard_Design}							name:field_content[1][subform][field_content_cards_design][0]
+${Inp_ContentCard_TargetId}							//input[contains(@name, 'target_id')]
+${Inp_ContentCard_Addnew}							name:field_content_1_subform_field_content_cards_content_add_more
+

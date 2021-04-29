@@ -72,7 +72,7 @@ User Starts Creating ${alignment} Aligned Banner With ${linkstyle} Link   Create
 User Clicks The Content Link   
 	Wait Until Keyword Succeeds  5x  200ms  Click Link In Content
 
-Link Should Be Opened In New Window   New Window Should Be Opened
+Link Should Be Opened In New Window   New Window Should Be Opened   Rautatie (romaani) – Wikipedia
 
 User Opens Created Content
 	 Open Created Content
