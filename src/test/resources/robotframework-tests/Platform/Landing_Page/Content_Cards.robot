@@ -2,54 +2,54 @@
 Resource        ../../../robotframework-keywords/platform/Paragraphs/Content_Cards.robot
 Test Setup      Login And Go To Content Page
 Test Teardown   Cleanup and Close Browser	
-Force Tags		ARTICLE   CONTENTCARDS
+Force Tags		LANDINGPAGE   CONTENTCARDS
 
 
 
 *** Test Cases ***
 Small Cards
 	[Tags]  CRITICAL
-	Given User Goes To New Article Site
-	And User Starts Creating Article With Small Content Card For Linkkiesimerkit Content Page
+	Given User Goes To New LandingPage Site
+	And User Starts Creating Landingpage With Small Content Card For Linkkiesimerkit Content Page
 	And User Adds New ContentCard For Esimerkkisivu Content
-	When User Submits The New Article
+	When New Landingpage is Submitted
 	And User Opens Created Content
 	Then Layout Should Not Have Changed
 	And ContentCards Should Work Correctly
 	
 Large Cards
 	[Tags]  
-	Given User Goes To New Article Site
-	And User Starts Creating Article With Large Content Card For Linkkiesimerkit Content Page
+	Given User Goes To New LandingPage Site
+	And User Starts Creating Landingpage With Large Content Card For Linkkiesimerkit Content Page
 	And User Adds New ContentCard For Esimerkkisivu Content
-	When User Submits The New Article
+	When New Landingpage is Submitted
 	And User Opens Created Content
 	Then Layout Should Not Have Changed
 	And ContentCards Should Work Correctly
 	
 Small Grey Cards
-	[Tags] 
-	Given User Goes To New Article Site
-	And User Starts Creating Article With Small Grey Content Card For Linkkiesimerkit Content Page
+	[Tags]
+	Given User Goes To New LandingPage Site
+	And User Starts Creating Landingpage With Small Grey Content Card For Linkkiesimerkit Content Page
 	And User Adds New ContentCard For Esimerkkisivu Content
-	When User Submits The New Article
+	When New Landingpage is Submitted
 	And User Opens Created Content
 	Then Layout Should Not Have Changed
 	And ContentCards Should Work Correctly
 	
 Large Grey Cards
 	[Tags]
-	Given User Goes To New Article Site
-	And User Starts Creating Article With Large Grey Content Card For Linkkiesimerkit Content Page
+	Given User Goes To New LandingPage Site
+	And User Starts Creating Landingpage With Large Grey Content Card For Linkkiesimerkit Content Page
 	And User Adds New ContentCard For Esimerkkisivu Content
-	When User Submits The New Article
+	When New Landingpage is Submitted
 	And User Opens Created Content
 	Then Layout Should Not Have Changed
 	And ContentCards Should Work Correctly
 	
 *** Keywords ***
-User Starts Creating Article With ${cardsize} Content Card For ${contentname} Content Page
-	Create Article With ${cardsize} Cards For ${contentname} Content	
+User Starts Creating Landingpage With ${cardsize} Content Card For ${contentname} Content Page
+	Create Landingpage With ${cardsize} Cards For ${contentname} Content	
 	
 User Adds New ContentCard For ${contentname} Content
 	Add New ContentCard For ${contentname} Content
@@ -57,9 +57,8 @@ User Adds New ContentCard For ${contentname} Content
 ContentCards Should Work Correctly
 	ContentCards Are Working Correctly
 	
-User Goes To New Article Site  Go To New Article Site
-User Submits The New Article
-	Submit The New Article
+User Goes To New LandingPage Site   Go To New LandingPage Site
+New Landingpage is Submitted	Submit The New Landingpage
 	
 User Opens Created Content
 	 Open Created Content

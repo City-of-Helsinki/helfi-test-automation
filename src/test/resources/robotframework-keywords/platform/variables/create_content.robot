@@ -167,7 +167,9 @@ ${Opt_Accordion_Column_Right_AddContent_Text}	//ul[contains(@data-drupal-selecto
 
 # CONTENT_CARDS
 ${Inp_ContentCard_Title}							name:field_content[1][subform][field_content_cards_title][0][value]
+${Inp_ContentCard_Landingpage_Title}				name:field_content[0][subform][field_content_cards_title][0][value]
 ${Inp_ContentCard_Design}							name:field_content[1][subform][field_content_cards_design][0]
+${Inp_ContentCard_Landingpage_Design}				name:field_content[0][subform][field_content_cards_design][0]
 ${Inp_ContentCard_TargetId}							//input[contains(@name, 'target_id')]
-${Inp_ContentCard_Addnew}							name:field_content_1_subform_field_content_cards_content_add_more
+${Inp_ContentCard_Addnew}							//input[contains(@name, 'subform_field_content_cards_content_add_more')]
 
