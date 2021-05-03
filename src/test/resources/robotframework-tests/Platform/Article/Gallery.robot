@@ -4,11 +4,11 @@ Documentation   Testing Gallery. Actually just checking that layout is not broke
 Resource        ../../../robotframework-keywords/platform/Paragraphs/Gallery.robot
 Test Setup      Login And Go To Content Page
 Test Teardown   Cleanup and Close Browser	
-Force Tags		ARTICLE
+Force Tags		ARTICLE   GALLERY
 
 *** Test Cases ***
 Browse Gallery Images
-	[Tags]  GALLERY   CRITICAL
+	[Tags]  CRITICAL
 	Given User Goes To New Article Site
 	And User Starts Creating Page With Gallery
 	When User Submits The New Article
@@ -18,7 +18,6 @@ Browse Gallery Images
 	
 *** Keywords ***    						
 User Submits The New Article
-	Sleep  1
 	Submit The New Article
 	 		
 User Starts Creating Page With Gallery  Start Creating Article With Gallery

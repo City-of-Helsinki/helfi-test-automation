@@ -394,3 +394,16 @@ Compare Pictures And Handle PictureData
 	Run Keyword If   ${USEORIGINALNAME}   Rename Picture With New Name   ${originalpic}   ${comparisonpic}
 	Compared Pictures Match   ${originalpic}    ${comparisonpic}
 	Run Keyword Unless   ${USEORIGINALNAME}   Copy Original Screenshot To Reports Folder   ${originalpic}
+	
+Input Non-paragraph Related Content
+	[Arguments]   ${pagetype}
+	Input Title  Test Automation: ${TEST NAME}
+	Run Keyword If  '${pagetype}'=='Article'   Set Article Spesific Values
+	${headertitle}=  Get File  ${CONTENT_PATH}/text_description_short_${language}.txt
+	${islandingpage}=  Suite Name Contains Text    Landing Page
+	Run Keyword Unless  ${islandingpage}   Input Content Header Title  ${headertitle}	
+	
+Set Article Spesific Values
+	Input Author   Test Automation Author
+	${ingress}=  Get File  ${CONTENT_PATH}/text_ingress_${language}.txt
+	Input Lead   ${ingress}

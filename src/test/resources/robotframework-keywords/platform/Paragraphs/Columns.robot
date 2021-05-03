@@ -3,19 +3,10 @@ Resource        ../Contenthandler.robot
 Resource        ../Commonkeywords.robot
 
 *** Keywords ***
-Set Article Spesific Values
-	Input Author   Test Automation Author
-	${ingress}=  Get File  ${CONTENT_PATH}/text_ingress_${language}.txt
-	Input Lead   ${ingress}
-	
 Create ${pagetype} With ${division} Division And ${contenttype} Content
  	Set Test Variable  ${contenttype}   ${contenttype}
- 	Input Title  Test Automation: ${TEST NAME}
- 	Run Keyword If  '${pagetype}'=='Article'   Set Article Spesific Values
-	Set Test Variable   ${division}   ${division}
-	${headertitle}=  Get File  ${CONTENT_PATH}/text_description_short_${language}.txt
-	${islandingpage}=  Suite Name Contains Text    Landing Page
-	Run Keyword Unless  ${islandingpage}   Input Content Header Title  ${headertitle}
+ 	Set Test Variable   ${division}   ${division}
+ 	Input Non-paragraph Related Content   ${pagetype}
 	Run Keyword If  '${language}'=='fi'  Open Paragraph For Edit   ${Opt_AddColumns}
 	Wait Until Keyword Succeeds  5x  100ms  Input Title To Paragraph   ${Inp_Column_Title}
 	Click Element With Value   '${division}'

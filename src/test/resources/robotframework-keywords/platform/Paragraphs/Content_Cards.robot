@@ -14,19 +14,11 @@ Resolve Card-Size Variable
 	...			'${card-size}'=='large grey'    large-cards-grey
 	[Return]   ${cardsizevariable}
 
-Set Article Spesific Values
-	Input Author   Test Automation Author
-	${ingress}=  Get File  ${CONTENT_PATH}/text_ingress_${language}.txt
-	Input Lead   ${ingress}
-
 Create ${pagetype} With ${cardsize} Cards For ${contentname} Content
- 	Input Title  Test Automation: ${TEST NAME}
  	Set Test Variable  ${cardsize}  ${cardsize}
- 	Run Keyword If  '${pagetype}'=='Article'   Set Article Spesific Values
-	${headertitle}=  Get File  ${CONTENT_PATH}/text_description_short_${language}.txt
-	${islandingpage}=  Suite Name Contains Text    Landing Page
-	Run Keyword Unless  ${islandingpage}   Input Content Header Title  ${headertitle}
+ 	Input Non-paragraph Related Content   ${pagetype}
 	Open Paragraph For Edit   ${Opt_AddContentCards}
+	${islandingpage}=  Suite Name Contains Text    Landing Page
 	Run Keyword Unless  ${islandingpage}   Wait Until Keyword Succeeds  5x  100ms  Input Title To Paragraph   ${Inp_ContentCard_Title}
 	Run Keyword If  ${islandingpage}  Wait Until Keyword Succeeds  5x  100ms  Input Title To Paragraph   ${Inp_ContentCard_Landingpage_Title}
 	${cardsizevalue}=  Resolve Card-Size Variable   ${cardsize}

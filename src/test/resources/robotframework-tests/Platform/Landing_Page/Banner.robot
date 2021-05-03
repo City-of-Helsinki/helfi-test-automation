@@ -3,11 +3,11 @@ Documentation   Testing Banner paragraph in landing page content type
 Resource        ../../../robotframework-keywords/platform/Paragraphs/Banner.robot
 Test Setup      Login And Go To Content Page
 Test Teardown   Cleanup and Close Browser
-Force Tags		LANDINGPAGE
+Force Tags		LANDINGPAGE   BANNER
 
 *** Test Cases ***
 Left Aligned Banner With Fullcolor Link
-	[Tags]  BANNER   CRITICAL
+	[Tags]  CRITICAL
 	Given User Goes To New LandingPage Site
 	And User Starts Creating Left Aligned Banner With Fullcolor Link
 	When New Landingpage is Submitted
@@ -15,7 +15,7 @@ Left Aligned Banner With Fullcolor Link
 	Then Layout Should Not Have Changed
 
 Left Aligned Banner With Transparent Link
-	[Tags]  BANNER   CRITICAL
+	[Tags]  
 	Given User Goes To New LandingPage Site
 	And User Starts Creating Left Aligned Banner With Transparent Link
 	When New Landingpage is Submitted
@@ -23,7 +23,7 @@ Left Aligned Banner With Transparent Link
 	Then Layout Should Not Have Changed
 	
 Left Aligned Banner With Framed Link
-	[Tags]  BANNER   CRITICAL
+	[Tags]  
 	Given User Goes To New LandingPage Site
 	And User Starts Creating Left Aligned Banner With Framed Link
 	When New Landingpage is Submitted
@@ -31,7 +31,7 @@ Left Aligned Banner With Framed Link
 	Then Layout Should Not Have Changed	
 
 Center Aligned Banner With Fullcolor Link
-	[Tags]  BANNER   CRITICAL
+	[Tags]  CRITICAL
 	Given User Goes To New LandingPage Site
 	And User Starts Creating Center Aligned Banner With Fullcolor Link
 	When New Landingpage is Submitted
@@ -39,7 +39,7 @@ Center Aligned Banner With Fullcolor Link
 	Then Layout Should Not Have Changed
 
 Center Aligned Banner With Transparent Link
-	[Tags]  BANNER   CRITICAL
+	[Tags]  
 	Given User Goes To New LandingPage Site
 	And User Starts Creating Center Aligned Banner With Transparent Link
 	When New Landingpage is Submitted
@@ -47,7 +47,7 @@ Center Aligned Banner With Transparent Link
 	Then Layout Should Not Have Changed
 	
 Center Aligned Banner With Framed Link
-	[Tags]  BANNER   CRITICAL
+	[Tags]  
 	Given User Goes To New LandingPage Site
 	And User Starts Creating Center Aligned Banner With Framed Link
 	When New Landingpage is Submitted
@@ -55,7 +55,7 @@ Center Aligned Banner With Framed Link
 	Then Layout Should Not Have Changed		
 
 Link Opens In New Window
-	[Tags]  BANNER   CRITICAL
+	[Tags]  CRITICAL
 	Given User Goes To New LandingPage Site
 	And User Starts Creating Left Aligned Banner With Fullcolor Link
 	When New Landingpage is Submitted

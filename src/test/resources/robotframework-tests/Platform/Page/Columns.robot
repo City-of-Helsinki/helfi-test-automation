@@ -4,13 +4,13 @@ Documentation   Testing Columns Settings in Platform by comparing layout to defa
 Resource        ../../../robotframework-keywords/platform/Paragraphs/Columns.robot
 Test Setup      Login And Go To Content Page
 Test Teardown   Cleanup and Close Browser	
-Force Tags		PAGE
+Force Tags		PAGE   COLUMNS
 *** Variables ***
 
 
 *** Test Cases ***
 50-50
-	[Tags]  COLUMNS   CRITICAL
+	[Tags]  CRITICAL
 	Given User Goes To New Page -Site
 	And User Starts Creating Page With 50-50 Division And Text Content
 	And User Adds Text to Left Column
@@ -20,7 +20,7 @@ Force Tags		PAGE
 	Then Layout Should Not Have Changed	
 	
 30-70
-	[Tags]  COLUMNS
+	[Tags]
 	Given User Goes To New Page -Site 
 	And User Starts Creating Page With 30-70 Division And Text Content
 	And User Adds Text to Left Column
@@ -30,7 +30,7 @@ Force Tags		PAGE
 	Then Layout Should Not Have Changed	
 
 70-30
-	[Tags]  COLUMNS
+	[Tags]
 	Given User Goes To New Page -Site
 	And User Starts Creating Page With 70-30 Division And Text Content
 	And User Adds Text to Left Column
@@ -40,7 +40,7 @@ Force Tags		PAGE
 	Then Layout Should Not Have Changed	
 
 50-50 with picture
-	[Tags]  COLUMNS   CRITICAL
+	[Tags]  CRITICAL
 	Given User Goes To New Page -Site  
 	And User Starts Creating Page With 50-50 Division And Picture Content
 	And User Adds Picture to Left Column
@@ -50,7 +50,7 @@ Force Tags		PAGE
 	Then Layout Should Not Have Changed	
 
 50-50 with picture and text
-	[Tags]  COLUMNS   CRITICAL
+	[Tags]  CRITICAL
 	Given User Goes To New Page -Site 
 	And User Starts Creating Page With 50-50 Division And Mixed Content
 	And User Adds Picture to Left Column
@@ -60,7 +60,7 @@ Force Tags		PAGE
 	Then Layout Should Not Have Changed
 
 70-30 with original size picture and text
-	[Tags]  COLUMNS   CRITICAL
+	[Tags]  CRITICAL
 	Given User Goes To New Page -Site
 	And User Starts Creating Page With 70-30 Division And Mixed Content
 	And User Adds Original Picture to Left Column
@@ -71,7 +71,7 @@ Force Tags		PAGE
 	Then Layout Should Not Have Changed
 
 Finnish English Swedish Translations
-	[Tags]  COLUMNS   CRITICAL
+	[Tags]  CRITICAL
 	Given User Creates Page With 50-50 Division And Mixed Content in Finnish Language
 	And User Creates Page With 50-50 Division And Mixed Content in English Language
 	And User Creates Page With 50-50 Division And Mixed Content in Swedish Language

@@ -6,7 +6,7 @@ Resource        ../Commonkeywords.robot
 *** Keywords ***
 Create ${pagetype} With List Of Links ${style}
 	Set Test Variable  ${style}  ${style}
-	Input Non-paragraph related Content   ${pagetype}
+	Input Non-paragraph Related Content   ${pagetype}
 	Open Paragraph For Edit   ${Opt_AddListOfLinks}
 	${style}=   Resolve Style Variable   ${style}
 	Wait Until Keyword Succeeds  5x  200ms  Select From List By Value  ${Inp_ListOfLinks_Design}  ${style}
@@ -31,18 +31,6 @@ Add Picture To Link
 	Wait Until Element Is Visible  //input[contains(@data-drupal-selector, 'remove-button')]   timeout=3
 	Set Test Variable  ${picsadded}    ${picsadded}+1 
 	Set Test Variable  ${picture}   picture
-
-Set Article Spesific Values
-	Input Author   Test Automation Author
-	${ingress}=  Get File  ${CONTENT_PATH}/text_ingress_${language}.txt
-	Input Lead   ${ingress}
-	
-Input Non-paragraph related Content
-	[Arguments]   ${pagetype}
-	Input Title  Test Automation: ${TEST NAME}
-	Run Keyword If  '${pagetype}'=='Article'   Set Article Spesific Values
-	${headertitle}=  Get File  ${CONTENT_PATH}/text_description_short_${language}.txt
-	Input Content Header Title  ${headertitle}
 	
 Resolve Style Variable
 	[Arguments]  ${style}

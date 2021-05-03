@@ -10,10 +10,7 @@ Create ${pagetype} With ${color} Color , ${heading} Heading And ${contenttype} C
 	Set Test Variable  ${contenttype}  ${contenttype}
 	Set Test Variable  ${color}  ${color}
 	Set Test Variable  ${heading}  ${heading}
-	Input Title  Test Automation: ${TEST NAME}
-	${headertitle}=  Get File  ${CONTENT_PATH}/text_description_short_${language}.txt
-	${islandingpage}=  Suite Name Contains Text    Landing Page
-	Run Keyword Unless  ${islandingpage}   Input Content Header Title  ${headertitle}
+	Input Non-paragraph Related Content   ${pagetype}
 	Open Paragraph For Edit   ${Opt_AddAccordion}
 	Run Keyword Unless  '${color}'=='White'  Wait Until Keyword Succeeds  5x  100ms  Click Element With Value   grey
 	Wait Until Keyword Succeeds  5x  200ms  Click Element   //option[text()='${heading}']

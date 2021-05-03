@@ -4,16 +4,9 @@ Resource        ../Contenthandler.robot
 Resource        ../Commonkeywords.robot
 
 *** Keywords ***
-Set Article Spesific Values
-	Input Author   Test Automation Author
-	${ingress}=  Get File  ${CONTENT_PATH}/text_ingress_${language}.txt
-	Input Lead   ${ingress}
 
 Start Creating ${pagetype} With Gallery
-	Input Title  Test Automation: ${TEST NAME}
-	Run Keyword If  '${pagetype}'=='Article'   Set Article Spesific Values
-	${headertitle}=  Get File  ${CONTENT_PATH}/text_description_short_${language}.txt
-	Input Content Header Title  ${headertitle}
+	Input Non-paragraph Related Content   ${pagetype}
 	Open Paragraph For Edit   ${Opt_AddGallery}
 	Add Picture 'train' And Caption To 1:th Picture
 	Add Picture 'temple' And Caption To 2:th Picture

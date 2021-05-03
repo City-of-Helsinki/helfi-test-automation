@@ -6,8 +6,7 @@ Resource        ../Commonkeywords.robot
 Create ${pagetype} With ${alignment} Aligned Banner And With ${linkstyle} Link
 	Set Test Variable   ${alignment}   ${alignment}
 	Set Test Variable   ${linkstyle}   ${linkstyle}
-	Input Title  Test Automation: ${TEST NAME}
- 	Run Keyword If  '${pagetype}'=='Article'   Set Article Spesific Values
+	Input Non-paragraph Related Content   ${pagetype}
 	Open Paragraph For Edit   ${Opt_AddBanner}
 	Wait Until Keyword Succeeds  5x  200ms  Input Title To Paragraph   ${Inp_Banner_Title}
 	Run Keyword If  '${alignment}'=='Left'   Click Element   ${Opt_Banner_Left}

@@ -12,17 +12,9 @@ Take Screenshot Of Content
 	Capture Page Screenshot    filename=${BROWSER}_TESTRUN-${SUITE NAME}-${TEST NAME}_${language}.png
 	Execute javascript  document.body.style.zoom="100%"
 
-Set Article Spesific Values
-	Input Author   Test Automation Author
-	${ingress}=  Get File  ${CONTENT_PATH}/text_ingress_${language}.txt
-	Input Lead   ${ingress}
-
 Start Creating a New ${pagetype} With ${content} Content
 	Set Test Variable  ${content}  ${content}
-	Input Title  Test Automation: ${TEST NAME}
-	Run Keyword If  '${pagetype}'=='Article'   Set Article Spesific Values
-	${headertitle}=  Get File  ${CONTENT_PATH}/text_description_short_${language}.txt
-	Input Content Header Title  ${headertitle}
+	Input Non-paragraph Related Content   ${pagetype}
 	Wait Until Element Is Visible   ${Ddn_AddContent}   timeout=3
 	Run Keyword If  '${language}'=='fi'  Click Element	${Ddn_AddContent}
 	Run Keyword If  '${content}'=='Text'	Add Text Content To Page

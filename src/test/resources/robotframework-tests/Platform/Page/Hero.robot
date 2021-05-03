@@ -5,7 +5,7 @@ Documentation   Testing Hero Block Settings in Platform. Tests are created with 
 Resource        ../../../robotframework-keywords/platform/Paragraphs/Hero.robot
 Test Setup      Login And Go To Content Page
 Test Teardown   Cleanup and Close Browser	
-Force Tags		PAGE
+Force Tags		PAGE   HERO
 *** Variables ***
 ${color}	 		 ${EMPTY}
 
@@ -13,7 +13,7 @@ ${color}	 		 ${EMPTY}
 
 Left Aligned
 	[Documentation]   Left Aligned Hero Block with Short version of text files in Finnish. 'Vaakuna' style.
-	[Tags]   HERO    CRITICAL
+	[Tags]   CRITICAL
 	Given User Goes To New Page -Site
 	And User Starts Creating a Left Aligned Page With Hero Block
 	When User Submits The New Page
@@ -21,7 +21,7 @@ Left Aligned
 	Then Layout Should Not Have Changed	
 
 Center Aligned
-	[Tags]  HERO
+	[Tags] 
 	Given User Goes To New Page -Site
 	And User Starts Creating a Center Aligned Page With Hero Block
 	When User Submits The New Page
@@ -30,7 +30,7 @@ Center Aligned
 
 Left Aligned Picture
 	[Documentation]   Left Aligned Hero Block with Picture
-	[Tags]  HERO    CRITICAL
+	[Tags]  CRITICAL
 	Given User Goes To New Page -Site
 	And User Starts Creating Hero Block Page with Left Picture
 	When User Submits The New Page
@@ -38,7 +38,7 @@ Left Aligned Picture
 	Then Layout Should Not Have Changed	
 
 Right Aligned Picture
-	[Tags]  HERO
+	[Tags]  
 	Given User Goes To New Page -Site
 	And User Starts Creating Hero Block Page with Right Picture
 	When User Submits The New Page
@@ -46,7 +46,7 @@ Right Aligned Picture
 	Then Layout Should Not Have Changed
 	
 Bottom Aligned Picture
-	[Tags]  HERO    
+	[Tags]      
 	Given User Goes To New Page -Site
 	And User Starts Creating Hero Block Page with Bottom Picture
 	When User Submits The New Page
@@ -54,7 +54,7 @@ Bottom Aligned Picture
 	Then Layout Should Not Have Changed
 	
 Background Picture
-	[Tags]  HERO
+	[Tags]  
 	Given User Goes To New Page -Site
 	And User Starts Creating Hero Block Page with Background Picture
 	When User Submits The New Page
@@ -62,7 +62,7 @@ Background Picture
 	Then Layout Should Not Have Changed			
 
 Diagonal Picture
-	[Tags]  HERO
+	[Tags]  
 	Given User Goes To New Page -Site
 	And User Starts Creating Hero Block Page with Diagonal Picture
 	When User Submits The New Page
@@ -71,7 +71,7 @@ Diagonal Picture
 
 Fullcolor Link
 	[Documentation]   Adds Left aligned page and a link with Fullcolor styling option selected
-	[Tags]   HERO    CRITICAL
+	[Tags]   CRITICAL
 	Given User Goes To New Page -Site
 	And User Starts Creating a Left Aligned Page With Hero Block
 	And User Adds Hero Link Button With Fullcolor Style
@@ -80,7 +80,7 @@ Fullcolor Link
 	Then Layout Should Not Have Changed
 
 Framed Link
-	[Tags]   HERO
+	[Tags]   
 	Given User Goes To New Page -Site
 	And User Starts Creating a Left Aligned Page With Hero Block
 	And User Adds Hero Link Button With Framed Style
@@ -89,7 +89,7 @@ Framed Link
 	Then Layout Should Not Have Changed
 
 Transparent Link
-	[Tags]   HERO
+	[Tags]   
 	Given User Goes To New Page -Site
 	And User Starts Creating a Left Aligned Page With Hero Block
 	And User Adds Hero Link Button With Transparent Style
@@ -99,7 +99,7 @@ Transparent Link
 
 Gold Background Color
 	[Documentation]   Left Aligned Hero Block with Background Color selection 'Gold' 
-	[Tags]   HERO    CRITICAL
+	[Tags]   CRITICAL
 	Given User Goes To New Page -Site
 	And User Starts Creating a Left Aligned Page With Hero Block
 	And User Adds Gold As Background Color
@@ -108,7 +108,7 @@ Gold Background Color
 	Then Layout Should Not Have Changed
 
 Silver Background Color
-	[Tags]   HERO
+	[Tags]   
 	Given User Goes To New Page -Site
 	And User Starts Creating a Left Aligned Page With Hero Block
 	And User Adds Silver As Background Color
@@ -117,7 +117,7 @@ Silver Background Color
 	Then Layout Should Not Have Changed
 	
 Brick Background Color
-	[Tags]   HERO
+	[Tags]   
 	Given User Goes To New Page -Site
 	And User Starts Creating a Left Aligned Page With Hero Block
 	And User Adds Brick As Background Color
@@ -126,7 +126,7 @@ Brick Background Color
 	Then Layout Should Not Have Changed
 	
 Bus Background Color
-	[Tags]   HERO
+	[Tags]   
 	Given User Goes To New Page -Site
 	And User Starts Creating a Left Aligned Page With Hero Block
 	And User Adds Bus As Background Color
@@ -135,7 +135,7 @@ Bus Background Color
 	Then Layout Should Not Have Changed
 	
 Copper Background Color
-	[Tags]   HERO
+	[Tags]   
 	Given User Goes To New Page -Site
 	And User Starts Creating a Left Aligned Page With Hero Block
 	And User Adds Copper As Background Color
@@ -144,7 +144,7 @@ Copper Background Color
 	Then Layout Should Not Have Changed
 	
 Engel Background Color
-	[Tags]   HERO
+	[Tags]   
 	Given User Goes To New Page -Site
 	And User Starts Creating a Left Aligned Page With Hero Block
 	And User Adds Engel As Background Color
@@ -153,7 +153,7 @@ Engel Background Color
 	Then Layout Should Not Have Changed
 	
 Fog Background Color
-	[Tags]   HERO
+	[Tags]   
 	Given User Goes To New Page -Site
 	And User Starts Creating a Left Aligned Page With Hero Block
 	And User Adds Fog As Background Color
@@ -162,7 +162,7 @@ Fog Background Color
 	Then Layout Should Not Have Changed
 	
 Metro Background Color
-	[Tags]   HERO
+	[Tags]   
 	Given User Goes To New Page -Site
 	And User Starts Creating a Left Aligned Page With Hero Block
 	And User Adds Metro As Background Color
@@ -171,7 +171,7 @@ Metro Background Color
 	Then Layout Should Not Have Changed
 	
 Summer Background Color
-	[Tags]   HERO
+	[Tags]   
 	Given User Goes To New Page -Site
 	And User Starts Creating a Left Aligned Page With Hero Block
 	And User Adds Summer As Background Color
@@ -180,7 +180,7 @@ Summer Background Color
 	Then Layout Should Not Have Changed
 	
 Suomenlinna Background Color
-	[Tags]   HERO
+	[Tags]   
 	Given User Goes To New Page -Site
 	And User Starts Creating a Left Aligned Page With Hero Block
 	And User Adds Suomenlinna As Background Color
@@ -189,7 +189,7 @@ Suomenlinna Background Color
 	Then Layout Should Not Have Changed
 	
 Tram Background Color
-	[Tags]   HERO
+	[Tags]   
 	Given User Goes To New Page -Site
 	And User Starts Creating a Left Aligned Page With Hero Block
 	And User Adds Tram As Background Color
@@ -198,7 +198,7 @@ Tram Background Color
 	Then Layout Should Not Have Changed
 
 Finnish English Swedish Translations
-	[Tags]   HERO   CRITICAL
+	[Tags]   CRITICAL
 	Given User Creates a Left Aligned Page With Hero Block In Finnish Language
 	And User Creates a Left Aligned Page With Hero Block In English Language
 	And User Creates a Left Aligned Page With Hero Block In Swedish Language
