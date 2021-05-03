@@ -199,7 +199,7 @@ Go To Translate Selection Page
 
 Submit The New ${pagetype}
 	[Documentation]   Sleeps 1 second in case of pictures added so that they have time to load into content view.
-	Run Keyword If  '${picture}'=='picture'   Sleep  1
+	Run Keyword If  '${picsadded}' > 0   Sleep  1
 	Wait Until Keyword Succeeds  5x  1  Submit New Content
 
 Submit New Content

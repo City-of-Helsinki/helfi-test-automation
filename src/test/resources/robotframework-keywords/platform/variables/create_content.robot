@@ -173,3 +173,16 @@ ${Inp_ContentCard_Landingpage_Design}				name:field_content[0][subform][field_co
 ${Inp_ContentCard_TargetId}							//input[contains(@name, 'target_id')]
 ${Inp_ContentCard_Addnew}							//input[contains(@name, 'subform_field_content_cards_content_add_more')]
 
+#LIST-OF-LINKS
+${Opt_AddListOfLinks}							    name:field_content_list_of_links_add_more
+${Inp_ListOfLinks_Title}							name:field_content[1][subform][field_list_of_links_title][0][value]
+${Inp_ListOfLinks_Design}							name:field_content[1][subform][field_list_of_links_design][0]
+${Inp_ListOfLinks_Link_Uri}							name:field_content[1][subform][field_list_of_links_links][0][subform][field_list_of_links_link][0][uri]
+${Inp_ListOfLinks_Link_Title}		    			name:field_content[1][subform][field_list_of_links_links][0][subform][field_list_of_links_link][0][title]
+${Inp_ListOfLinks_Link_NewLink}						name:field_content_1_subform_field_list_of_links_links_list_of_links_item_add_more
+${Inp_ListOfLinks_Link_Picture}					    name:field_list_of_links_image-media-library-open-button-field_content-1-subform-field_list_of_links_links-0-subform
+${Inp_ListOfLinks_Link_Picture2}				    name:field_list_of_links_image-media-library-open-button-field_content-1-subform-field_list_of_links_links-1-subform
+${Inp_ListOfLinks_Link_Description}					name:field_content[1][subform][field_list_of_links_links][0][subform][field_list_of_links_desc][0][value]
+${Inp_ListOfLinks_Link_Description2}				name:field_content[1][subform][field_list_of_links_links][1][subform][field_list_of_links_desc][0][value]
+${Swh_ListOfLinks_Link_OpenInNewTab}				name:field_content[1][subform][field_list_of_links_links][0][subform][field_list_of_links_link][0][options][target_new]
+
