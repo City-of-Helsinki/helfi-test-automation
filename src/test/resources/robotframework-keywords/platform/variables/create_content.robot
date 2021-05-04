@@ -190,6 +190,4 @@ ${Swh_ListOfLinks_Link_OpenInNewTab}				//input[contains(@name, 'field_list_of_l
 #LIFTUP-WITH-IMAGE
 ${Inp_LiftupWithImage_Title}		    			//input[contains(@name, 'liftup_with_image')][contains(@name, 'title')]
 ${Inp_LiftupWithImage_Picture}		    			//input[contains(@name, 'liftup_with_image')][contains(@name, 'image-media-library-open-button')]
-#${Inp_LiftupWithImage_Picture}  				    name:field_liftup_with_image_image-media-library-open-button-field_content-0-subform
-#${Inp_LiftupWithImage_Design}						//select[contains(@name, 'liftup_with_image')][contains(@name, 'design')]
 ${Inp_LiftupWithImage_Design}						name:field_content[0][subform][field_liftup_with_image_design][0]
