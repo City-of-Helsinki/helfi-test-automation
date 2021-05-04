@@ -43,6 +43,7 @@ ${Opt_AddLink}								name:field-content-link-add-more
 ${Opt_AddBanner}   							name:field_content_banner_add_more
 ${Opt_AddAccordion}   						name:field_content_accordion_add_more
 ${Opt_AddContentCards} 						name:field_content_content_cards_add_more
+${Opt_AddLiftupWithImage}					name:field_content_liftup_with_image_add_more
 ${Btn_File_Upload}					    	name:files[upload]
 ${Inp_Pic_Name}								css:[data-drupal-selector=edit-media-0-fields-name-0-value]
 ${Inp_Pic_AltText}							css:[data-drupal-selector=edit-media-0-fields-field-media-image-0-alt]
@@ -185,3 +186,10 @@ ${Inp_ListOfLinks_Link_Picture2_Landingpage}	    name:field_list_of_links_image-
 ${Inp_ListOfLinks_Link_Description}					//input[contains(@name, 'field_list_of_links_link')][contains(@name, 'value')]
 ${Inp_ListOfLinks_Link_Description2}				name:field_content[1][subform][field_list_of_links_links][1][subform][field_list_of_links_desc][0][value]
 ${Swh_ListOfLinks_Link_OpenInNewTab}				//input[contains(@name, 'field_list_of_links_link')][contains(@name, 'target_new')]
+
+#LIFTUP-WITH-IMAGE
+${Inp_LiftupWithImage_Title}		    			//input[contains(@name, 'liftup_with_image')][contains(@name, 'title')]
+${Inp_LiftupWithImage_Picture}		    			//input[contains(@name, 'liftup_with_image')][contains(@name, 'image-media-library-open-button')]
+#${Inp_LiftupWithImage_Picture}  				    name:field_liftup_with_image_image-media-library-open-button-field_content-0-subform
+#${Inp_LiftupWithImage_Design}						//select[contains(@name, 'liftup_with_image')][contains(@name, 'design')]
+${Inp_LiftupWithImage_Design}						name:field_content[0][subform][field_liftup_with_image_design][0]
