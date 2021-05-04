@@ -74,7 +74,6 @@ ${Opt_Hero_Picture_On_Left}					css:[value=with-image-left]
 ${Opt_Hero_Picture_On_Bottom}				css:[value=with-image-bottom]
 ${Opt_Hero_Picture_On_Background}			css:[value=background-image]
 ${Opt_Hero_Diagonal}						css:[value=diagonal]
-#${Btn_Hero_Picture}							//input[contains(@name, 'field_hero_image-media-library-open-button-field_hero')][contains(@name, 'subform')]
 ${Btn_Hero_Picture}							name:field_hero_image-media-library-open-button-field_hero-0-subform
 ${Btn_Hero_AddLink}						    name:field_hero_0_subform_field_hero_cta_link_add_more
 ${Inp_Hero_Link_URL}						css:[data-drupal-selector=edit-field-hero-0-subform-field-hero-cta-0-subform-field-link-link-0-uri]
@@ -86,7 +85,6 @@ ${Ddn_Hero_Link_Texteditor_Design}			css:[data-drupal-selector=edit-attributes-c
 ${Opt_Hero_Link_Texteditor_ButtonFullcolor}		//option[@value='hds-button hds-button--primary']
 ${Opt_Hero_Link_Texteditor_ButtonFramed}		//option[@value='hds-button hds-button--secondary']
 ${Opt_Hero_Link_Texteditor_ButtonTransparent}	//option[@value='hds-button hds-button--supplementary']
-#${Ddn_Hero_Color}							css:[data-drupal-selector=edit-field-hero-0-subform-field-hero-bg-color]
 ${Ddn_Hero_Color}							//select[@data-drupal-selector='edit-field-hero-0-subform-field-hero-bg-color']
 
 #COLUMNS
@@ -176,13 +174,14 @@ ${Inp_ContentCard_Addnew}							//input[contains(@name, 'subform_field_content_c
 #LIST-OF-LINKS
 ${Opt_AddListOfLinks}							    name:field_content_list_of_links_add_more
 ${Inp_ListOfLinks_Title}							name:field_content[1][subform][field_list_of_links_title][0][value]
-${Inp_ListOfLinks_Design}							name:field_content[1][subform][field_list_of_links_design][0]
-${Inp_ListOfLinks_Link_Uri}							name:field_content[1][subform][field_list_of_links_links][0][subform][field_list_of_links_link][0][uri]
-${Inp_ListOfLinks_Link_Title}		    			name:field_content[1][subform][field_list_of_links_links][0][subform][field_list_of_links_link][0][title]
-${Inp_ListOfLinks_Link_NewLink}						name:field_content_1_subform_field_list_of_links_links_list_of_links_item_add_more
+${Inp_ListOfLinks_Design}							//select[contains(@name, 'field_list_of_links_design')]
+${Inp_ListOfLinks_Link_Uri}							//input[contains(@name, 'field_list_of_links_link')][contains(@name, 'uri')]
+${Inp_ListOfLinks_Link_Title}		    			//input[contains(@name, 'field_list_of_links_link')][contains(@name, 'title')]
+${Inp_ListOfLinks_Link_NewLink}						//input[contains(@name, 'field_list_of_links_links_list')][contains(@name, 'add_more')]
 ${Inp_ListOfLinks_Link_Picture}					    name:field_list_of_links_image-media-library-open-button-field_content-1-subform-field_list_of_links_links-0-subform
+${Inp_ListOfLinks_Link_Picture_Landingpage}			name:field_list_of_links_image-media-library-open-button-field_content-0-subform-field_list_of_links_links-0-subform
 ${Inp_ListOfLinks_Link_Picture2}				    name:field_list_of_links_image-media-library-open-button-field_content-1-subform-field_list_of_links_links-1-subform
-${Inp_ListOfLinks_Link_Description}					name:field_content[1][subform][field_list_of_links_links][0][subform][field_list_of_links_desc][0][value]
+${Inp_ListOfLinks_Link_Picture2_Landingpage}	    name:field_list_of_links_image-media-library-open-button-field_content-0-subform-field_list_of_links_links-1-subform
+${Inp_ListOfLinks_Link_Description}					//input[contains(@name, 'field_list_of_links_link')][contains(@name, 'value')]
 ${Inp_ListOfLinks_Link_Description2}				name:field_content[1][subform][field_list_of_links_links][1][subform][field_list_of_links_desc][0][value]
-${Swh_ListOfLinks_Link_OpenInNewTab}				name:field_content[1][subform][field_list_of_links_links][0][subform][field_list_of_links_link][0][options][target_new]
-
+${Swh_ListOfLinks_Link_OpenInNewTab}				//input[contains(@name, 'field_list_of_links_link')][contains(@name, 'target_new')]
