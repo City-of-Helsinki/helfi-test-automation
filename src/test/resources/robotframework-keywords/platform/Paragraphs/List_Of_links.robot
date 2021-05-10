@@ -44,7 +44,6 @@ Resolve Style Variable
 	[Return]   ${stylevariable}
 
 Add Second Link For Content
-	#${islandingpage}=  Suite Name Contains Text    Landing Page
 	Wait Until Keyword Succeeds  5x  100ms  Click Element  ${Inp_ListOfLinks_Link_NewLink}
 	# Better locators does not match correct element. For some reason only first is returned
 	# So Only works for second content card.
