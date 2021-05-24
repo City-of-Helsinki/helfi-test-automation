@@ -50,6 +50,12 @@ Rename Reports Picture To Use Original Picture Name
 	...				  only new name in second one.
 	[Arguments]  ${fullpath}   ${newname}
 	Move File  ${fullpath}  ${newname}
+
+Remove Hidden Characters
+	[Arguments]   ${string}   ${char}
+	${string}=   Encode String To Bytes   ${string}   UTF-8
+	${string}=  Set Variable  ${string.replace('${char}', '')}
+	[Return]    ${string}
 	
 Zoom Out And Capture Page Screenshot
 	Execute javascript  document.body.style.zoom="25%"

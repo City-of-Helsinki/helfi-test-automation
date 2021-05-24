@@ -28,7 +28,7 @@ ${picsize}									cropped
 ${linkstyle} 		 						${EMPTY}
 ${language}	 		 						fi
 ${gallery}									false
-
+${serviceispublished}						false
 ${URL_content_page}							${PROTOCOL}://${BASE_URL}/fi/admin/content
 ${URL_media_page}							${PROTOCOL}://${BASE_URL}/fi/admin/content/media		
 *** Keywords ***
@@ -85,7 +85,14 @@ Cleanup and Close Browser
 	FOR    ${i}    IN RANGE    ${picsadded}
            Wait Until Keyword Succeeds  2x  200ms 	Delete Newly Created Item from Content Media List
     END
+    ${serviceispublished}=   Convert To Boolean   ${serviceispublished}
+    Run Keyword If  ${serviceispublished}  Set Service Back To Unpublished
 	Close Browser	
+	
+Set Service Back To Unpublished
+	Goto  https://helfi.docker.sh/fi/admin/content/integrations/tpr-service/1/edit
+	Set Content As Published
+	Submit New Content
 	
 Image Comparison Needs To Exclude Areas
 	[Documentation]   Image Comparison needs to exclude some parts of the picture in case of for example changing date
@@ -126,6 +133,7 @@ Open Content In Non CI Environments
 	[Documentation]   Goes to content view of created content through content list page (since local environment errors prevent
 	...				  viewing it directly after creation)
 	Go To   ${URL_content_page}
+	Sleep   10
 	Wait Until Keyword Succeeds  5x  200ms  Click Content Link From Notification Banner
 	Run Keyword If  '${language}'=='fi'  	Accept Cookies
 	
@@ -163,6 +171,10 @@ Go To New Page Site
 	Click Add Content
 	Wait Until Keyword Succeeds  5x  200ms  Click Add Page
 
+Go To New Service Site
+	Click Add Content
+	Wait Until Keyword Succeeds  5x  200ms  Click Add Service
+
 Go To New LandingPage Site
 	Click Add Content
 	Wait Until Keyword Succeeds  5x  200ms  Click Add Landing Page
@@ -178,6 +190,11 @@ Click Add Page
 	Wait Until Element Is Clickable  //a[contains(@href, '/node/add/page')][@class='admin-item__link']   timeout=3
 	Wait Until Keyword Succeeds  5x  200ms  Click Element  //a[contains(@href, '/node/add/page')][@class='admin-item__link']
 	Element Should Not Be Visible   //a[contains(@href, '/node/add/page')][@class='admin-item__link']
+
+Click Add Service
+	Wait Until Element Is Clickable  //a[contains(@href, '/node/add/service')][@class='admin-item__link']   timeout=3
+	Wait Until Keyword Succeeds  5x  200ms  Click Element  //a[contains(@href, '/node/add/service')][@class='admin-item__link']
+	Element Should Not Be Visible   //a[contains(@href, '/node/add/service')][@class='admin-item__link']
 
 Click Add Landing Page
 	[Documentation]   Add LandingPage ('Laskeutumissivu') click in Add Content('Lisää sisältöä') -menu
@@ -206,7 +223,8 @@ Submit New Content
 	[Documentation]  User submits new page and it is saved and appears in content view
 	Wait Until Keyword Succeeds  5x  100ms  Click Button   ${Btn_Submit}
 	Wait Until Keyword Succeeds  5x  100ms  Element Should Not Be Visible   ${Btn_Submit}
-	Set Test Variable  ${pagesadded}    ${pagesadded}+1
+	${isserviceandunit}=  Suite Name Contains Text  ServiceAndUnit
+	Run Keyword Unless  ${isserviceandunit}  Set Test Variable  ${pagesadded}    ${pagesadded}+1
 		
 Go To New ${pagetype} -View For ${language} Translation
 	Go To Translate Selection Page
@@ -235,6 +253,10 @@ Get Admin Url
    [Documentation]   Gets URL needed in localhost testing.
    ${admin_url} =   Run  ${ADMIN_URL}
    Set Test Variable   ${admin_url}
+
+Set Content As Published
+	Click Element   id:edit-status
+	Set Test Variable  ${serviceispublished}   true
 
 Select Language
 	[Arguments]     ${value}

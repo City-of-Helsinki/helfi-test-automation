@@ -52,9 +52,9 @@ ${Btn_Insert_Pic}							//button[contains(text(),'Poimi valitut mediatiedostot')
 ${Ddn_SelectLanguage}						//select[@id='edit-langcode-0-value']
 ${Inp_Title}								//input[@id='edit-title-0-value']
 ${Frm_Content}							    css:#cke_1_contents > iframe
-${Frm_Content_Hero_Translations}			css:#cke_2_contents > iframe
+${Frm_Content2}								css:#cke_2_contents > iframe
 ${Frm_Content_Description}				    css:#cke_58_contents > iframe
-${Btn_Submit}							    //input[@id='edit-submit--2']		
+${Btn_Submit}							    //input[@id='edit-submit--2--gin-edit-form']		
 ${Mtm_Content}								//li[contains(@class, 'menu-item menu-item__system-admin_content')]
 ${Btn_Actions_Dropbutton}					//button[@class='dropbutton__toggle']
 ${Btn_Actions_ContentMenu_Deletebutton}		//li[contains(@class, 'delete dropbutton')]/child::a
@@ -191,3 +191,8 @@ ${Swh_ListOfLinks_Link_OpenInNewTab}				//input[contains(@name, 'field_list_of_l
 ${Inp_LiftupWithImage_Title}		    			//input[contains(@name, 'liftup_with_image')][contains(@name, 'title')]
 ${Inp_LiftupWithImage_Picture}		    			//input[contains(@name, 'liftup_with_image')][contains(@name, 'image-media-library-open-button')]
 ${Inp_LiftupWithImage_Design}						name:field_content[0][subform][field_liftup_with_image_design][0]
+
+#SERVICE
+${Inp_Service_Title}								name:title[0][value]
+${Inp_Service_Visible_Title}						name:field_service_visible_title[0][value]
+${Inp_Service_ParentService}						name:field_service_parent_service[0][target_id]

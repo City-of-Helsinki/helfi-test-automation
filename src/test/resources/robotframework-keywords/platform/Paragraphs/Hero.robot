@@ -51,7 +51,7 @@ Start Creating a ${value} Aligned Page With Hero Block
 Input Text Content
 	[Arguments]   ${content}
 	Run Keyword If  '${language}'=='fi'	Input Text To Frame   ${Frm_Content}   //body   ${content}
-	Run Keyword If  '${language}'!='fi'   Input Text To Frame   ${Frm_Content_Hero_Translations}   //body   ${content}
+	Run Keyword If  '${language}'!='fi'   Input Text To Frame   ${Frm_Content2}   //body   ${content}
 
 Start Creating Hero Block Page with ${picalign} Picture 
 	Start Creating a Left Aligned Page With Hero Block
